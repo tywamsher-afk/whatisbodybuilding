@@ -733,243 +733,136 @@ Timing: Evening for better sleep quality.
 <a href="#" class="affiliate-link">Raw honey</a>
 </div>
 </div>
-</section>
+<script>
+// Expanded exercise library with weird/advanced moves
+const exercises = [
+  // Chest
+  { name: "Barbell Bench Press", muscle: "chest", tags: ["compound", "horizontal press"], img: "https://picsum.photos/id/1015/600/400" },
+  { name: "Incline Dumbbell Press", muscle: "chest", tags: ["compound", "upper chest"], img: "https://picsum.photos/id/102/600/400" },
+  { name: "Cable Flyes", muscle: "chest", tags: ["isolation", "stretch"], img: "https://picsum.photos/id/201/600/400" },
+  { name: "Dips (Chest Focus)", muscle: "chest", tags: ["compound", "bodyweight"], img: "https://picsum.photos/id/133/600/400" },
+  
+  // Back
+  { name: "Conventional Deadlift", muscle: "back", tags: ["compound", "heavy"], img: "https://picsum.photos/id/180/600/400" },
+  { name: "Pull-Ups", muscle: "back", tags: ["compound", "bodyweight"], img: "https://picsum.photos/id/201/600/400" },
+  { name: "Meadows Row", muscle: "back", tags: ["unilateral", "advanced"], img: "https://picsum.photos/id/251/600/400" },
+  { name: "Chest-Supported T-Bar Row", muscle: "back", tags: ["compound", "isolation"], img: "https://picsum.photos/id/180/600/400" },
+  
+  // Legs
+  { name: "Back Squat", muscle: "legs", tags: ["compound", "quads"], img: "https://picsum.photos/id/1016/600/400" },
+  { name: "Zercher Squat", muscle: "legs", tags: ["compound", "weird", "core"], img: "https://picsum.photos/id/133/600/400" },
+  { name: "Romanian Deadlift", muscle: "legs", tags: ["compound", "hamstrings"], img: "https://picsum.photos/id/180/600/400" },
+  { name: "Bulgarian Split Squat", muscle: "legs", tags: ["unilateral", "advanced"], img: "https://picsum.photos/id/201/600/400" },
+  { name: "Nordic Hamstring Curl", muscle: "legs", tags: ["advanced", "bodyweight"], img: "https://picsum.photos/id/251/600/400" },
+  
+  // Shoulders
+  { name: "Overhead Press (Strict)", muscle: "shoulders", tags: ["compound", "heavy"], img: "https://picsum.photos/id/102/600/400" },
+  { name: "Viking Press", muscle: "shoulders", tags: ["compound", "weird", "advanced"], img: "https://picsum.photos/id/133/600/400" },
+  { name: "Lateral Raises", muscle: "shoulders", tags: ["isolation", "side delts"], img: "https://picsum.photos/id/180/600/400" },
+  { name: "Rear Delt Flyes", muscle: "shoulders", tags: ["isolation", "rear delts"], img: "https://picsum.photos/id/201/600/400" },
+  
+  // Arms
+  { name: "Barbell Curl", muscle: "arms", tags: ["isolation", "biceps"], img: "https://picsum.photos/id/251/600/400" },
+  { name: "Preacher Curl", muscle: "arms", tags: ["isolation", "biceps"], img: "https://picsum.photos/id/133/600/400" },
+  { name: "Tricep Pushdown", muscle: "arms", tags: ["isolation", "triceps"], img: "https://picsum.photos/id/180/600/400" },
+  { name: "JM Press", muscle: "arms", tags: ["compound", "triceps", "advanced"], img: "https://picsum.photos/id/201/600/400" },
+  
+  // Core + Weird
+  { name: "Ab Wheel Rollout", muscle: "core", tags: ["advanced", "anti-extension"], img: "https://picsum.photos/id/1015/600/400" },
+  { name: "Hanging Leg Raises", muscle: "core", tags: ["bodyweight", "advanced"], img: "https://picsum.photos/id/102/600/400" },
+  { name: "Dragon Flag", muscle: "core", tags: ["advanced", "weird"], img: "https://picsum.photos/id/133/600/400" }
+];
 
-<section id="exercises" class="section">
-<h2 class="section-title">Exercise library</h2>
-<p class="section-subtitle">Searchable database of exercises. Filter by muscle group.</p>
+let currentMuscleFilter = 'all';
 
-<input type="text" class="search-box" id="exercise-search" placeholder="Search exercises (e.g., 'bench press', 'squat', 'curl')..." onkeyup="filterExercises()">
+// Render exercises
+function renderExercises(filter, search) {
+  filter = filter || 'all';
+  search = (search || '').toLowerCase();
+  
+  const grid = document.getElementById('exercise-grid');
+  const filtered = exercises.filter(e => {
+    const muscleMatch = filter === 'all' || e.muscle === filter;
+    const searchMatch = search === '' || e.name.toLowerCase().includes(search);
+    return muscleMatch && searchMatch;
+  });
 
-<div class="tab-buttons">
-<button class="active" onclick="filterByMuscle(event, 'all')">All</button>
-<button onclick="filterByMuscle(event, 'chest')">Chest</button>
-<button onclick="filterByMuscle(event, 'back')">Back</button>
-<button onclick="filterByMuscle(event, 'legs')">Legs</button>
-<button onclick="filterByMuscle(event, 'shoulders')">Shoulders</button>
-<button onclick="filterByMuscle(event, 'arms')">Arms</button>
-<button onclick="filterByMuscle(event, 'core')">Core</button>
-</div>
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 3rem;">No exercises found.</p>';
+    return;
+  }
 
-<div class="exercise-grid" id="exercise-grid"></div>
-</section>
+  grid.innerHTML = filtered.map(e => `
+    <div class="exercise-card" onclick="showExerciseModal('${e.name}', '${e.muscle}', '${e.img}')">
+      <div class="exercise-muscle">${e.muscle}</div>
+      <div class="exercise-name">${e.name}</div>
+      <div class="exercise-tags">
+        ${e.tags.map(t => `<span class="exercise-tag">${t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
 
-<section id="recovery" class="section">
-<h2 class="section-title">Recovery</h2>
-<p class="section-subtitle">Optimize sleep, mobility, and recovery to maximize gains.</p>
+// Modal for illustration
+function showExerciseModal(name, muscle, imgUrl) {
+  let modal = document.getElementById('exercise-modal');
+  
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'exercise-modal';
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+      background: rgba(0,0,0,0.85); display: flex; align-items: center; 
+      justify-content: center; z-index: 1000; animation: fadeIn 0.3s;
+    `;
+    modal.innerHTML = `
+      <div style="background: var(--bg-card); border-radius: 16px; max-width: 700px; width: 90%; max-height: 90vh; overflow: auto; position: relative; border: 1px solid var(--border);">
+        <button onclick="closeExerciseModal()" style="position: absolute; top: 15px; right: 15px; background: transparent; border: none; font-size: 28px; color: var(--text-muted); cursor: pointer; z-index: 10;">×</button>
+        
+        <div style="padding: 2rem;">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+            <span style="background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">${muscle}</span>
+          </div>
+          <h2 style="text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: 36px; margin-bottom: 1.5rem; letter-spacing: 1px;">${name}</h2>
+          
+          <div style="background: #111; border-radius: 12px; padding: 20px; margin-bottom: 1.5rem; text-align: center; min-height: 380px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <img id="modal-exercise-img" src="${imgUrl}" alt="${name}" style="max-width: 100%; max-height: 420px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
+          </div>
+          
+          <div style="text-align: center; color: var(--text-secondary); font-size: 15px;">
+            <strong>Form Tip:</strong> Control the eccentric (lowering) phase. Keep core tight and avoid momentum.
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  } else {
+    document.getElementById('modal-exercise-img').src = imgUrl;
+    modal.style.display = 'flex';
+  }
+}
 
-<div class="grid">
-<div class="card"><h3>Sleep protocols</h3><p>Sleep is where muscle is built. Aim for 7-9 hours nightly. Keep bedroom cool (62F), dark, and quiet. Consistency matters more than duration.</p></div>
-<div class="card"><h3>Stretching &amp; mobility</h3><p>10-15 minutes daily improves recovery and prevents injury. Focus on tight areas: hip flexors, hamstrings, thoracic spine, shoulders.</p></div>
-<div class="card"><h3>Foam rolling</h3><p>30 seconds per muscle group, 2-3 times per week. Calves, quads, IT band, glutes, lats. Can be done post-workout or rest days.</p></div>
-<div class="card"><h3>Deload weeks</h3><p>Every 4-6 weeks, reduce volume by 40-50% and intensity slightly. Still train, but lighter. Crucial for long-term progress.</p></div>
-<div class="card"><h3>Hydration</h3><p>Aim for 0.5-1 oz per lb bodyweight daily. More if training hard or in hot environment. Electrolytes matter for performance.</p></div>
-<div class="card"><h3>Stress management</h3><p>Chronic stress elevates cortisol, killing gains. Meditate 10 minutes daily, take walks, maintain social connections.</p></div>
-</div>
+function closeExerciseModal() {
+  const modal = document.getElementById('exercise-modal');
+  if (modal) modal.style.display = 'none';
+}
 
-<div class="affiliate-banner">
-<h3>Recovery tools</h3>
-<p>Gear for optimizing sleep and recovery</p>
-<div class="affiliate-links">
-<a href="#" class="affiliate-link">WHOOP strap</a>
-<a href="#" class="affiliate-link">Theragun</a>
-<a href="#" class="affiliate-link">Foam rollers</a>
-<a href="#" class="affiliate-link">Sleep supplements</a>
-</div>
-</div>
-</section>
+// Keep your existing filter functions and just call the new render
+function filterByMuscle(event, muscle) {
+  document.querySelectorAll('#exercises .tab-buttons button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  currentMuscleFilter = muscle;
+  const search = document.getElementById('exercise-search').value;
+  renderExercises(muscle, search);
+}
 
-<section id="tools" class="section">
-<h2 class="section-title">Calculators</h2>
-<p class="section-subtitle">Free tools for planning and optimizing your training and nutrition.</p>
+function filterExercises() {
+  const search = document.getElementById('exercise-search').value;
+  renderExercises(currentMuscleFilter, search);
+}
 
-<div class="calculator-section">
-<h3>One rep max (1RM) estimator</h3>
-<div class="form-group"><label>Weight lifted (lbs)</label><input type="number" id="lift-weight" value="225"></div>
-<div class="form-group"><label>Reps completed</label><input type="number" id="lift-reps" value="5"></div>
-<div class="calc-result"><div class="calc-result-label">Estimated 1RM (Epley)</div><div class="calc-result-value" id="orm-result">261</div></div>
-</div>
-
-<div class="calculator-section">
-<h3>Plate calculator</h3>
-<div class="form-group"><label>Target weight (lbs)</label><input type="number" id="plate-target" value="315"></div>
-<div class="form-group"><label>Bar type</label><select id="bar-weight"><option value="45" selected>Olympic bar (45 lbs)</option><option value="35">Women's bar (35 lbs)</option><option value="55">Safety squat bar (55 lbs)</option></select></div>
-<div class="plate-visual" id="plate-visual"></div>
-<div class="calc-result"><div class="calc-result-label">Plates per side</div><div class="calc-result-value" id="plate-result" style="font-size: 24px;">1x 45, 1x 25, 1x 10</div></div>
-</div>
-
-<div class="calculator-section">
-<h3>Body fat estimator (Navy method)</h3>
-<div class="form-group"><label>Sex</label><select id="bf-sex"><option value="male" selected>Male</option><option value="female">Female</option></select></div>
-<div class="form-group"><label>Height (inches)</label><input type="number" id="bf-height" value="70"></div>
-<div class="form-group"><label>Waist (inches, at navel)</label><input type="number" id="bf-waist" value="34"></div>
-<div class="form-group"><label>Neck (inches)</label><input type="number" id="bf-neck" value="15"></div>
-<div class="form-group" id="hip-group" style="display: none;"><label>Hip (inches)</label><input type="number" id="bf-hip" value="38"></div>
-<div class="calc-result"><div class="calc-result-label">Estimated body fat</div><div class="calc-result-value" id="bf-result">15.2%</div></div>
-</div>
-
-<div class="calculator-section">
-<h3>Water intake calculator</h3>
-<div class="form-group"><label>Body weight (lbs)</label><input type="number" id="water-weight" value="185"></div>
-<div class="form-group"><label>Training hours/day</label><input type="number" id="water-training" value="1" step="0.5"></div>
-<div class="calc-result"><div class="calc-result-label">Daily water target (oz)</div><div class="calc-result-value" id="water-result">130</div></div>
-</div>
-
-<div class="calculator-section">
-<h3>Protein per meal distributor</h3>
-<div class="form-group"><label>Total daily protein (g)</label><input type="number" id="prot-total" value="180"></div>
-<div class="form-group"><label>Number of meals</label><input type="number" id="prot-meals" value="4"></div>
-<div class="calc-result"><div class="calc-result-label">Grams per meal</div><div class="calc-result-value" id="prot-per-meal">45g</div></div>
-</div>
-
-<div class="calculator-section">
-<h3>Body metrics projection</h3>
-<div class="form-group"><label>Current weight (lbs)</label><input type="number" id="body-weight" value="185"></div>
-<div class="form-group"><label>Target weight (lbs)</label><input type="number" id="target-weight" value="195"></div>
-<div class="form-group"><label>Weeks to target</label><input type="number" id="target-weeks" value="12"></div>
-<div class="calc-result"><div class="calc-result-label">Weekly gain/loss needed</div><div class="calc-result-value" id="weekly-gain" style="font-size: 36px;">0.83 lbs</div></div>
-</div>
-</section>
-
-<section id="tracker" class="section">
-<h2 class="section-title">Workout logger</h2>
-<p class="section-subtitle">Log your sets, reps, and weights. Saves automatically to your browser. See your progress over time.</p>
-
-<div class="workout-log">
-<h3>Today's workout</h3>
-<div id="log-entries"></div>
-<button class="cta-button" onclick="addLogEntry()" style="margin-top: 1rem;">Add exercise</button>
-<button class="cta-button secondary" onclick="clearLog()" style="margin-top: 1rem; margin-left: 0.5rem; background: transparent; color: var(--accent); border: 2px solid var(--accent);">Clear all</button>
-<div class="log-stats">
-<div class="log-stat"><div class="log-stat-value" id="total-sets">0</div><div class="log-stat-label">Total sets</div></div>
-<div class="log-stat"><div class="log-stat-value" id="total-reps">0</div><div class="log-stat-label">Total reps</div></div>
-<div class="log-stat"><div class="log-stat-value" id="total-volume">0</div><div class="log-stat-label">Total volume (lbs)</div></div>
-<div class="log-stat"><div class="log-stat-value" id="total-exercises">0</div><div class="log-stat-label">Exercises</div></div>
-</div>
-</div>
-</section>
-
-<section id="articles" class="section">
-<div id="article-list">
-<h2 class="section-title">Articles</h2>
-<p class="section-subtitle">Deep dives on training, nutrition, and supplements. Updated weekly.</p>
-
-<div class="grid">
-<div class="article-card" onclick="showArticle('protein')">
-<div class="article-image">01</div>
-<div class="article-content">
-<div class="article-category">Nutrition</div>
-<div class="article-title">How much protein do you actually need?</div>
-<p class="article-excerpt">The latest research on protein intake for muscle building. Based on meta-analyses from 2024-2026.</p>
-</div>
-</div>
-<div class="article-card" onclick="showArticle('overload')">
-<div class="article-image">02</div>
-<div class="article-content">
-<div class="article-category">Training</div>
-<div class="article-title">Progressive overload: the only principle that matters</div>
-<p class="article-excerpt">Why your program doesn't matter as much as you think. What actually drives long-term gains.</p>
-</div>
-</div>
-<div class="article-card" onclick="showArticle('creatine')">
-<div class="article-image">03</div>
-<div class="article-content">
-<div class="article-category">Supplements</div>
-<div class="article-title">The truth about creatine in 2026</div>
-<p class="article-excerpt">New research on timing, loading, and which type actually works best.</p>
-</div>
-</div>
-<div class="article-card" onclick="showArticle('failure')">
-<div class="article-image">04</div>
-<div class="article-content">
-<div class="article-category">Training</div>
-<div class="article-title">Training to failure: when it helps, when it hurts</div>
-<p class="article-excerpt">The nuanced science of RIR (reps in reserve) and when pushing to failure is optimal.</p>
-</div>
-</div>
-<div class="article-card" onclick="showArticle('sleep')">
-<div class="article-image">05</div>
-<div class="article-content">
-<div class="article-category">Recovery</div>
-<div class="article-title">Sleep for strength: the muscle builder's guide</div>
-<p class="article-excerpt">How sleep quality directly impacts your strength and muscle growth.</p>
-</div>
-</div>
-<div class="article-card" onclick="showArticle('cutting')">
-<div class="article-image">06</div>
-<div class="article-content">
-<div class="article-category">Nutrition</div>
-<div class="article-title">Cutting without losing muscle</div>
-<p class="article-excerpt">Proven strategies for losing fat while preserving hard-earned muscle mass.</p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="article-content-wrap" style="display: none;"></div>
-</section>
-
-<section id="community" class="section">
-<h2 class="section-title">Community</h2>
-<p class="section-subtitle">Connect with serious lifters. Share progress, ask questions, discuss training.</p>
-
-<div style="margin-bottom: 2rem;">
-<textarea style="width: 100%; height: 80px; border: 1px solid var(--border-strong); padding: 12px; border-radius: 6px; font-family: inherit; background: var(--bg-card); color: var(--text-primary);" placeholder="Start a new discussion..."></textarea>
-<button class="cta-button" style="margin-top: 1rem;">Post discussion</button>
-</div>
-
-<h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 2rem 0 1.5rem; letter-spacing: 2px;">Recent discussions</h3>
-
-<div class="forum-post">
-<div class="post-header"><div class="post-author">TyFromPhilly</div><div class="post-date">2 hours ago</div></div>
-<div class="post-title">Best beginner routine for someone returning after 6 months off?</div>
-<div class="post-content">Getting back into lifting after a 6 month layoff. Was running PPL before but lost a lot of strength.</div>
-<div class="post-meta"><span>15 replies</span><span>42 views</span></div>
-</div>
-
-<div class="forum-post">
-<div class="post-header"><div class="post-author">IronMinded</div><div class="post-date">8 hours ago</div></div>
-<div class="post-title">Protein timing: research update 2026</div>
-<div class="post-content">Just finished reading the latest meta-analysis on nutrient timing. Turns out daily total protein matters way more than when you eat it.</div>
-<div class="post-meta"><span>28 replies</span><span>156 views</span></div>
-</div>
-
-<div class="forum-post">
-<div class="post-header"><div class="post-author">GainzGoblin</div><div class="post-date">1 day ago</div></div>
-<div class="post-title">Cut from 205 to 185 in 12 weeks - here's what worked</div>
-<div class="post-content">Followed a consistent 500 calorie deficit, maintained protein at 1.2g per lb, and trained hard.</div>
-<div class="post-meta"><span>67 replies</span><span>428 views</span></div>
-</div>
-
-<div class="forum-post">
-<div class="post-header"><div class="post-author">StrengthSeeker</div><div class="post-date">1 day ago</div></div>
-<div class="post-title">Can't seem to increase deadlift - form check request</div>
-<div class="post-content">Stuck at 315 for 4 weeks. Not sure if it's my form, strength plateau, or something else.</div>
-<div class="post-meta"><span>12 replies</span><span>89 views</span></div>
-</div>
-</section>
-
-<section id="contact" class="section">
-<h2 class="section-title">Contact</h2>
-<p class="section-subtitle">Questions, sponsorships, or partnership inquiries? Get in touch.</p>
-
-<div class="contact-form">
-<form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" onsubmit="return handleContact(event)">
-<div class="form-group"><label>Your name</label><input type="text" name="name" required></div>
-<div class="form-group"><label>Email</label><input type="email" name="email" required></div>
-<div class="form-group"><label>Reason for contact</label>
-<select name="reason">
-<option>General question</option>
-<option>Sponsorship inquiry</option>
-<option>Advertising</option>
-<option>Content suggestion</option>
-<option>Partnership</option>
-</select></div>
-<div class="form-group"><label>Message</label><textarea name="message" rows="5" required></textarea></div>
-<button type="submit" class="cta-button">Send message</button>
-</form>
-</div>
-</section>
+// At the very end of your script, replace the old renderExercises() call with:
+renderExercises();
 
 </main>
 
