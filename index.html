@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRON - Bodybuilding, Training, Nutrition & Supplements</title>
+<meta name="description" content="Complete guide to training programs, nutrition science, supplements, and recovery for muscle building. Evidence-based protocols and calculators.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #1a1a1a; line-height: 1.6; }
+header { background: #ffffff; border-bottom: 1px solid #e0e0e0; padding: 1rem 0; position: sticky; top: 0; z-index: 10; }
+.header-inner { max-width: 1200px; margin: 0 auto; padding: 0 1rem; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 22px; font-weight: 600; letter-spacing: 2px; }
+.nav-buttons { display: flex; gap: 0.75rem; list-style: none; flex-wrap: wrap; }
+.nav-buttons button { background: transparent; border: 1px solid #d0d0d0; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; color: #1a1a1a; transition: all 0.2s; }
+.nav-buttons button.active { background: #1a1a1a; color: #ffffff; border-color: #1a1a1a; }
+.nav-buttons button:hover { background: #f0f0f0; }
+main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+.section { display: none; }
+.section.active { display: block; }
+.hero { background: #ffffff; padding: 3rem 2rem; border-radius: 8px; margin-bottom: 3rem; text-align: center; border: 1px solid #e0e0e0; }
+.hero h1 { font-size: 36px; font-weight: 600; margin-bottom: 1rem; }
+.hero p { color: #666; font-size: 16px; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+.cta-button { background: #1a1a1a; color: #ffffff; padding: 12px 24px; border: none; border-radius: 6px; font-size: 15px; font-weight: 500; cursor: pointer; transition: opacity 0.2s; }
+.cta-button:hover { opacity: 0.9; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+.card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; }
+.card h3 { font-size: 18px; font-weight: 600; margin-bottom: 0.75rem; }
+.card p { color: #666; font-size: 14px; margin-bottom: 1rem; }
+.card-link { color: #1a1a1a; text-decoration: none; font-weight: 500; font-size: 14px; cursor: pointer; }
+.card-link:hover { text-decoration: underline; }
+.section-title { font-size: 28px; font-weight: 600; margin-bottom: 2rem; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 0.5rem; color: #1a1a1a; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid #d0d0d0; border-radius: 6px; font-size: 14px; font-family: inherit; background: #ffffff; color: #1a1a1a; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #999; }
+.calculator-section { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
+.calc-result { background: #f0f0f0; padding: 1.5rem; border-radius: 6px; margin-top: 1.5rem; text-align: center; }
+.calc-result-label { font-size: 13px; color: #666; margin-bottom: 0.5rem; }
+.calc-result-value { font-size: 32px; font-weight: 600; color: #1a1a1a; }
+.program-card { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
+.program-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; }
+.program-card .meta { font-size: 12px; color: #999; margin-bottom: 1rem; }
+.program-card ul { list-style: none; margin-bottom: 1rem; }
+.program-card li { font-size: 13px; color: #666; padding: 4px 0; }
+.program-card li:before { content: "• "; margin-right: 6px; color: #1a1a1a; }
+.affiliate-banner { background: #ffffff; border: 2px dashed #ddd; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; text-align: center; }
+.affiliate-banner h3 { font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; }
+.affiliate-banner p { color: #666; font-size: 13px; margin-bottom: 1rem; }
+.affiliate-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.affiliate-link { background: #ffffff; border: 1px solid #e0e0e0; padding: 1rem; border-radius: 6px; text-align: center; text-decoration: none; color: #1a1a1a; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+.affiliate-link:hover { background: #f5f5f5; border-color: #999; }
+.forum-post { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.post-header { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+.post-author { font-weight: 600; }
+.post-date { color: #999; font-size: 13px; }
+.post-title { font-size: 16px; font-weight: 600; margin-bottom: 0.75rem; }
+.post-content { color: #666; font-size: 14px; margin-bottom: 1rem; }
+.post-meta { font-size: 12px; color: #999; }
+.post-meta span { margin-right: 1rem; }
+.supplement-item { background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.supplement-name { font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; }
+.supplement-dosage { background: #f5f5f5; padding: 0.75rem; border-radius: 6px; margin: 0.75rem 0; font-size: 13px; }
+.supplement-dosage strong { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+.supplement-note { color: #666; font-size: 13px; margin-top: 0.75rem; }
+.supplement-link { color: #1a1a1a; text-decoration: none; font-weight: 500; font-size: 13px; cursor: pointer; }
+.supplement-link:hover { text-decoration: underline; }
+.tab-buttons { display: flex; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; }
+.tab-buttons button { background: transparent; border: none; padding: 12px 16px; border-bottom: 2px solid transparent; cursor: pointer; font-size: 14px; font-weight: 500; color: #999; transition: all 0.2s; }
+.tab-buttons button.active { color: #1a1a1a; border-bottom-color: #1a1a1a; }
+footer { background: #ffffff; border-top: 1px solid #e0e0e0; padding: 2rem; text-align: center; color: #999; font-size: 13px; margin-top: 3rem; }
+footer a { color: #999; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+<div class="logo">IRON</div>
+<ul class="nav-buttons">
+<button data-section="home" class="active">Home</button>
+<button data-section="training">Training</button>
+<button data-section="nutrition">Nutrition</button>
+<button data-section="supplements">Supplements</button>
+<button data-section="recovery">Recovery</button>
+<button data-section="tools">Tools</button>
+<button data-section="community">Community</button>
+</ul>
+</div>
+</header>
+
+<main>
+
+<section id="home" class="section active">
+<div class="hero">
+<h1>Build muscle. Get strong. Do it right.</h1>
+<p>Everything you need to know about training, nutrition, supplements, and recovery. No fluff. Just science and results.</p>
+<button class="cta-button" onclick="document.querySelector('[data-section=\"training\"]').click()">Start reading</button>
+</div>
+<h2 class="section-title">Main guides</h2>
+<div class="grid">
+<div class="card">
+<h3>Training programs</h3>
+<p>Science-backed workout splits, periodization models, and progression strategies for all experience levels.</p>
+<a class="card-link" onclick="document.querySelector('[data-section=\"training\"]').click()">Browse programs →</a>
+</div>
+<div class="card">
+<h3>Nutrition science</h3>
+<p>Macro breakdowns, meal timing, caloric adjustments, and detailed protocols for bulking and cutting.</p>
+<a class="card-link" onclick="document.querySelector('[data-section=\"nutrition\"]').click()">Learn nutrition →</a>
+</div>
+<div class="card">
+<h3>Supplements guide</h3>
+<p>Evidence-based supplement recommendations with peer-reviewed dosing and timing protocols.</p>
+<a class="card-link" onclick="document.querySelector('[data-section=\"supplements\"]').click()">Explore supplements →</a>
+</div>
+<div class="card">
+<h3>Recovery protocols</h3>
+<p>Sleep optimization, stretching routines, foam rolling, and injury prevention strategies.</p>
+<a class="card-link" onclick="document.querySelector('[data-section=\"recovery\"]').click()">Optimize recovery →</a>
+</div>
+</div>
+</section>
+
+<section id="training" class="section">
+<h2 class="section-title">Training programs</h2>
+<p style="color: #666; margin-bottom: 2rem;">Structured programs designed for strength and hypertrophy. Pick based on your experience level and available training days.</p>
+
+<div class="tab-buttons">
+<button class="active" onclick="filterPrograms('all')">All</button>
+<button onclick="filterPrograms('beginner')">Beginner</button>
+<button onclick="filterPrograms('intermediate')">Intermediate</button>
+<button onclick="filterPrograms('advanced')">Advanced</button>
+</div>
+
+<div id="programs">
+<div class="program-card" data-level="beginner">
+<h4>Push pull legs (PPL) - 6 days/week</h4>
+<div class="meta">Best for: Intermediate lifters | Duration: 12 weeks | Focus: Hypertrophy</div>
+<p style="font-size: 14px; color: #666; margin-bottom: 1rem;">Three alternating days split into push, pull, and leg focused sessions. Higher frequency allows more volume and recovery time per muscle group.</p>
+<p style="font-size: 12px; color: #999; margin: 1rem 0;">Common exercises:</p>
+<ul>
+<li>Push day: Bench press, incline DB press, overhead press, cable flyes, tricep dips</li>
+<li>Pull day: Deadlifts, rows, pull-ups, lat pulldowns, face pulls</li>
+<li>Leg day: Squats, leg press, hamstring curls, leg extensions, calf raises</li>
+</ul>
+</div>
+
+<div class="program-card" data-level="beginner">
+<h4>Upper lower split - 4 days/week</h4>
+<div class="meta">Best for: Beginner to intermediate | Duration: 8-12 weeks | Focus: Strength and hypertrophy</div>
+<p style="font-size: 14px; color: #666; margin-bottom: 1rem;">Two upper body days and two lower body days. Excellent for beginners and allows heavy lifting twice per week per muscle group.</p>
+<ul>
+<li>Upper A: Compound pressing, supplemental pressing, back work</li>
+<li>Upper B: Deadlifts, rows, supplemental pulling</li>
+<li>Lower A: Squats, quad emphasis</li>
+<li>Lower B: Deadlifts, hamstring and glute emphasis</li>
+</ul>
+</div>
+
+<div class="program-card" data-level="beginner">
+<h4>Full body 3x/week</h4>
+<div class="meta">Best for: Beginner | Duration: 12+ weeks | Focus: Strength foundation</div>
+<p style="font-size: 14px; color: #666; margin-bottom: 1rem;">Simple, effective routine. Each session hits all major muscle groups. Perfect for building base strength before specializing.</p>
+<ul>
+<li>Compound lifts: Squat, bench, row, deadlift</li>
+<li>Supplemental: Isolation for weak points</li>
+<li>Rest days: Important for recovery</li>
+</ul>
+</div>
+
+<div class="program-card" data-level="advanced">
+<h4>Advanced periodization - 5 days/week</h4>
+<div class="meta">Best for: Advanced | Duration: 16 weeks | Focus: Peak strength</div>
+<p style="font-size: 14px; color: #666; margin-bottom: 1rem;">Block periodization with accumulation, intensification, and realization phases. For lifters with 5+ years experience targeting specific peak performance.</p>
+<ul>
+<li>Phase 1: High volume (8-12 reps)</li>
+<li>Phase 2: Moderate volume, higher intensity (4-8 reps)</li>
+<li>Phase 3: Low volume, max effort (1-3 reps)</li>
+</ul>
+</div>
+</div>
+
+<div class="affiliate-banner">
+<h3>Featured training partners</h3>
+<p>Tools and equipment we recommend for tracking and optimizing your training</p>
+<div class="affiliate-links">
+<a href="#" class="affiliate-link">StrongApp (tracking)</a>
+<a href="#" class="affiliate-link">Rogue fitness (equipment)</a>
+<a href="#" class="affiliate-link">Rep Fitness (equipment)</a>
+<a href="#" class="affiliate-link">MyFitnessPal (nutrition tracking)</a>
+</div>
+</div>
+</section>
+
+<section id="nutrition" class="section">
+<h2 class="section-title">Nutrition science & calculators</h2>
+
+<div class="calculator-section">
+<h3 style="margin-bottom: 1.5rem;">Macro calculator</h3>
+<div class="form-group">
+<label>Body weight (lbs)</label>
+<input type="number" id="weight" placeholder="185" value="185">
+</div>
+<div class="form-group">
+<label>Activity level</label>
+<select id="activity">
+<option value="1.2">Sedentary (little exercise)</option>
+<option value="1.375">Light (1-3 days/week)</option>
+<option value="1.55" selected>Moderate (4-5 days/week)</option>
+<option value="1.725">Heavy (6-7 days/week)</option>
+<option value="1.9">Very heavy (twice per day)</option>
+</select>
+</div>
+<div class="form-group">
+<label>Goal</label>
+<select id="goal">
+<option value="deficit">Cut (500 cal deficit)</option>
+<option value="maintenance" selected>Maintain</option>
+<option value="surplus">Bulk (500 cal surplus)</option>
+</select>
+</div>
+
+<div class="calc-result">
+<div class="calc-result-label">Daily calorie target</div>
+<div class="calc-result-value" id="tdee-result">2500</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem;">
+<div class="calc-result">
+<div class="calc-result-label">Protein</div>
+<div class="calc-result-value" id="protein-result" style="font-size: 24px;">180g</div>
+</div>
+<div class="calc-result">
+<div class="calc-result-label">Fat</div>
+<div class="calc-result-value" id="fat-result" style="font-size: 24px;">83g</div>
+</div>
+<div class="calc-result">
+<div class="calc-result-label">Carbs</div>
+<div class="calc-result-value" id="carbs-result" style="font-size: 24px;">313g</div>
+</div>
+</div>
+</div>
+
+<div class="calculator-section">
+<h3 style="margin-bottom: 1.5rem;">TDEE calculator</h3>
+<div class="form-group">
+<label>Height (inches)</label>
+<input type="number" id="height" placeholder="70" value="70">
+</div>
+<div class="form-group">
+<label>Age (years)</label>
+<input type="number" id="age" placeholder="28" value="28">
+</div>
+<div class="form-group">
+<label>Sex</label>
+<select id="sex">
+<option value="male" selected>Male</option>
+<option value="female">Female</option>
+</select>
+</div>
+
+<div class="calc-result">
+<div class="calc-result-label">Maintenance calories (TDEE)</div>
+<div class="calc-result-value" id="tdee-detailed-result">2800</div>
+</div>
+</div>
+
+<h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Nutrition guides</h3>
+<div class="card">
+<h3>Bulking phase</h3>
+<p style="margin-bottom: 1rem;">Eat in a 500 calorie surplus above maintenance. Aim for 0.8-1g protein per lb bodyweight. Prioritize dense carbs (rice, pasta, oats) for energy and volume.</p>
+<p style="font-size: 13px; color: #999;">Duration: 4-16 weeks depending on starting point and goals.</p>
+</div>
+
+<div class="card">
+<h3>Cutting phase</h3>
+<p style="margin-bottom: 1rem;">Eat in a 500 calorie deficit. Maintain high protein (1-1.2g per lb) to preserve muscle. Reduce carbs slightly, keep fat moderate (0.3g per lb).</p>
+<p style="font-size: 13px; color: #999;">Duration: 8-16 weeks depending on how lean you want to get.</p>
+</div>
+
+<div class="card">
+<h3>Meal timing fundamentals</h3>
+<p style="margin-bottom: 1rem;">Post-workout: Fast-digesting carbs + protein within 2 hours. Pre-workout: Moderate carbs + protein 2-3 hours before. Daily adherence to total macros matters more than timing.</p>
+<p style="font-size: 13px; color: #999;">Consistent nutrition beats perfect meal timing every time.</p>
+</div>
+
+<div class="affiliate-banner">
+<h3>Nutrition sponsors</h3>
+<p>Recommended supplement and food brands for hitting your macros</p>
+<div class="affiliate-links">
+<a href="#" class="affiliate-link">MyProtein (whey)</a>
+<a href="#" class="affiliate-link">Bulk Supplements (bulk)</a>
+<a href="#" class="affiliate-link">Amazon Fresh (groceries)</a>
+<a href="#" class="affiliate-link">LabsMax (bulk powders)</a>
+</div>
+</div>
+</section>
+
+<section id="supplements" class="section">
+<h2 class="section-title">Supplement guide</h2>
+<p style="color: #666; margin-bottom: 2rem;">Evidence-based recommendations with peer-reviewed dosing. All supplements listed are legal, safe, and research-backed.</p>
+
+<div class="supplement-item">
+<div class="supplement-name">Creatine monohydrate</div>
+<div class="supplement-dosage">
+<strong>Daily dose: 5g per day</strong>
+Timing: Any time. Works best with consistent daily use.
+</div>
+<p style="color: #666; font-size: 13px; margin: 0.75rem 0;">Research shows: Increases strength and muscle mass by ~2-3%. Most studied supplement. No loading phase needed.</p>
+<a href="#" class="supplement-link">Find on Amazon →</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Whey protein isolate</div>
+<div class="supplement-dosage">
+<strong>Daily dose: 20-40g per serving</strong>
+Timing: Post-workout or with meals to hit daily protein goal.
+</div>
+<p style="color: #666; font-size: 13px; margin: 0.75rem 0;">Research shows: Equivalent to whole food protein. 1.6-2.2g per kg bodyweight daily is optimal for muscle growth.</p>
+<a href="#" class="supplement-link">Find on MyProtein →</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Beta-alanine</div>
+<div class="supplement-dosage">
+<strong>Daily dose: 3-5g split into 2-3 servings</strong>
+Timing: With meals. Takes 3-4 weeks to see benefit.
+</div>
+<p style="color: #666; font-size: 13px; margin: 0.75rem 0;">Research shows: ~2-3% improvement in 60-240 second efforts. Most beneficial for higher rep ranges (8-15 reps).</p>
+<a href="#" class="supplement-link">Find on Amazon →</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Caffeine</div>
+<div class="supplement-dosage">
+<strong>Daily dose: 3-6mg per kg bodyweight</strong>
+Timing: 30-60 minutes before workout for max benefit.
+</div>
+<p style="color: #666; font-size: 13px; margin: 0.75rem 0;">Research shows: 5-6% strength improvement, better focus. Tolerance builds, cycle off every 2-4 weeks.</p>
+<a href="#" class="supplement-link">Find on Amazon →</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Citrulline malate</div>
+<div class="supplement-dosage">
+<strong>Daily dose: 6-8g</strong>
+Timing: 60 minutes before workout for pump and recovery.
+</div>
+<p style="color: #666; font-size: 13px; margin: 0.75rem 0;">Research shows: Reduces soreness, improves blood flow. Some studies show modest strength improvements.</p>
+<a href="#" class="supplement-link">Find on MyProtein →</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Magnesium glycinate</div>
+<div class="supplement-dosage">
+<strong>Daily dose: 200-400mg before bed</strong>
+Timing: Evening for better sleep quality.
+</div>
+<p style="color: #666; font-size: 13px; margin: 0.75rem 0;">Research shows: Improves sleep quality, reduces muscle soreness. Most people are deficient in magnesium.</p>
+<a href="#" class="supplement-link">Find on Amazon →</a>
+</div>
+
+<div class="affiliate-banner">
+<h3>Supplement vendors</h3>
+<p>Where to buy quality supplements at competitive prices</p>
+<div class="affiliate-links">
+<a href="#" class="affiliate-link">MyProtein</a>
+<a href="#" class="affiliate-link">Bulk Supplements</a>
+<a href="#" class="affiliate-link">Amazon</a>
+<a href="#" class="affiliate-link">Legion Athletics</a>
+</div>
+</div>
+</section>
+
+<section id="recovery" class="section">
+<h2 class="section-title">Recovery optimization</h2>
+
+<div class="card">
+<h3>Sleep protocols</h3>
+<p>Sleep is where muscle is built. Aim for 7-9 hours nightly. Keep bedroom cool (65-68°F), dark, and quiet. Consistent sleep schedule is more important than duration.</p>
+<p style="font-size: 13px; color: #999; margin-top: 1rem;">Strategy: Same bedtime and wake time every day. Avoid screens 1 hour before bed. No caffeine after 2pm.</p>
+</div>
+
+<div class="card">
+<h3>Stretching and mobility</h3>
+<p>10-15 minutes daily improves recovery and prevents injury. Focus on tight areas: hip flexors, hamstrings, thoracic spine, shoulders.</p>
+<p style="font-size: 13px; color: #999; margin-top: 1rem;">Science: Static stretching post-workout (30 sec/muscle). Dynamic stretching pre-workout. Consistency matters more than duration.</p>
+</div>
+
+<div class="card">
+<h3>Foam rolling</h3>
+<p>30 seconds per muscle group, 2-3 times per week. Calves, quads, IT band, glutes, lats. Can be done post-workout or on rest days.</p>
+<p style="font-size: 13px; color: #999; margin-top: 1rem;">Evidence: Reduces soreness, improves blood flow, increases ROM. Not a replacement for stretching.</p>
+</div>
+
+<div class="card">
+<h3>Deload weeks</h3>
+<p>Every 4-6 weeks, reduce volume by 40-50% and intensity slightly. Still train, but lighter. Crucial for long-term progress and preventing burnout.</p>
+<p style="font-size: 13px; color: #999; margin-top: 1rem;">Benefits: Allows CNS recovery, reduces injury risk, lets connective tissue adapt.</p>
+</div>
+
+<div class="card">
+<h3>Hydration</h3>
+<p>Aim for 0.5-1 oz per lb bodyweight daily. More if training hard or in hot environment. Electrolytes matter for performance and recovery.</p>
+<p style="font-size: 13px; color: #999; margin-top: 1rem;">Tip: Drink with meals, sip throughout the day. Dark urine = dehydrated. Pale yellow = adequate.</p>
+</div>
+
+<div class="card">
+<h3>Stress management</h3>
+<p>Chronic stress elevates cortisol, killing gains. Meditate 10 minutes daily, take walks, maintain social connections, manage work stress.</p>
+<p style="font-size: 13px; color: #999; margin-top: 1rem;">Research: Stress management improves strength gains by 5-10%. Sleep quality is the easiest leverage point.</p>
+</div>
+
+<div class="affiliate-banner">
+<h3>Recovery tools</h3>
+<p>Equipment recommended for optimizing sleep and recovery</p>
+<div class="affiliate-links">
+<a href="#" class="affiliate-link">WHOOP strap (recovery)</a>
+<a href="#" class="affiliate-link">Theragun (massage)</a>
+<a href="#" class="affiliate-link">Foam rollers</a>
+<a href="#" class="affiliate-link">Supplements</a>
+</div>
+</div>
+</section>
+
+<section id="tools" class="section">
+<h2 class="section-title">Fitness tools</h2>
+
+<div class="calculator-section">
+<h3 style="margin-bottom: 1.5rem;">One rep max (1RM) estimator</h3>
+<div class="form-group">
+<label>Weight lifted (lbs)</label>
+<input type="number" id="lift-weight" placeholder="225" value="225">
+</div>
+<div class="form-group">
+<label>Reps completed</label>
+<input type="number" id="lift-reps" placeholder="5" value="5">
+</div>
+<div class="calc-result">
+<div class="calc-result-label">Estimated 1RM (Epley formula)</div>
+<div class="calc-result-value" id="orm-result">261 lbs</div>
+</div>
+</div>
+
+<div class="calculator-section">
+<h3 style="margin-bottom: 1.5rem;">Body metrics</h3>
+<div class="form-group">
+<label>Current weight (lbs)</label>
+<input type="number" id="body-weight" placeholder="185" value="185">
+</div>
+<div class="form-group">
+<label>Target weight (lbs)</label>
+<input type="number" id="target-weight" placeholder="195" value="195">
+</div>
+<div class="form-group">
+<label>Weeks to target</label>
+<input type="number" id="target-weeks" placeholder="12" value="12">
+</div>
+<div class="calc-result">
+<div class="calc-result-label">Weekly gain needed</div>
+<div class="calc-result-value" id="weekly-gain">0.83 lbs/week</div>
+</div>
+</div>
+
+<h3 style="margin: 3rem 0 1.5rem;">Featured calculators and tools</h3>
+<div class="grid">
+<div class="card">
+<h3>Strength standards</h3>
+<p>See where you stand compared to beginners, intermediate, and elite lifters on main compounds.</p>
+<a class="card-link">View standards →</a>
+</div>
+<div class="card">
+<h3>Plate calculator</h3>
+<p>Calculate what plates to load for your target weight. Never do math at the gym again.</p>
+<a class="card-link">Load calculator →</a>
+</div>
+<div class="card">
+<h3>Weekly plan builder</h3>
+<p>Auto-generate a custom workout split based on days per week and experience level.</p>
+<a class="card-link">Build your plan →</a>
+</div>
+</div>
+</section>
+
+<section id="community" class="section">
+<h2 class="section-title">Community forum</h2>
+<p style="color: #666; margin-bottom: 2rem;">Connect with serious lifters. Share progress, ask questions, debug your training and nutrition.</p>
+
+<div style="margin-bottom: 2rem;">
+<textarea style="width: 100%; height: 80px; border: 1px solid #d0d0d0; padding: 12px; border-radius: 6px; font-family: inherit;" placeholder="Start a new discussion..."></textarea>
+<button class="cta-button" style="margin-top: 1rem;">Post discussion</button>
+</div>
+
+<h3 style="margin: 2rem 0 1.5rem; font-size: 18px; font-weight: 600;">Recent discussions</h3>
+
+<div class="forum-post">
+<div class="post-header">
+<div class="post-author">TyFromPhilly</div>
+<div class="post-date">2 hours ago</div>
+</div>
+<div class="post-title">Best beginner routine for someone returning after 6 months off?</div>
+<div class="post-content">Getting back into lifting after a 6 month layoff. Was running PPL before but lost a lot of strength. Should I jump back in or restart with something simpler?</div>
+<div class="post-meta">
+<span>15 replies</span>
+<span>42 views</span>
+</div>
+</div>
+
+<div class="forum-post">
+<div class="post-header">
+<div class="post-author">IronMinded</div>
+<div class="post-date">8 hours ago</div>
+</div>
+<div class="post-title">Protein timing: research update 2024</div>
+<div class="post-content">Just finished reading the latest meta-analysis on nutrient timing. Turns out daily total protein matters WAY more than when you eat it. Link to study in comments.</div>
+<div class="post-meta">
+<span>28 replies</span>
+<span>156 views</span>
+</div>
+</div>
+
+<div class="forum-post">
+<div class="post-header">
+<div class="post-author">GainzGoblin</div>
+<div class="post-date">1 day ago</div>
+</div>
+<div class="post-title">Cut from 205 to 185 in 12 weeks - here's what worked</div>
+<div class="post-content">Followed a consistent 500 calorie deficit, maintained protein at 1.2g per lb, and trained hard. Lost mostly fat. Posting before/after pics and full nutrition breakdown.</div>
+<div class="post-meta">
+<span>67 replies</span>
+<span>428 views</span>
+</div>
+</div>
+
+<div class="forum-post">
+<div class="post-header">
+<div class="post-author">StrengthSeeker</div>
+<div class="post-date">1 day ago</div>
+</div>
+<div class="post-title">Can't seem to increase deadlift - form check request</div>
+<div class="post-content">Stuck at 315 for 4 weeks. Posted form videos below. Not sure if it's my form, strength plateau, or something else. Would appreciate feedback.</div>
+<div class="post-meta">
+<span>12 replies</span>
+<span>89 views</span>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>&copy; 2026 IRON. Built by lifters, for lifters. | <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Advertise</a></p>
+</footer>
+
+<script>
+const navButtons = document.querySelectorAll('.nav-buttons button');
+const sections = document.querySelectorAll('.section');
+
+navButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const section = button.getAttribute('data-section');
+    
+    navButtons.forEach(b => b.classList.remove('active'));
+    button.classList.add('active');
+    
+    sections.forEach(s => s.classList.remove('active'));
+    document.getElementById(section).classList.add('active');
+    
+    window.scrollTo(0, 0);
+  });
+});
+
+function updateMacros() {
+  const weight = parseFloat(document.getElementById('weight').value) || 185;
+  const activity = parseFloat(document.getElementById('activity').value) || 1.55;
+  const goal = document.getElementById('goal').value;
+  
+  let tdee = weight * 11 * activity;
+  if (goal === 'deficit') tdee -= 500;
+  if (goal === 'surplus') tdee += 500;
+  
+  const protein = Math.round(weight * 1.0);
+  const fat = Math.round(tdee * 0.3 / 9);
+  const carbs = Math.round((tdee - protein * 4 - fat * 9) / 4);
+  
+  document.getElementById('tdee-result').textContent = Math.round(tdee);
+  document.getElementById('protein-result').textContent = protein + 'g';
+  document.getElementById('fat-result').textContent = fat + 'g';
+  document.getElementById('carbs-result').textContent = carbs + 'g';
+}
+
+function updateTDEE() {
+  const weight = parseFloat(document.getElementById('weight').value) || 185;
+  const height = parseFloat(document.getElementById('height').value) || 70;
+  const age = parseFloat(document.getElementById('age').value) || 28;
+  const sex = document.getElementById('sex').value;
+  
+  let bmr;
+  if (sex === 'male') {
+    bmr = 88.362 + (13.397 * weight * 0.453592) + (4.799 * height * 2.54) - (5.677 * age);
+  } else {
+    bmr = 447.593 + (9.247 * weight * 0.453592) + (3.098 * height * 2.54) - (4.330 * age);
+  }
+  
+  const tdee = Math.round(bmr * 1.55);
+  document.getElementById('tdee-detailed-result').textContent = tdee;
+}
+
+function updateORM() {
+  const weight = parseFloat(document.getElementById('lift-weight').value) || 225;
+  const reps = parseFloat(document.getElementById('lift-reps').value) || 5;
+  
+  const orm = Math.round(weight * (1 + reps / 30));
+  document.getElementById('orm-result').textContent = orm + ' lbs';
+}
+
+function updateWeeklyGain() {
+  const current = parseFloat(document.getElementById('body-weight').value) || 185;
+  const target = parseFloat(document.getElementById('target-weight').value) || 195;
+  const weeks = parseFloat(document.getElementById('target-weeks').value) || 12;
+  
+  const gain = ((target - current) / weeks).toFixed(2);
+  document.getElementById('weekly-gain').textContent = gain + ' lbs/week';
+}
+
+function filterPrograms(level) {
+  const programs = document.querySelectorAll('#programs .program-card');
+  const buttons = document.querySelectorAll('.tab-buttons button');
+  
+  buttons.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  programs.forEach(p => {
+    if (level === 'all') {
+      p.style.display = 'block';
+    } else {
+      p.style.display = p.getAttribute('data-level') === level ? 'block' : 'none';
+    }
+  });
+}
+
+document.getElementById('weight').addEventListener('input', updateMacros);
+document.getElementById('activity').addEventListener('change', updateMacros);
+document.getElementById('goal').addEventListener('change', updateMacros);
+document.getElementById('height').addEventListener('input', updateTDEE);
+document.getElementById('age').addEventListener('input', updateTDEE);
+document.getElementById('sex').addEventListener('change', updateTDEE);
+document.getElementById('lift-weight').addEventListener('input', updateORM);
+document.getElementById('lift-reps').addEventListener('input', updateORM);
+document.getElementById('body-weight').addEventListener('input', updateWeeklyGain);
+document.getElementById('target-weight').addEventListener('input', updateWeeklyGain);
+document.getElementById('target-weeks').addEventListener('input', updateWeeklyGain);
+
+updateMacros();
+updateTDEE();
+updateORM();
+updateWeeklyGain();
+</script>
+
+</body>
+</html>
