@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>whatisbodybuilding.com - Complete Guide to Training, Nutrition &amp; Supplements</title>
+<meta name="description" content="Complete bodybuilding resource: training programs, nutrition calculators, supplement guides, exercise library with illustrations, workout tracker, and community forum.">
+<meta name="keywords" content="bodybuilding, muscle building, workout programs, macro calculator, supplements, exercises, advanced lifting">
+<meta property="og:title" content="whatisbodybuilding.com - Complete Bodybuilding Guide">
+<meta property="og:description" content="Training programs, nutrition science, supplements, exercise library with illustrations, and forum for serious lifters.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://whatisbodybuilding.com">
+<link rel="canonical" href="https://whatisbodybuilding.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg-primary: #f5f5f5;
+  --bg-card: #ffffff;
+  --bg-section: #fff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --border: #e0e0e0;
+  --border-strong: #d0d0d0;
+  --accent: #ff3b00;
+  --accent-hover: #e03300;
+  --dark-bg: #0a0a0a;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0a0a0a;
+  --bg-card: #1a1a1a;
+  --bg-section: #151515;
+  --text-primary: #f5f5f5;
+  --text-secondary: #aaa;
+  --text-muted: #666;
+  --border: #2a2a2a;
+  --border-strong: #3a3a3a;
+}
+
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; transition: background 0.3s, color 0.3s; }
+
+header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0.75rem 0; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 1300px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+
+.logo-wrap { display: flex; flex-direction: column; cursor: pointer; line-height: 1; }
+.logo-main { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--accent); font-weight: 400; }
+.logo-sub { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 3px; color: var(--text-secondary); text-transform: uppercase; margin-top: 2px; font-weight: 500; }
+
+.header-right { display: flex; align-items: center; gap: 0.75rem; }
+.icon-btn { background: transparent; border: 1px solid var(--border-strong); width: 36px; height: 36px; border-radius: 6px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--text-primary); }
+.icon-btn:hover { background: var(--bg-primary); }
+
+.menu-toggle { display: none; background: transparent; border: 1px solid var(--border-strong); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 18px; color: var(--text-primary); }
+.nav-buttons { display: flex; gap: 0.3rem; list-style: none; flex-wrap: wrap; }
+.nav-buttons button { background: transparent; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 500; color: var(--text-primary); transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+.nav-buttons button.active { color: var(--accent); }
+.nav-buttons button:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+  .nav-buttons { display: none; width: 100%; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: var(--bg-card); padding: 1rem; border-bottom: 1px solid var(--border); gap: 0; z-index: 99; }
+  .nav-buttons.open { display: flex; }
+  .nav-buttons button { width: 100%; text-align: left; padding: 12px; }
+  .header-inner { position: relative; }
+  .logo-main { font-size: 22px; }
+  .logo-sub { font-size: 8px; }
+}
+
+.site-search-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 200; align-items: flex-start; justify-content: center; padding-top: 15vh; }
+.site-search-overlay.open { display: flex; }
+.site-search-box { background: var(--bg-card); padding: 2rem; border-radius: 12px; width: 90%; max-width: 600px; }
+.site-search-box input { width: 100%; padding: 16px 20px; border: 2px solid var(--border); border-radius: 8px; font-size: 18px; background: var(--bg-primary); color: var(--text-primary); }
+.search-results { margin-top: 1rem; max-height: 400px; overflow-y: auto; }
+.search-result-item { padding: 12px; border-radius: 6px; cursor: pointer; border-bottom: 1px solid var(--border); }
+.search-result-item:hover { background: var(--bg-primary); }
+.search-result-title { font-weight: 600; color: var(--text-primary); }
+.search-result-category { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+
+.exercise-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; padding: 1rem; overflow-y: auto; }
+.exercise-modal.open { display: flex; }
+.exercise-modal-content { background: var(--bg-card); padding: 2rem; border-radius: 12px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
+.exercise-modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg-primary); border: 1px solid var(--border-strong); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--text-primary); }
+.exercise-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; margin-bottom: 0.5rem; letter-spacing: 1px; padding-right: 3rem; }
+.exercise-modal-muscle { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 1.5rem; font-family: 'Oswald', sans-serif; }
+.exercise-illustration { background: var(--bg-primary); border-radius: 10px; padding: 2rem; margin-bottom: 1.5rem; display: flex; justify-content: center; align-items: center; min-height: 280px; }
+.exercise-modal-content h4 { font-family: 'Oswald', sans-serif; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; margin: 1.5rem 0 0.75rem; color: var(--accent); }
+.exercise-modal-content p { color: var(--text-primary); margin-bottom: 0.75rem; }
+.exercise-modal-content ul, .exercise-modal-content ol { margin: 0.5rem 0 1rem 1.5rem; color: var(--text-primary); }
+.exercise-modal-content li { margin-bottom: 0.5rem; }
+
+main { max-width: 1300px; margin: 0 auto; padding: 2rem 1.5rem; }
+.section { display: none; animation: fadeIn 0.4s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a1a0a 100%); color: #fff; padding: 5rem 2rem; border-radius: 16px; margin-bottom: 3rem; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 30%, rgba(255,59,0,0.15) 0%, transparent 60%); pointer-events: none; }
+.hero-content { position: relative; z-index: 1; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 72px; font-weight: 400; margin-bottom: 0.5rem; line-height: 1; letter-spacing: 2px; }
+.hero h1 .accent { color: var(--accent); }
+.hero-tagline { font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 4px; text-transform: uppercase; color: #aaa; margin-bottom: 2rem; }
+.hero p { color: #ccc; font-size: 18px; margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.cta-button { background: var(--accent); color: #fff; padding: 14px 32px; border: none; border-radius: 6px; font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 2px; }
+.cta-button:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.cta-button.primary { background: #fff; color: var(--dark-bg); }
+.cta-button.secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+.cta-button.secondary:hover { background: #fff; color: #1a1a1a; }
+
+@media (max-width: 768px) { .hero h1 { font-size: 48px; } .hero-tagline { font-size: 13px; letter-spacing: 2px; } }
+
+.stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 3rem; }
+.stat-item { text-align: center; }
+.stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--accent); line-height: 1; }
+.stat-label { font-family: 'Oswald', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); margin-top: 0.5rem; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.75rem; transition: all 0.2s; position: relative; overflow: hidden; }
+.card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform 0.3s; }
+.card:hover::before { transform: scaleY(1); }
+.card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+.card h3 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+.card p { color: var(--text-secondary); font-size: 14px; margin-bottom: 1rem; }
+.card-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 13px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; font-weight: 400; margin-bottom: 0.5rem; letter-spacing: 2px; line-height: 1; }
+.section-subtitle { color: var(--text-secondary); margin-bottom: 2rem; font-size: 16px; max-width: 700px; }
+
+.newsletter-banner { background: linear-gradient(135deg, #ff3b00 0%, #c82424 100%); color: #fff; padding: 3rem 2rem; border-radius: 16px; margin: 3rem 0; text-align: center; }
+.newsletter-banner h2 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; margin-bottom: 0.5rem; letter-spacing: 2px; }
+.newsletter-banner p { color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; font-size: 16px; }
+.newsletter-form { display: flex; gap: 0.5rem; max-width: 500px; margin: 0 auto; flex-wrap: wrap; }
+.newsletter-form input { flex: 1; min-width: 200px; padding: 14px 18px; border: none; border-radius: 6px; font-size: 14px; font-family: inherit; }
+.newsletter-form button { background: #0a0a0a; color: #fff; border: none; padding: 14px 28px; border-radius: 6px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; font-family: 'Oswald', sans-serif; }
+
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; font-family: 'Oswald', sans-serif; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--border-strong); border-radius: 6px; font-size: 14px; font-family: inherit; background: var(--bg-card); color: var(--text-primary); transition: border-color 0.2s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+
+.calculator-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+.calculator-section h3 { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+.calc-result { background: var(--bg-primary); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; text-align: center; border: 2px solid var(--accent); }
+.calc-result-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 2px; font-family: 'Oswald', sans-serif; font-weight: 500; }
+.calc-result-value { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--accent); line-height: 1; }
+
+.program-card { background: var(--bg-card); border: 1px solid var(--border); padding: 1.75rem; margin-bottom: 1rem; border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; }
+.program-card h4 { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; }
+.program-card .meta { font-size: 11px; color: var(--accent); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+.program-card ul { list-style: none; margin-bottom: 1rem; }
+.program-card li { font-size: 14px; color: var(--text-secondary); padding: 6px 0; padding-left: 1.5rem; position: relative; }
+.program-card li:before { content: "\25B6"; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 9px; }
+
+.affiliate-banner { background: linear-gradient(135deg, rgba(255,59,0,0.1), rgba(255,59,0,0.05)); border: 2px solid rgba(255,59,0,0.3); padding: 1.75rem; border-radius: 12px; margin: 2rem 0; text-align: center; }
+.affiliate-banner h3 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+.affiliate-banner p { color: var(--text-secondary); font-size: 13px; margin-bottom: 1rem; }
+.affiliate-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.affiliate-link { background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; border-radius: 6px; text-align: center; text-decoration: none; color: var(--text-primary); font-size: 13px; font-weight: 600; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; font-family: 'Oswald', sans-serif; }
+.affiliate-link:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.deal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s; }
+.deal-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.deal-category { font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 0.5rem; font-family: 'Oswald', sans-serif; }
+.deal-title { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+.deal-description { color: var(--text-secondary); font-size: 13px; margin-bottom: 1rem; flex: 1; }
+.deal-price { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--accent); margin-bottom: 0.75rem; }
+.deal-button { background: var(--accent); color: #fff; border: none; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 12px; font-weight: 600; text-align: center; display: block; }
+.deal-button:hover { background: var(--accent-hover); }
+
+.forum-post { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; transition: all 0.2s; }
+.forum-post:hover { border-color: var(--accent); }
+.post-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; align-items: center; }
+.post-author { font-weight: 700; color: var(--accent); font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; }
+.post-date { color: var(--text-muted); font-size: 12px; }
+.post-title { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 0.75rem; }
+.post-content { color: var(--text-primary); font-size: 14px; margin-bottom: 1rem; white-space: pre-wrap; }
+.post-actions { display: flex; gap: 0.5rem; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.post-action-btn { background: transparent; border: 1px solid var(--border-strong); color: var(--text-secondary); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+.post-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+.post-action-btn.liked { background: var(--accent); color: #fff; border-color: var(--accent); }
+.reply-form { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); display: none; }
+.reply-form.open { display: block; }
+.reply-form textarea { width: 100%; padding: 10px; border: 1px solid var(--border-strong); border-radius: 6px; background: var(--bg-primary); color: var(--text-primary); font-family: inherit; min-height: 70px; }
+.reply { background: var(--bg-primary); padding: 0.75rem 1rem; margin-top: 0.5rem; border-radius: 6px; border-left: 3px solid var(--accent); font-size: 14px; }
+.reply-header { display: flex; justify-content: space-between; margin-bottom: 0.25rem; }
+.reply-author { font-weight: 700; color: var(--accent); font-family: 'Oswald', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.reply-date { color: var(--text-muted); font-size: 11px; }
+
+.username-setup { background: linear-gradient(135deg, rgba(255,59,0,0.1), rgba(255,59,0,0.05)); border: 2px solid rgba(255,59,0,0.3); border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; text-align: center; }
+.username-setup h3 { font-family: 'Oswald', sans-serif; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+.username-setup input { padding: 10px 14px; border: 1px solid var(--border-strong); border-radius: 6px; margin-right: 0.5rem; background: var(--bg-card); color: var(--text-primary); font-family: inherit; }
+
+.supplement-item { background: var(--bg-card); border: 1px solid var(--border); padding: 1.75rem; margin-bottom: 1rem; border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; }
+.supplement-name { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+.supplement-badge { display: inline-block; background: var(--accent); color: #fff; padding: 3px 12px; border-radius: 12px; font-size: 10px; font-weight: 700; margin-left: 0.5rem; text-transform: uppercase; letter-spacing: 1px; vertical-align: middle; font-family: 'Oswald', sans-serif; }
+.supplement-dosage { background: var(--bg-primary); padding: 1rem; border-radius: 6px; margin: 0.75rem 0; font-size: 14px; border-left: 4px solid var(--accent); }
+.supplement-dosage strong { display: block; font-weight: 700; margin-bottom: 0.25rem; color: var(--accent); font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+.supplement-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 13px; display: inline-block; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 1px; font-family: 'Oswald', sans-serif; }
+.supplement-link:hover { text-decoration: underline; }
+
+.tab-buttons { display: flex; gap: 0.5rem; margin-bottom: 2rem; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
+.tab-buttons button { background: transparent; border: none; padding: 12px 18px; border-bottom: 3px solid transparent; cursor: pointer; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-muted); transition: all 0.2s; margin-bottom: -2px; text-transform: uppercase; letter-spacing: 1px; }
+.tab-buttons button.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.search-box { width: 100%; padding: 16px 20px; border: 2px solid var(--border); border-radius: 10px; font-size: 15px; margin-bottom: 2rem; background: var(--bg-card); color: var(--text-primary); }
+.search-box:focus { outline: none; border-color: var(--accent); }
+
+.exercise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.exercise-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; transition: all 0.2s; cursor: pointer; position: relative; }
+.exercise-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.exercise-name { font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.exercise-muscle { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; font-weight: 600; }
+.exercise-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.exercise-tag { background: var(--bg-primary); color: var(--text-secondary); padding: 2px 8px; border-radius: 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.exercise-tag.advanced { background: var(--accent); color: #fff; }
+.exercise-click-hint { font-size: 10px; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+
+.article-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: all 0.2s; cursor: pointer; }
+.article-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: var(--accent); }
+.article-image { width: 100%; height: 180px; background: linear-gradient(135deg, #1a1a1a 0%, #3a2a1a 50%, #ff3b00 150%); display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 64px; letter-spacing: 4px; }
+.article-content { padding: 1.5rem; }
+.article-category { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 0.5rem; font-family: 'Oswald', sans-serif; }
+.article-title { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+.article-excerpt { color: var(--text-secondary); font-size: 14px; }
+
+.article-full { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 3rem 2rem; max-width: 800px; margin: 0 auto; }
+.article-full h1 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 1.1; margin-bottom: 1rem; }
+.article-full .article-meta { color: var(--text-muted); font-size: 13px; margin-bottom: 2rem; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+.article-full h2 { font-family: 'Oswald', sans-serif; font-size: 26px; margin: 2rem 0 1rem; text-transform: uppercase; letter-spacing: 1px; }
+.article-full p { margin-bottom: 1rem; font-size: 16px; color: var(--text-primary); }
+.article-full ul { margin: 1rem 0 1rem 1.5rem; }
+.article-full li { margin-bottom: 0.5rem; color: var(--text-primary); }
+.back-btn { background: transparent; border: 1px solid var(--border-strong); color: var(--text-primary); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; margin-bottom: 2rem; }
+
+.contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; max-width: 600px; }
+
+.weird-tip { background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255,59,0,0.05) 100%); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 1.75rem; margin-bottom: 1.5rem; }
+.weird-tip-number { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--accent); line-height: 1; margin-bottom: 0.5rem; }
+.weird-tip h3 { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+.weird-tip p { color: var(--text-secondary); margin-bottom: 0.75rem; }
+.weird-tip .science { background: var(--bg-primary); padding: 0.75rem; border-radius: 6px; font-size: 13px; color: var(--text-muted); }
+.weird-tip .science strong { color: var(--accent); text-transform: uppercase; letter-spacing: 1px; font-size: 11px; font-family: 'Oswald', sans-serif; }
+
+.workout-log { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+.workout-log h3 { font-family: 'Oswald', sans-serif; font-size: 22px; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+.log-entry { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 0.75rem; padding: 0.75rem; background: var(--bg-primary); border-radius: 6px; margin-bottom: 0.5rem; align-items: center; }
+.log-entry input { background: var(--bg-card); border: 1px solid var(--border-strong); padding: 8px; border-radius: 4px; color: var(--text-primary); font-family: inherit; font-size: 13px; }
+.log-delete { background: transparent; border: 1px solid #c82424; color: #c82424; border-radius: 4px; padding: 6px 10px; cursor: pointer; font-size: 12px; }
+.log-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.log-stat { text-align: center; }
+.log-stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--accent); }
+.log-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); font-family: 'Oswald', sans-serif; }
+
+.plate-visual { display: flex; align-items: center; justify-content: center; gap: 4px; margin: 1.5rem 0; flex-wrap: wrap; min-height: 100px; }
+.plate { border-radius: 4px; color: #fff; font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; padding: 4px; }
+.plate-45 { background: #c82424; width: 30px; height: 80px; }
+.plate-35 { background: #1a5fa8; width: 26px; height: 72px; }
+.plate-25 { background: #2e8b57; width: 22px; height: 64px; }
+.plate-10 { background: #e0c00f; color: #000; width: 18px; height: 52px; }
+.plate-5 { background: #444; width: 14px; height: 40px; }
+.plate-2-5 { background: #ccc; color: #000; width: 12px; height: 32px; }
+.bar { background: #888; height: 8px; width: 80px; }
+
+footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margin-top: 4rem; }
+.footer-inner { max-width: 1300px; margin: 0 auto; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--accent); letter-spacing: 2px; }
+.footer-tagline { font-family: 'Oswald', sans-serif; font-size: 11px; color: #666; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+.footer-col h4 { color: #fff; font-family: 'Oswald', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; }
+.footer-col a { color: #999; text-decoration: none; display: block; padding: 4px 0; font-size: 14px; cursor: pointer; }
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom { border-top: 1px solid #2a2a2a; padding-top: 2rem; text-align: center; font-size: 12px; color: #666; }
+.footer-disclosure { font-size: 11px; color: #555; margin-top: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+<div class="logo-wrap" onclick="showSection('home')">
+<div class="logo-main">WHATISBODYBUILDING</div>
+<div class="logo-sub">.com &middot; build &middot; grow &middot; dominate</div>
+</div>
+<button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+<ul class="nav-buttons" id="nav-buttons">
+<button data-section="home" class="active">Home</button>
+<button data-section="training">Training</button>
+<button data-section="nutrition">Nutrition</button>
+<button data-section="supplements">Supps</button>
+<button data-section="exercises">Exercises</button>
+<button data-section="recovery">Recovery</button>
+<button data-section="tools">Tools</button>
+<button data-section="tracker">Log</button>
+<button data-section="deals">Deals</button>
+<button data-section="weirdgains">Weird Tips</button>
+<button data-section="articles">Articles</button>
+<button data-section="community">Community</button>
+<button data-section="contact">Contact</button>
+</ul>
+<div class="header-right">
+<button class="icon-btn" onclick="toggleSearch()" title="Search">&#128269;</button>
+<button class="icon-btn" onclick="toggleTheme()" title="Dark mode">&#9790;</button>
+</div>
+</div>
+</header>
+
+<div class="site-search-overlay" id="search-overlay" onclick="closeSearchOverlay(event)">
+<div class="site-search-box" onclick="event.stopPropagation()">
+<input type="text" id="site-search" placeholder="Search calculators, supplements, exercises..." onkeyup="siteSearch()">
+<div class="search-results" id="search-results"></div>
+</div>
+</div>
+
+<div class="exercise-modal" id="exercise-modal" onclick="closeExerciseModal(event)">
+<div class="exercise-modal-content" onclick="event.stopPropagation()">
+<button class="exercise-modal-close" onclick="closeExerciseModal()">&times;</button>
+<div id="exercise-modal-body"></div>
+</div>
+</div>
+
+<main>
+
+<section id="home" class="section active">
+<div class="hero">
+<div class="hero-content">
+<h1>BUILD. <span class="accent">LIFT.</span> DOMINATE.</h1>
+<div class="hero-tagline">The complete bodybuilding resource</div>
+<p>Training programs, nutrition science, supplement guides, recovery protocols, exercise library with illustrations, and insane gains tips. Free forever. No fluff. Just results.</p>
+<div class="hero-buttons">
+<button class="cta-button" onclick="showSection('training')">Start training</button>
+<button class="cta-button secondary" onclick="showSection('tools')">Free calculators</button>
+</div>
+</div>
+</div>
+
+<div class="stats-bar">
+<div class="stat-item"><div class="stat-number">60+</div><div class="stat-label">Exercises</div></div>
+<div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Calculators</div></div>
+<div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Articles</div></div>
+<div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Free access</div></div>
+</div>
+
+<h2 class="section-title">Main guides</h2>
+<div class="grid">
+<div class="card" onclick="showSection('training')" style="cursor: pointer;"><h3>Training programs</h3><p>Science-backed splits, periodization, and progression for all experience levels.</p><a class="card-link">Browse programs &rarr;</a></div>
+<div class="card" onclick="showSection('nutrition')" style="cursor: pointer;"><h3>Nutrition science</h3><p>Macro breakdowns, meal timing, bulk/cut protocols.</p><a class="card-link">Learn nutrition &rarr;</a></div>
+<div class="card" onclick="showSection('supplements')" style="cursor: pointer;"><h3>Supplements guide</h3><p>Evidence-based recommendations with peer-reviewed dosing.</p><a class="card-link">Explore supplements &rarr;</a></div>
+<div class="card" onclick="showSection('weirdgains')" style="cursor: pointer;"><h3>Weird gains tips</h3><p>Bizarre but science-backed methods for insane muscle growth.</p><a class="card-link">See the tips &rarr;</a></div>
+<div class="card" onclick="showSection('exercises')" style="cursor: pointer;"><h3>Exercise library</h3><p>60+ exercises with illustrations. Advanced variations for serious lifters.</p><a class="card-link">Browse exercises &rarr;</a></div>
+<div class="card" onclick="showSection('deals')" style="cursor: pointer;"><h3>Deals &amp; gear</h3><p>Hand-picked supplements, equipment, and energy drinks at the best prices.</p><a class="card-link">Shop deals &rarr;</a></div>
+</div>
+
+<div class="newsletter-banner">
+<h2>Join 10,000+ lifters</h2>
+<p>Weekly tips on training, nutrition, and insane gains protocols. No spam.</p>
+<form class="newsletter-form" onsubmit="return handleNewsletter(event)">
+<input type="email" placeholder="your@email.com" required>
+<button type="submit">Subscribe</button>
+</form>
+</div>
+
+<h2 class="section-title">Latest articles</h2>
+<div class="grid">
+<div class="article-card" onclick="showArticle('protein')"><div class="article-image">01</div><div class="article-content"><div class="article-category">Nutrition</div><div class="article-title">How much protein do you actually need?</div><p class="article-excerpt">Latest research on protein intake. Spoiler: less than you think.</p></div></div>
+<div class="article-card" onclick="showArticle('overload')"><div class="article-image">02</div><div class="article-content"><div class="article-category">Training</div><div class="article-title">Progressive overload: the only principle that matters</div><p class="article-excerpt">What actually drives gains over months and years.</p></div></div>
+<div class="article-card" onclick="showArticle('creatine')"><div class="article-image">03</div><div class="article-content"><div class="article-category">Supplements</div><div class="article-title">The truth about creatine in 2026</div><p class="article-excerpt">Timing, loading, and which type actually works best.</p></div></div>
+</div>
+</section>
+
+<section id="training" class="section">
+<h2 class="section-title">Training programs</h2>
+<p class="section-subtitle">Structured programs designed for strength and hypertrophy. Pick based on your experience level and available training days.</p>
+
+<div class="tab-buttons">
+<button class="active" onclick="filterPrograms(event, 'all')">All</button>
+<button onclick="filterPrograms(event, 'beginner')">Beginner</button>
+<button onclick="filterPrograms(event, 'intermediate')">Intermediate</button>
+<button onclick="filterPrograms(event, 'advanced')">Advanced</button>
+</div>
+
+<div id="programs">
+<div class="program-card" data-level="intermediate">
+<h4>Push pull legs (PPL) - 6 days/week</h4>
+<div class="meta">Intermediate &middot; 12 weeks &middot; Hypertrophy</div>
+<p style="color: var(--text-secondary); margin-bottom: 1rem;">Three alternating days split into push, pull, and leg focused sessions. Higher frequency allows more volume per muscle group.</p>
+<ul>
+<li>Push: Bench press, incline DB press, overhead press, cable flyes, tricep dips</li>
+<li>Pull: Deadlifts, rows, pull-ups, lat pulldowns, face pulls</li>
+<li>Legs: Squats, leg press, hamstring curls, leg extensions, calf raises</li>
+</ul>
+</div>
+
+<div class="program-card" data-level="beginner">
+<h4>Upper lower split - 4 days/week</h4>
+<div class="meta">Beginner to intermediate &middot; 8-12 weeks &middot; Strength &amp; hypertrophy</div>
+<p style="color: var(--text-secondary); margin-bottom: 1rem;">Two upper days, two lower days. Allows heavy lifting twice per week per muscle group.</p>
+<ul>
+<li>Upper A: Compound pressing, supplemental pressing, back work</li>
+<li>Upper B: Deadlifts, rows, supplemental pulling</li>
+<li>Lower A: Squats, quad emphasis</li>
+<li>Lower B: Deadlifts, hamstring and glute emphasis</li>
+</ul>
+</div>
+
+<div class="program-card" data-level="beginner">
+<h4>Full body 3x/week</h4>
+<div class="meta">Beginner &middot; 12+ weeks &middot; Strength foundation</div>
+<p style="color: var(--text-secondary); margin-bottom: 1rem;">Simple, effective routine. Each session hits all major muscle groups.</p>
+<ul>
+<li>Compound lifts: Squat, bench, row, deadlift</li>
+<li>Supplemental: Isolation for weak points</li>
+</ul>
+</div>
+
+<div class="program-card" data-level="advanced">
+<h4>Advanced periodization - 5 days/week</h4>
+<div class="meta">Advanced &middot; 16 weeks &middot; Peak strength</div>
+<p style="color: var(--text-secondary); margin-bottom: 1rem;">Block periodization with accumulation, intensification, and realization phases. For lifters with 5+ years experience.</p>
+<ul>
+<li>Phase 1: High volume (8-12 reps)</li>
+<li>Phase 2: Moderate volume, higher intensity (4-8 reps)</li>
+<li>Phase 3: Low volume, max effort (1-3 reps)</li>
+</ul>
+</div>
+</div>
+
+<div class="affiliate-banner">
+<h3>Training gear</h3>
+<p>Apps and equipment we actually recommend</p>
+<div class="affiliate-links">
+<a href="https://www.amazon.com/s?k=olympic+barbell&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Barbells on Amazon</a>
+<a href="https://www.amazon.com/s?k=weight+plates&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Weight plates</a>
+<a href="https://www.amazon.com/s?k=power+rack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Power racks</a>
+<a href="https://www.amazon.com/s?k=lifting+belt&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Lifting belts</a>
+</div>
+</div>
+</section>
+
+<section id="nutrition" class="section">
+<h2 class="section-title">Nutrition</h2>
+<p class="section-subtitle">Calculators and guides to nail your nutrition for muscle growth or fat loss.</p>
+
+<div class="calculator-section">
+<h3>Macro calculator</h3>
+<div class="form-group"><label>Body weight (lbs)</label><input type="number" id="weight" value="185"></div>
+<div class="form-group"><label>Activity level</label><select id="activity">
+<option value="1.2">Sedentary (little exercise)</option>
+<option value="1.375">Light (1-3 days/week)</option>
+<option value="1.55" selected>Moderate (4-5 days/week)</option>
+<option value="1.725">Heavy (6-7 days/week)</option>
+<option value="1.9">Very heavy (twice per day)</option>
+</select></div>
+<div class="form-group"><label>Goal</label><select id="goal">
+<option value="deficit">Cut (500 cal deficit)</option>
+<option value="maintenance" selected>Maintain</option>
+<option value="surplus">Bulk (500 cal surplus)</option>
+</select></div>
+<div class="calc-result"><div class="calc-result-label">Daily calorie target</div><div class="calc-result-value" id="tdee-result">2500</div></div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem;">
+<div class="calc-result"><div class="calc-result-label">Protein</div><div class="calc-result-value" id="protein-result" style="font-size: 36px;">180g</div></div>
+<div class="calc-result"><div class="calc-result-label">Fat</div><div class="calc-result-value" id="fat-result" style="font-size: 36px;">83g</div></div>
+<div class="calc-result"><div class="calc-result-label">Carbs</div><div class="calc-result-value" id="carbs-result" style="font-size: 36px;">313g</div></div>
+</div>
+</div>
+
+<h3 style="font-family: 'Bebas Neue'; font-size: 36px; margin: 3rem 0 1.5rem; letter-spacing: 2px;">Nutrition guides</h3>
+<div class="grid">
+<div class="card"><h3>Bulking</h3><p>Eat in a 500 calorie surplus. Aim for 0.8-1g protein per lb bodyweight. Prioritize dense carbs for energy.</p></div>
+<div class="card"><h3>Cutting</h3><p>Eat in a 500 calorie deficit. Maintain high protein (1-1.2g per lb). Reduce carbs, keep fat moderate.</p></div>
+<div class="card"><h3>Meal timing</h3><p>Post-workout: Fast carbs + protein within 2 hrs. Daily adherence matters more than timing.</p></div>
+</div>
+
+<div class="affiliate-banner">
+<h3>Nutrition shopping</h3>
+<p>Recommended brands for hitting your macros</p>
+<div class="affiliate-links">
+<a href="https://www.amazon.com/s?k=whey+protein+isolate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Whey protein</a>
+<a href="https://www.amazon.com/s?k=rolled+oats+bulk&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Bulk oats</a>
+<a href="https://www.amazon.com/s?k=rice+bulk&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Bulk rice</a>
+<a href="https://www.amazon.com/s?k=peanut+butter&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Peanut butter</a>
+</div>
+</div>
+</section>
+
+<section id="supplements" class="section">
+<h2 class="section-title">Supplements</h2>
+<p class="section-subtitle">Evidence-based recommendations with peer-reviewed dosing. All legal, safe, and research-backed.</p>
+
+<div class="supplement-item">
+<div class="supplement-name">Creatine monohydrate <span class="supplement-badge">Top pick</span></div>
+<div class="supplement-dosage"><strong>Daily dose: 5g per day</strong>Timing: Any time. Works best with consistent daily use.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">Most studied supplement. Increases strength and muscle mass by ~2-3%. No loading phase needed.</p>
+<a href="https://www.amazon.com/s?k=creatine+monohydrate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Whey protein isolate <span class="supplement-badge">Top pick</span></div>
+<div class="supplement-dosage"><strong>Daily dose: 20-40g per serving</strong>Timing: Post-workout or with meals.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">Equivalent to whole food protein. 1.6-2.2g per kg bodyweight daily is optimal for muscle growth.</p>
+<a href="https://www.amazon.com/s?k=whey+protein+isolate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Beta-alanine</div>
+<div class="supplement-dosage"><strong>Daily dose: 3-5g split into 2-3 servings</strong>Timing: With meals. Takes 3-4 weeks to see benefit.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">~2-3% improvement in 60-240 second efforts. Best for higher rep ranges (8-15 reps).</p>
+<a href="https://www.amazon.com/s?k=beta+alanine&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Caffeine</div>
+<div class="supplement-dosage"><strong>Daily dose: 3-6mg per kg bodyweight</strong>Timing: 30-60 minutes before workout.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">5-6% strength improvement, better focus. Cycle off every 2-4 weeks.</p>
+<a href="https://www.amazon.com/s?k=caffeine+pills&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Citrulline malate</div>
+<div class="supplement-dosage"><strong>Daily dose: 6-8g</strong>Timing: 60 minutes before workout.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">Reduces soreness, improves blood flow. Better pumps.</p>
+<a href="https://www.amazon.com/s?k=citrulline+malate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
+</div>
+
+<div class="supplement-item">
+<div class="supplement-name">Magnesium glycinate</div>
+<div class="supplement-dosage"><strong>Daily dose: 200-400mg before bed</strong>Timing: Evening for better sleep quality.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">Improves sleep quality, reduces muscle soreness. Most people are deficient.</p>
+<a href="https://www.amazon.com/s?k=magnesium+glycinate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
+</div>
+</section>
+
+<section id="deals" class="section">
+<h2 class="section-title">Deals &amp; gear</h2>
+<p class="section-subtitle">Hand-picked supplements, energy drinks, and equipment. Updated regularly. Affiliate links support the site at no extra cost to you.</p>
+
+<h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 2rem 0 1rem; letter-spacing: 2px;">Energy drinks</h3>
+<div class="grid">
+<div class="deal-card">
+<div class="deal-category">Pre-workout</div>
+<div class="deal-title">C4 Original Energy Drink (12-pack)</div>
+<div class="deal-description">200mg caffeine, zero sugar, beta-alanine. Solid pre-workout option from Cellucor.</div>
+<div class="deal-price">~$24</div>
+<a href="https://www.amazon.com/s?k=c4+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Pre-workout</div>
+<div class="deal-title">Bang Energy Drinks (12-pack)</div>
+<div class="deal-description">300mg caffeine, zero sugar, BCAAs. Heavy hitter for serious sessions.</div>
+<div class="deal-price">~$25</div>
+<a href="https://www.amazon.com/s?k=bang+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Budget pick</div>
+<div class="deal-title">Monster Zero Ultra (24-pack)</div>
+<div class="deal-description">140mg caffeine, zero sugar. Cheapest per can. Reliable daily driver.</div>
+<div class="deal-price">~$28</div>
+<a href="https://www.amazon.com/s?k=monster+zero+ultra+24+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Healthy pick</div>
+<div class="deal-title">Ghost Energy Drinks (12-pack)</div>
+<div class="deal-description">200mg natural caffeine, zero sugar, electrolytes. Cleaner ingredients.</div>
+<div class="deal-price">~$30</div>
+<a href="https://www.amazon.com/s?k=ghost+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+</div>
+
+<h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 3rem 0 1rem; letter-spacing: 2px;">Must-have supplements</h3>
+<div class="grid">
+<div class="deal-card">
+<div class="deal-category">Top Pick</div>
+<div class="deal-title">Creatine Monohydrate (1 lb)</div>
+<div class="deal-description">90 servings of 5g. Cheapest cost per serving. Micronized for easy mixing.</div>
+<div class="deal-price">~$15</div>
+<a href="https://www.amazon.com/s?k=creatine+monohydrate+micronized&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Top Pick</div>
+<div class="deal-title">Whey Protein Isolate (5 lb)</div>
+<div class="deal-description">~75 servings of 25g protein. Low carb, low fat, fast absorption.</div>
+<div class="deal-price">~$60</div>
+<a href="https://www.amazon.com/s?k=whey+protein+isolate+5+pound&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Sleep</div>
+<div class="deal-title">Magnesium Glycinate (240 caps)</div>
+<div class="deal-description">400mg per dose. Improves sleep quality. 4-month supply.</div>
+<div class="deal-price">~$20</div>
+<a href="https://www.amazon.com/s?k=magnesium+glycinate+400mg&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Pump</div>
+<div class="deal-title">Citrulline Malate (1 lb)</div>
+<div class="deal-description">60 servings at 8g. Insane pumps and reduced soreness.</div>
+<div class="deal-price">~$20</div>
+<a href="https://www.amazon.com/s?k=citrulline+malate+powder&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+</div>
+
+<h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 3rem 0 1rem; letter-spacing: 2px;">Home gym essentials</h3>
+<div class="grid">
+<div class="deal-card">
+<div class="deal-category">Essential</div>
+<div class="deal-title">Olympic Barbell (45 lb)</div>
+<div class="deal-description">Quality barbell rated for 700+ lbs. Good knurling, smooth sleeves.</div>
+<div class="deal-price">~$150</div>
+<a href="https://www.amazon.com/s?k=olympic+barbell+700+lb&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Essential</div>
+<div class="deal-title">Adjustable Dumbbells</div>
+<div class="deal-description">Space-saving alternative to full rack. 5-50 lb range per dumbbell.</div>
+<div class="deal-price">~$300</div>
+<a href="https://www.amazon.com/s?k=adjustable+dumbbells+50lb&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Safety</div>
+<div class="deal-title">Power Rack</div>
+<div class="deal-description">Squat and bench safely at home. Includes pull-up bar.</div>
+<div class="deal-price">~$500</div>
+<a href="https://www.amazon.com/s?k=power+rack+home+gym&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Accessory</div>
+<div class="deal-title">Lifting Belt (Leather)</div>
+<div class="deal-description">10mm leather belt for squats and deads. Support to 800+ lbs.</div>
+<div class="deal-price">~$60</div>
+<a href="https://www.amazon.com/s?k=10mm+lifting+belt+leather&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+</div>
+
+<h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 3rem 0 1rem; letter-spacing: 2px;">Recovery gear</h3>
+<div class="grid">
+<div class="deal-card">
+<div class="deal-category">Recovery</div>
+<div class="deal-title">Massage Gun</div>
+<div class="deal-description">Percussive therapy for sore muscles. Better recovery.</div>
+<div class="deal-price">~$100</div>
+<a href="https://www.amazon.com/s?k=massage+gun+percussion&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Recovery</div>
+<div class="deal-title">Foam Roller (High Density)</div>
+<div class="deal-description">18-inch dense foam roller. Lasts forever.</div>
+<div class="deal-price">~$25</div>
+<a href="https://www.amazon.com/s?k=high+density+foam+roller&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Sleep</div>
+<div class="deal-title">Blackout Curtains</div>
+<div class="deal-description">Total darkness for better GH release during sleep.</div>
+<div class="deal-price">~$40</div>
+<a href="https://www.amazon.com/s?k=blackout+curtains+bedroom&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+<div class="deal-card">
+<div class="deal-category">Tracking</div>
+<div class="deal-title">Heart Rate Monitor</div>
+<div class="deal-description">Chest strap HRM for accurate training data.</div>
+<div class="deal-price">~$50</div>
+<a href="https://www.amazon.com/s?k=heart+rate+monitor+chest&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
+</div>
+</div>
+</section>
+
+<section id="weirdgains" class="section">
+<h2 class="section-title">Weird gains tips</h2>
+<p class="section-subtitle">Bizarre but scientifically-backed methods for insane muscle growth.</p>
+
+<div class="weird-tip"><div class="weird-tip-number">01</div><h3>Cold showers right after lifting KILL gains</h3><p>Taking a cold shower or ice bath within 4 hours of weight training can reduce muscle protein synthesis by up to 37%.</p><div class="science"><strong>Science:</strong> Cold blunts the inflammatory response your muscles need to grow. Save the cold plunge for non-training days.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">02</div><h3>Chewing gum makes you press more weight</h3><p>Chewing gum before heavy sets can increase strength output by 2-3% by activating the masseter muscle, which is neurally linked to grip and core activation.</p><div class="science"><strong>Science:</strong> The jaw clench reflex recruits more motor units throughout the body.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">03</div><h3>Listen to heavy music for 8% more strength</h3><p>Aggressive music (metal, rap, hardstyle) increases testosterone response and lift performance compared to calm music or silence.</p><div class="science"><strong>Science:</strong> Adrenaline release from arousing music directly impacts force production.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">04</div><h3>Eat a spoonful of honey before bed</h3><p>Slow-digesting carbs at night fuel overnight recovery. Honey specifically prevents the overnight cortisol spike that kills gains.</p><div class="science"><strong>Science:</strong> The liver uses fructose to restock glycogen and keep blood sugar stable during sleep.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">05</div><h3>Salt your pre-workout drink</h3><p>Adding 1/4 tsp of pink salt to your pre-workout water improves pumps, strength, and endurance.</p><div class="science"><strong>Science:</strong> Sodium drives water into muscle cells and improves nerve conduction.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">06</div><h3>Grip the bar with intent to bend it</h3><p>When benching, actively try to pull the bar apart. When squatting, spread the floor with your feet.</p><div class="science"><strong>Science:</strong> Irradiation principle - contracting nearby muscles hard increases neural drive to target muscles.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">07</div><h3>Sleep in a 62-degree room for +15% growth hormone</h3><p>Cooler bedroom temps significantly boost nighttime growth hormone release.</p><div class="science"><strong>Science:</strong> Lower core body temp extends deep sleep phases where GH is secreted.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">08</div><h3>Do calf raises first thing in the morning</h3><p>Training calves fasted in the morning activates different muscle fibers and breaks plateaus.</p><div class="science"><strong>Science:</strong> Fasted training hits high-threshold motor units harder. Calves respond to frequency.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">09</div><h3>The sock squat technique</h3><p>Squatting in just socks can increase depth, engage more glutes, and build better ankle mobility.</p><div class="science"><strong>Science:</strong> Thick-soled shoes reduce proprioception and alter squat mechanics.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">10</div><h3>Staring at yourself in the mirror</h3><p>Watching yourself lift improves mind-muscle connection by 15-22%, measured by EMG.</p><div class="science"><strong>Science:</strong> Visual feedback helps your brain recruit target muscles more effectively.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">11</div><h3>Drop sets on last set of every exercise</h3><p>One drop set at the end of your last set triggers extra hypertrophy with minimal recovery cost.</p><div class="science"><strong>Science:</strong> Additional metabolic stress without overloading the nervous system.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">12</div><h3>Ginger tea reduces muscle soreness 25%</h3><p>2g of ginger daily reduces delayed-onset muscle soreness as effectively as ibuprofen.</p><div class="science"><strong>Science:</strong> Gingerol compounds have strong anti-inflammatory properties.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">13</div><h3>Train legs last in your weekly split</h3><p>Save legs for the last training day. Heavy squats and deadlifts deplete your CNS.</p><div class="science"><strong>Science:</strong> Systemic fatigue from leg day affects all other lifts for 2-3 days.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">14</div><h3>Baking soda before high rep sets</h3><p>0.3g/kg of sodium bicarbonate 60 min pre-workout buffers lactic acid for 2-3 extra reps.</p><div class="science"><strong>Science:</strong> Sodium bicarbonate neutralizes hydrogen ions that cause muscle burn.</div></div>
+
+<div class="weird-tip"><div class="weird-tip-number">15</div><h3>Eat a banana with peanut butter pre-bed</h3><p>Slow carbs (banana) + slow protein/fat (PB) sustains amino acids for 7+ hours of overnight growth.</p><div class="science"><strong>Science:</strong> Similar amino acid sustenance as casein at much lower cost.</div></div>
+
+<div class="affiliate-banner">
+<h3>Gear for crazy gains</h3>
+<p>Tools that help you apply these tips</p>
+<div class="affiliate-links">
+<a href="https://www.amazon.com/s?k=raw+honey+local&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Raw honey</a>
+<a href="https://www.amazon.com/s?k=pink+himalayan+salt&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Pink salt</a>
+<a href="https://www.amazon.com/s?k=wireless+earbuds+sport&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Wireless earbuds</a>
+<a href="https://www.amazon.com/s?k=ginger+root+powder&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Ginger powder</a>
+</div>
+</div>
+</section>
+
+<section id="exercises" class="section">
+<h2 class="section-title">Exercise library</h2>
+<p class="section-subtitle">60+ exercises with illustrations. Click any exercise to see proper form, cues, and variations.</p>
+
+<input type="text" class="search-box" id="exercise-search" placeholder="Search exercises..." onkeyup="filterExercises()">
+
+<div class="tab-buttons">
+<button class="active" onclick="filterByMuscle(event, 'all')">All</button>
+<button onclick="filterByMuscle(event, 'chest')">Chest</button>
+<button onclick="filterByMuscle(event, 'back')">Back</button>
+<button onclick="filterByMuscle(event, 'legs')">Legs</button>
+<button onclick="filterByMuscle(event, 'shoulders')">Shoulders</button>
+<button onclick="filterByMuscle(event, 'arms')">Arms</button>
+<button onclick="filterByMuscle(event, 'core')">Core</button>
+<button onclick="filterByMuscle(event, 'advanced')">Advanced only</button>
+</div>
+
+<div class="exercise-grid" id="exercise-grid"></div>
+</section>
+
+<section id="recovery" class="section">
+<h2 class="section-title">Recovery</h2>
+<p class="section-subtitle">Optimize sleep, mobility, and recovery to maximize gains.</p>
+
+<div class="grid">
+<div class="card"><h3>Sleep protocols</h3><p>Sleep is where muscle is built. Aim for 7-9 hours nightly. Keep bedroom cool (62F), dark, and quiet.</p></div>
+<div class="card"><h3>Stretching &amp; mobility</h3><p>10-15 minutes daily improves recovery and prevents injury. Focus on hip flexors, hamstrings, shoulders.</p></div>
+<div class="card"><h3>Foam rolling</h3><p>30 seconds per muscle group, 2-3 times per week. Calves, quads, IT band, glutes, lats.</p></div>
+<div class="card"><h3>Deload weeks</h3><p>Every 4-6 weeks, reduce volume by 40-50%. Still train, but lighter. Crucial for long-term progress.</p></div>
+<div class="card"><h3>Hydration</h3><p>Aim for 0.5-1 oz per lb bodyweight daily. Electrolytes matter for performance and recovery.</p></div>
+<div class="card"><h3>Stress management</h3><p>Chronic stress elevates cortisol, killing gains. Meditate 10 minutes daily, maintain social connections.</p></div>
+</div>
+</section>
+
+<section id="tools" class="section">
+<h2 class="section-title">Calculators</h2>
+<p class="section-subtitle">Free tools for planning and optimizing your training and nutrition.</p>
+
+<div class="calculator-section">
+<h3>1RM estimator</h3>
+<div class="form-group"><label>Weight lifted (lbs)</label><input type="number" id="lift-weight" value="225"></div>
+<div class="form-group"><label>Reps completed</label><input type="number" id="lift-reps" value="5"></div>
+<div class="calc-result"><div class="calc-result-label">Estimated 1RM (Epley)</div><div class="calc-result-value" id="orm-result">261</div></div>
+</div>
+
+<div class="calculator-section">
+<h3>Plate calculator</h3>
+<div class="form-group"><label>Target weight (lbs)</label><input type="number" id="plate-target" value="315"></div>
+<div class="form-group"><label>Bar type</label><select id="bar-weight"><option value="45" selected>Olympic bar (45)</option><option value="35">Women's bar (35)</option><option value="55">Safety squat bar (55)</option></select></div>
+<div class="plate-visual" id="plate-visual"></div>
+<div class="calc-result"><div class="calc-result-label">Plates per side</div><div class="calc-result-value" id="plate-result" style="font-size: 24px;">1x 45, 1x 25, 1x 10</div></div>
+</div>
+
+<div class="calculator-section">
+<h3>Body fat (Navy method)</h3>
+<div class="form-group"><label>Sex</label><select id="bf-sex"><option value="male" selected>Male</option><option value="female">Female</option></select></div>
+<div class="form-group"><label>Height (inches)</label><input type="number" id="bf-height" value="70"></div>
+<div class="form-group"><label>Waist (inches)</label><input type="number" id="bf-waist" value="34"></div>
+<div class="form-group"><label>Neck (inches)</label><input type="number" id="bf-neck" value="15"></div>
+<div class="form-group" id="hip-group" style="display: none;"><label>Hip (inches)</label><input type="number" id="bf-hip" value="38"></div>
+<div class="calc-result"><div class="calc-result-label">Estimated body fat</div><div class="calc-result-value" id="bf-result">15.2%</div></div>
+</div>
+
+<div class="calculator-section">
+<h3>Water intake</h3>
+<div class="form-group"><label>Body weight (lbs)</label><input type="number" id="water-weight" value="185"></div>
+<div class="form-group"><label>Training hours/day</label><input type="number" id="water-training" value="1" step="0.5"></div>
+<div class="calc-result"><div class="calc-result-label">Daily water target (oz)</div><div class="calc-result-value" id="water-result">130</div></div>
+</div>
+
+<div class="calculator-section">
+<h3>Protein per meal</h3>
+<div class="form-group"><label>Total daily protein (g)</label><input type="number" id="prot-total" value="180"></div>
+<div class="form-group"><label>Number of meals</label><input type="number" id="prot-meals" value="4"></div>
+<div class="calc-result"><div class="calc-result-label">Grams per meal</div><div class="calc-result-value" id="prot-per-meal">45g</div></div>
+</div>
+
+<div class="calculator-section">
+<h3>Body metrics</h3>
+<div class="form-group"><label>Current weight (lbs)</label><input type="number" id="body-weight" value="185"></div>
+<div class="form-group"><label>Target weight (lbs)</label><input type="number" id="target-weight" value="195"></div>
+<div class="form-group"><label>Weeks to target</label><input type="number" id="target-weeks" value="12"></div>
+<div class="calc-result"><div class="calc-result-label">Weekly change needed</div><div class="calc-result-value" id="weekly-gain" style="font-size: 36px;">0.83 lbs</div></div>
+</div>
+</section>
+
+<section id="tracker" class="section">
+<h2 class="section-title">Workout logger</h2>
+<p class="section-subtitle">Log your sets, reps, and weights. Saves automatically to your browser.</p>
+
+<div class="workout-log">
+<h3>Today's workout</h3>
+<div id="log-entries"></div>
+<button class="cta-button" onclick="addLogEntry()" style="margin-top: 1rem;">Add exercise</button>
+<button class="cta-button secondary" onclick="clearLog()" style="margin-top: 1rem; margin-left: 0.5rem; background: transparent; color: var(--accent); border: 2px solid var(--accent);">Clear all</button>
+<div class="log-stats">
+<div class="log-stat"><div class="log-stat-value" id="total-sets">0</div><div class="log-stat-label">Total sets</div></div>
+<div class="log-stat"><div class="log-stat-value" id="total-reps">0</div><div class="log-stat-label">Total reps</div></div>
+<div class="log-stat"><div class="log-stat-value" id="total-volume">0</div><div class="log-stat-label">Volume (lbs)</div></div>
+<div class="log-stat"><div class="log-stat-value" id="total-exercises">0</div><div class="log-stat-label">Exercises</div></div>
+</div>
+</div>
+</section>
+
+<section id="articles" class="section">
+<div id="article-list">
+<h2 class="section-title">Articles</h2>
+<p class="section-subtitle">Deep dives on training, nutrition, and supplements.</p>
+
+<div class="grid">
+<div class="article-card" onclick="showArticle('protein')"><div class="article-image">01</div><div class="article-content"><div class="article-category">Nutrition</div><div class="article-title">How much protein do you actually need?</div><p class="article-excerpt">Latest research on protein intake for muscle building.</p></div></div>
+<div class="article-card" onclick="showArticle('overload')"><div class="article-image">02</div><div class="article-content"><div class="article-category">Training</div><div class="article-title">Progressive overload: the only principle that matters</div><p class="article-excerpt">What actually drives long-term gains.</p></div></div>
+<div class="article-card" onclick="showArticle('creatine')"><div class="article-image">03</div><div class="article-content"><div class="article-category">Supplements</div><div class="article-title">The truth about creatine in 2026</div><p class="article-excerpt">Timing, loading, and which type works best.</p></div></div>
+<div class="article-card" onclick="showArticle('failure')"><div class="article-image">04</div><div class="article-content"><div class="article-category">Training</div><div class="article-title">Training to failure: when it helps, when it hurts</div><p class="article-excerpt">The nuanced science of RIR and failure training.</p></div></div>
+<div class="article-card" onclick="showArticle('sleep')"><div class="article-image">05</div><div class="article-content"><div class="article-category">Recovery</div><div class="article-title">Sleep for strength: the muscle builder's guide</div><p class="article-excerpt">How sleep impacts strength and muscle growth.</p></div></div>
+<div class="article-card" onclick="showArticle('cutting')"><div class="article-image">06</div><div class="article-content"><div class="article-category">Nutrition</div><div class="article-title">Cutting without losing muscle</div><p class="article-excerpt">Proven strategies for preserving muscle during fat loss.</p></div></div>
+</div>
+</div>
+
+<div id="article-content-wrap" style="display: none;"></div>
+</section>
+
+<section id="community" class="section">
+<h2 class="section-title">Community forum</h2>
+<p class="section-subtitle">Share progress, ask questions, debug your training. Posts save to your browser and persist across sessions.</p>
+
+<div class="username-setup">
+<h3>Your username</h3>
+<p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 1rem;">Set your handle to post on the forum. Stored locally on your device.</p>
+<input type="text" id="username-input" placeholder="e.g., IronMike" maxlength="20">
+<button class="cta-button" onclick="setUsername()">Save</button>
+<p id="username-display" style="margin-top: 0.75rem; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; color: var(--accent);"></p>
+</div>
+
+<div style="margin-bottom: 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem;">
+<h3 style="font-family: 'Oswald'; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">Start a new discussion</h3>
+<div class="form-group"><label>Title</label><input type="text" id="new-post-title" placeholder="e.g., Best beginner routine for getting back in shape"></div>
+<div class="form-group"><label>Your message</label><textarea id="new-post-content" rows="4" placeholder="Share your question, tip, or progress update..."></textarea></div>
+<button class="cta-button" onclick="createPost()">Post discussion</button>
+</div>
+
+<h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 2rem 0 1.5rem; letter-spacing: 2px;">Recent discussions</h3>
+
+<div id="forum-posts"></div>
+</section>
+
+<section id="contact" class="section">
+<h2 class="section-title">Contact</h2>
+<p class="section-subtitle">Questions, sponsorships, or partnerships? Get in touch.</p>
+
+<div class="contact-form">
+<form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" onsubmit="return handleContact(event)">
+<div class="form-group"><label>Your name</label><input type="text" name="name" required></div>
+<div class="form-group"><label>Email</label><input type="email" name="email" required></div>
+<div class="form-group"><label>Reason for contact</label>
+<select name="reason">
+<option>General question</option>
+<option>Sponsorship inquiry</option>
+<option>Advertising</option>
+<option>Content suggestion</option>
+<option>Partnership</option>
+</select></div>
+<div class="form-group"><label>Message</label><textarea name="message" rows="5" required></textarea></div>
+<button type="submit" class="cta-button">Send message</button>
+</form>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-col">
+<div class="footer-logo">WHATISBODYBUILDING</div>
+<div class="footer-tagline">.com &middot; build &middot; grow &middot; dominate</div>
+<p style="color: #999; font-size: 13px; line-height: 1.7;">The complete resource for serious lifters. Free, science-backed content updated weekly.</p>
+</div>
+<div class="footer-col"><h4>Content</h4><a onclick="showSection('training')">Training</a><a onclick="showSection('nutrition')">Nutrition</a><a onclick="showSection('supplements')">Supplements</a><a onclick="showSection('recovery')">Recovery</a><a onclick="showSection('weirdgains')">Weird tips</a></div>
+<div class="footer-col"><h4>Tools</h4><a onclick="showSection('tools')">Calculators</a><a onclick="showSection('tracker')">Workout log</a><a onclick="showSection('exercises')">Exercise library</a><a onclick="showSection('deals')">Deals</a></div>
+<div class="footer-col"><h4>Company</h4><a onclick="showSection('contact')">Contact</a><a href="#">Privacy policy</a><a href="#">Terms of service</a><a href="#">Advertise</a></div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 whatisbodybuilding.com &middot; Built by lifters, for lifters</p>
+<p class="footer-disclosure">As an Amazon Associate, we earn from qualifying purchases. Clicking affiliate links costs you nothing extra but helps support the site. All content for informational purposes. Consult a healthcare professional before starting any fitness program.</p>
+</div>
+</div>
+</footer>
+
+<script>
+const exerciseSVGs = {
+  bench: '<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><rect x="30" y="130" width="240" height="12" fill="#333" rx="2"/><rect x="40" y="142" width="12" height="40" fill="#555"/><rect x="248" y="142" width="12" height="40" fill="#555"/><ellipse cx="150" cy="110" rx="65" ry="18" fill="#f5a672"/><circle cx="150" cy="85" r="18" fill="#f5a672"/><rect x="60" y="55" width="180" height="8" fill="#888" rx="2"/><circle cx="50" cy="59" r="18" fill="#c82424"/><circle cx="250" cy="59" r="18" fill="#c82424"/><circle cx="30" cy="59" r="12" fill="#c82424"/><circle cx="270" cy="59" r="12" fill="#c82424"/><line x1="85" y1="95" x2="85" y2="63" stroke="#f5a672" stroke-width="8" stroke-linecap="round"/><line x1="215" y1="95" x2="215" y2="63" stroke="#f5a672" stroke-width="8" stroke-linecap="round"/></svg>',
+  squat: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="50" r="18" fill="#f5a672"/><path d="M 120 70 Q 150 100 180 70 L 180 140 Q 170 150 160 155 L 155 200 L 145 200 L 140 155 Q 130 150 120 140 Z" fill="#f5a672"/><rect x="70" y="60" width="160" height="8" fill="#888" rx="2"/><circle cx="60" cy="64" r="18" fill="#c82424"/><circle cx="240" cy="64" r="18" fill="#c82424"/><circle cx="40" cy="64" r="14" fill="#c82424"/><circle cx="260" cy="64" r="14" fill="#c82424"/><rect x="130" y="200" width="15" height="20" fill="#333"/><rect x="155" y="200" width="15" height="20" fill="#333"/><line x1="0" y1="225" x2="300" y2="225" stroke="#666" stroke-width="3"/></svg>',
+  deadlift: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="40" r="18" fill="#f5a672"/><path d="M 130 60 L 170 60 L 175 120 L 165 160 L 155 200 L 145 200 L 135 160 L 125 120 Z" fill="#f5a672"/><line x1="130" y1="80" x2="110" y2="165" stroke="#f5a672" stroke-width="12" stroke-linecap="round"/><line x1="170" y1="80" x2="190" y2="165" stroke="#f5a672" stroke-width="12" stroke-linecap="round"/><rect x="40" y="162" width="220" height="8" fill="#888" rx="2"/><circle cx="50" cy="166" r="24" fill="#c82424"/><circle cx="250" cy="166" r="24" fill="#c82424"/><circle cx="25" cy="166" r="16" fill="#c82424"/><circle cx="275" cy="166" r="16" fill="#c82424"/><rect x="135" y="200" width="15" height="22" fill="#333"/><rect x="155" y="200" width="15" height="22" fill="#333"/><line x1="0" y1="225" x2="300" y2="225" stroke="#666" stroke-width="3"/></svg>',
+  pullup: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><rect x="50" y="20" width="200" height="10" fill="#555" rx="2"/><rect x="50" y="0" width="10" height="30" fill="#555"/><rect x="240" y="0" width="10" height="30" fill="#555"/><circle cx="150" cy="70" r="18" fill="#f5a672"/><path d="M 130 90 L 170 90 L 170 175 L 155 175 L 150 200 L 145 175 L 130 175 Z" fill="#f5a672"/><line x1="130" y1="100" x2="110" y2="30" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="170" y1="100" x2="190" y2="30" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><circle cx="110" cy="30" r="8" fill="#f5a672"/><circle cx="190" cy="30" r="8" fill="#f5a672"/></svg>',
+  ohp: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="70" r="18" fill="#f5a672"/><path d="M 130 90 L 170 90 L 175 160 L 160 200 L 140 200 L 125 160 Z" fill="#f5a672"/><line x1="130" y1="100" x2="110" y2="50" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="170" y1="100" x2="190" y2="50" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><rect x="40" y="28" width="220" height="8" fill="#888" rx="2"/><circle cx="50" cy="32" r="20" fill="#c82424"/><circle cx="250" cy="32" r="20" fill="#c82424"/><circle cx="25" cy="32" r="14" fill="#c82424"/><circle cx="275" cy="32" r="14" fill="#c82424"/><line x1="0" y1="225" x2="300" y2="225" stroke="#666" stroke-width="3"/><rect x="135" y="200" width="15" height="22" fill="#333"/><rect x="155" y="200" width="15" height="22" fill="#333"/></svg>',
+  row: '<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="110" cy="60" r="15" fill="#f5a672"/><path d="M 95 75 L 125 75 L 140 130 L 160 140 L 160 150 L 130 145 L 115 145 Z" fill="#f5a672"/><line x1="95" y1="85" x2="60" y2="115" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="125" y1="85" x2="220" y2="115" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><rect x="190" y="108" width="60" height="8" fill="#888" rx="2"/><circle cx="240" cy="112" r="14" fill="#c82424"/><circle cx="200" cy="112" r="14" fill="#c82424"/><line x1="0" y1="175" x2="300" y2="175" stroke="#666" stroke-width="3"/></svg>',
+  curl: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="60" r="18" fill="#f5a672"/><path d="M 130 80 L 170 80 L 170 180 L 155 200 L 145 200 L 130 180 Z" fill="#f5a672"/><line x1="130" y1="95" x2="115" y2="125" stroke="#f5a672" stroke-width="11" stroke-linecap="round"/><line x1="115" y1="125" x2="140" y2="105" stroke="#f5a672" stroke-width="11" stroke-linecap="round"/><line x1="170" y1="95" x2="185" y2="125" stroke="#f5a672" stroke-width="11" stroke-linecap="round"/><line x1="185" y1="125" x2="160" y2="105" stroke="#f5a672" stroke-width="11" stroke-linecap="round"/><rect x="125" y="95" width="50" height="6" fill="#888" rx="2"/><circle cx="118" cy="98" r="10" fill="#c82424"/><circle cx="182" cy="98" r="10" fill="#c82424"/><line x1="0" y1="225" x2="300" y2="225" stroke="#666" stroke-width="3"/></svg>',
+  plank: '<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="60" cy="65" r="13" fill="#f5a672"/><path d="M 70 60 L 240 60 L 240 75 L 70 75 Z" fill="#f5a672"/><line x1="70" y1="75" x2="60" y2="110" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="235" y1="75" x2="235" y2="110" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="0" y1="115" x2="300" y2="115" stroke="#666" stroke-width="3"/></svg>',
+  generic: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="70" r="20" fill="#f5a672"/><path d="M 125 95 L 175 95 L 175 170 L 160 200 L 140 200 L 125 170 Z" fill="#f5a672"/><line x1="125" y1="105" x2="100" y2="145" stroke="#f5a672" stroke-width="12" stroke-linecap="round"/><line x1="175" y1="105" x2="200" y2="145" stroke="#f5a672" stroke-width="12" stroke-linecap="round"/><line x1="0" y1="220" x2="300" y2="220" stroke="#666" stroke-width="3"/></svg>'
+};
+
+const exercises = [
+  { name: "Barbell bench press", muscle: "chest", tags: ["compound"], svg: "bench", desc: "The king of chest exercises. Builds raw pressing power and chest mass.", cues: ["Retract shoulder blades and pin to bench", "Feet flat on floor, arch lower back slightly", "Grip just wider than shoulder width", "Lower bar to lower chest with control", "Drive bar up explosively, elbows at 45-75 degrees"] },
+  { name: "Incline dumbbell press", muscle: "chest", tags: ["compound", "upper chest"], svg: "bench", desc: "Targets upper chest and front delts. Better range of motion than barbell version.", cues: ["Bench at 30-45 degree incline", "Dumbbells start at shoulder level", "Press up and slightly in, meeting at top", "Control the descent, feel the stretch"] },
+  { name: "Svend press", muscle: "chest", tags: ["isolation", "advanced"], svg: "generic", desc: "Hold two weight plates flat together at chest level, press forward slowly. Insane upper inner chest pump.", cues: ["Two 5-10 lb plates sandwiched together", "Press flat hands together hard whole time", "Arms parallel to floor at all times", "Push plates straight forward, not up"] },
+  { name: "Dumbbell pullover", muscle: "chest", tags: ["isolation", "advanced"], svg: "generic", desc: "Old-school exercise for chest and serratus. Arnold's favorite for expanding ribcage.", cues: ["Lie perpendicular on bench, only upper back on pad", "Hold single DB over chest, arms slightly bent", "Lower DB behind head in smooth arc", "Feel stretch in chest and lats, return slowly"] },
+  { name: "Deficit push-ups", muscle: "chest", tags: ["bodyweight", "advanced"], svg: "generic", desc: "Push-ups with hands elevated on blocks for greater range of motion. Brutal on chest.", cues: ["Hands on 4-6 inch blocks or handles", "Lower chest below hand level", "Keep body in straight line", "Full extension at top"] },
+  { name: "Cable crossovers", muscle: "chest", tags: ["isolation"], svg: "generic", desc: "Constant tension chest isolation. Adjust pulleys high for lower chest, low for upper chest.", cues: ["Slight forward lean", "Soft elbow bend maintained throughout", "Arc the weight, don't press", "Squeeze chest hard at bottom"] },
+  { name: "Dips", muscle: "chest", tags: ["compound", "bodyweight"], svg: "generic", desc: "Bodyweight compound for chest, triceps, and shoulders. Lean forward for chest emphasis.", cues: ["Lean torso forward 30 degrees for chest", "Lower until shoulders below elbows", "Drive up with chest, not triceps", "Add weight once 12+ bodyweight reps"] },
+  { name: "Guillotine press", muscle: "chest", tags: ["compound", "advanced"], svg: "bench", desc: "Vince Gironda's secret for upper chest. Bar lowered to neck, elbows high.", cues: ["Elbows flared out 90 degrees", "Lower bar slowly to upper neck/collarbone", "Use 60-70% of normal bench weight", "Stop if shoulders hurt"] },
+
+  { name: "Conventional deadlift", muscle: "back", tags: ["compound", "heavy"], svg: "deadlift", desc: "The ultimate full-body strength builder. Targets hamstrings, glutes, back, traps.", cues: ["Bar over mid-foot, shoulders over bar", "Grip just outside knees", "Chest up, flat back, neutral neck", "Drive floor away with legs", "Lock out hips, don't hyperextend"] },
+  { name: "Pendlay row", muscle: "back", tags: ["compound"], svg: "row", desc: "Strict barbell row starting from floor each rep. Builds mass and thickness.", cues: ["Torso parallel to floor", "Bar starts on floor each rep", "Pull to lower chest explosively", "Reset on floor between reps"] },
+  { name: "Meadows row", muscle: "back", tags: ["compound", "advanced"], svg: "row", desc: "Landmine row variation from John Meadows. Perfect back-to-elbow tracking.", cues: ["Use landmine or corner of room", "Stagger stance, same side as working arm", "Row with elbow out wide toward ribs", "Squeeze at top, controlled negative"] },
+  { name: "Seal row", muscle: "back", tags: ["compound", "advanced"], svg: "row", desc: "Chest-supported row on flat bench. Isolates back by removing lower body assistance.", cues: ["Lie face down on elevated flat bench", "Bar must touch bench each rep", "Pull elbows up and back", "No body english - strict form only"] },
+  { name: "T-bar row", muscle: "back", tags: ["compound"], svg: "row", desc: "Landmine version focused on mid-back thickness. Arnold's favorite.", cues: ["Straddle bar with narrow stance", "Slight knee bend, hinge at hips", "Pull to lower chest", "Full stretch at bottom"] },
+  { name: "Pull-ups", muscle: "back", tags: ["compound", "bodyweight"], svg: "pullup", desc: "The gold standard for lat development. Wide grip for width, neutral for thickness.", cues: ["Hang from dead stop each rep", "Pull chest to bar, not chin over", "Drive elbows down and back", "Controlled negative - 2 seconds minimum"] },
+  { name: "Weighted chin-ups", muscle: "back", tags: ["compound", "advanced"], svg: "pullup", desc: "Underhand grip pull-ups with added weight. Better for biceps than pull-ups.", cues: ["Use dip belt to add weight", "Full dead hang start", "Chin over bar at top", "Work up to +90 lbs for 5 reps"] },
+  { name: "Face pulls", muscle: "back", tags: ["isolation", "rear delts"], svg: "generic", desc: "Best exercise for rear delts and shoulder health. Should be a staple.", cues: ["Rope attachment at face height", "Pull to forehead, elbows high", "External rotation at end range", "3-4 sets of 15-20 reps minimum"] },
+  { name: "Reverse hyper", muscle: "back", tags: ["isolation", "lower back"], svg: "generic", desc: "Louie Simmons classic. Builds and decompresses the lower back simultaneously.", cues: ["Lie face down on hyper bench", "Hang legs below", "Raise legs to parallel with back", "Controlled descent"] },
+  { name: "Rack pulls", muscle: "back", tags: ["compound", "heavy"], svg: "deadlift", desc: "Deadlifts from mid-shin or knee height. Lets you overload traps and upper back.", cues: ["Pins set at knee height", "Setup like conventional deadlift", "Use 110-130% of normal DL weight", "Focus on upper back contraction"] },
+
+  { name: "Back squat", muscle: "legs", tags: ["compound", "quads"], svg: "squat", desc: "The king of all lifts. Builds total leg mass and strength.", cues: ["Bar on upper traps (high) or rear delts (low)", "Feet shoulder width, toes slightly out", "Break at hips and knees simultaneously", "Knees track over toes", "Drive through heels to stand"] },
+  { name: "Front squat", muscle: "legs", tags: ["compound", "quads"], svg: "squat", desc: "Quad-dominant squat. Forces upright torso, hits quads harder than back squat.", cues: ["Bar racked on front delts", "Elbows high throughout movement", "Upright torso maintained", "Full depth below parallel"] },
+  { name: "Bulgarian split squat", muscle: "legs", tags: ["compound", "unilateral"], svg: "generic", desc: "Brutal unilateral leg builder. Fixes imbalances and builds serious glutes.", cues: ["Rear foot elevated on bench", "Front foot 2-3 feet from bench", "Descend straight down, not forward", "Front knee tracks over toe"] },
+  { name: "Romanian deadlift", muscle: "legs", tags: ["compound", "hamstrings"], svg: "deadlift", desc: "The best hamstring builder. Hip hinge movement with slight knee bend.", cues: ["Slight knee bend, maintain throughout", "Push hips back, bar stays close to legs", "Lower until stretch in hamstrings", "Drive hips forward to stand"] },
+  { name: "Hack squat", muscle: "legs", tags: ["compound", "quads"], svg: "generic", desc: "Machine-based quad builder. Takes lower back out of the equation.", cues: ["Shoulders under pads", "Feet lower on platform for quads", "Full depth, no bouncing", "Drive knees forward slightly"] },
+  { name: "Nordic curl", muscle: "legs", tags: ["bodyweight", "advanced"], svg: "generic", desc: "Bodyweight hamstring killer. Incredibly hard, builds tendinous strength.", cues: ["Kneel, feet anchored", "Lower body forward slowly", "Fight gravity all the way down", "Push back up with hands if needed"] },
+  { name: "Sissy squat", muscle: "legs", tags: ["bodyweight", "advanced"], svg: "generic", desc: "Old-school quad isolation. Lean back while squatting - hits quads HARD.", cues: ["Heels elevated on plates", "Hold rack for balance", "Lean back while bending knees", "Body forms straight line from knee to head"] },
+  { name: "Walking lunges", muscle: "legs", tags: ["compound", "unilateral"], svg: "generic", desc: "Great for glutes, quads, and conditioning. Take long steps for glutes.", cues: ["Step forward 3-4 feet", "Back knee nearly touches ground", "Drive through front heel to step through", "Maintain upright torso"] },
+  { name: "Calf raises (standing)", muscle: "legs", tags: ["isolation", "calves"], svg: "generic", desc: "Standing calf raises hit gastrocnemius. Go heavy and do 15-30 reps.", cues: ["Ball of foot on block", "Full stretch at bottom", "Pause at top for 1 second", "Very slow negative - 3 seconds"] },
+  { name: "Leg curl (lying)", muscle: "legs", tags: ["isolation", "hamstrings"], svg: "generic", desc: "Hamstring isolation. Prone version hits hamstrings better than seated.", cues: ["Hips pressed into pad", "Full range of motion", "Squeeze at top hard", "Controlled negative"] },
+
+  { name: "Overhead press", muscle: "shoulders", tags: ["compound", "heavy"], svg: "ohp", desc: "The true measure of upper body strength. Builds massive shoulders.", cues: ["Grip just outside shoulders", "Bar at upper chest start position", "Drive bar overhead, pull through under bar", "Lock out with bar over mid-foot"] },
+  { name: "Seated dumbbell press", muscle: "shoulders", tags: ["compound"], svg: "ohp", desc: "Allows natural shoulder rotation. Easier on joints than barbell.", cues: ["Dumbbells at shoulder level", "Press up and slightly in", "Don't lock out - maintain tension", "Control descent"] },
+  { name: "Lateral raises", muscle: "shoulders", tags: ["isolation", "side delts"], svg: "generic", desc: "THE shoulder width exercise. Most lifters go too heavy.", cues: ["Slight forward lean", "Lead with elbows, not hands", "Raise to parallel, no higher", "Pause at top for 1 second", "Go LIGHT - 10-15 lb DBs for most"] },
+  { name: "Cable lateral raise", muscle: "shoulders", tags: ["isolation", "advanced"], svg: "generic", desc: "Constant tension on side delts. Better than dumbbells for most.", cues: ["Cable at lowest pulley", "Cable behind body for better arc", "Smooth up and down", "Don't use momentum"] },
+  { name: "Arnold press", muscle: "shoulders", tags: ["compound"], svg: "ohp", desc: "Arnold's signature press. Rotates DBs throughout rep for full delt recruitment.", cues: ["Start with palms facing you", "Press while rotating palms out", "End with palms forward overhead", "Reverse on way down"] },
+  { name: "Handstand push-ups", muscle: "shoulders", tags: ["bodyweight", "advanced"], svg: "generic", desc: "Advanced bodyweight shoulder press. Wall supports initially.", cues: ["Kick up to handstand against wall", "Lower head to floor with control", "Press back up explosively", "Deficit version with hands on blocks"] },
+  { name: "Upright row", muscle: "shoulders", tags: ["compound"], svg: "generic", desc: "Controversial but effective for traps and side delts. Use wider grip for safety.", cues: ["Wider grip - shoulder width", "Pull to upper chest, not chin", "Elbows higher than wrists", "Stop if shoulders hurt"] },
+
+  { name: "Barbell curl", muscle: "arms", tags: ["isolation", "biceps"], svg: "curl", desc: "Classic bicep builder. Strict form maximizes growth.", cues: ["Elbows pinned to sides", "Full range - full extension to full flex", "No swinging or hip movement", "Squeeze hard at top for 1 second"] },
+  { name: "Hammer curl", muscle: "arms", tags: ["isolation", "biceps"], svg: "curl", desc: "Hits brachialis and brachioradialis. Gives arms thickness.", cues: ["Neutral grip throughout (palms facing)", "Elbows pinned", "Can use slight swing for last reps", "Alternate or both at once"] },
+  { name: "Preacher curl", muscle: "arms", tags: ["isolation", "biceps"], svg: "curl", desc: "Isolates biceps by removing body involvement. Great for peak development.", cues: ["Chest firmly on pad", "Don't fully extend - stop 3/4 way down", "Slow 3-second negative", "Explode on concentric"] },
+  { name: "21s", muscle: "arms", tags: ["isolation", "advanced"], svg: "curl", desc: "7 bottom half + 7 top half + 7 full reps = 21 total. Nuclear pump.", cues: ["7 reps from bottom to middle only", "7 reps from middle to top only", "7 full range reps", "Use 40-50% of normal curl weight"] },
+  { name: "Zottman curl", muscle: "arms", tags: ["isolation", "advanced"], svg: "curl", desc: "Supinated up, pronated down. Hits biceps AND forearms in one move.", cues: ["Curl up with palms facing you", "Rotate to palms down at top", "Lower slowly with palms down", "Rotate back to palms up at bottom"] },
+  { name: "Skull crushers", muscle: "arms", tags: ["isolation", "triceps"], svg: "generic", desc: "Classic tricep mass builder. EZ bar is kinder on wrists than straight bar.", cues: ["Bar starts over forehead", "Lower behind head slowly", "Keep elbows pointed up", "Don't flare elbows out"] },
+  { name: "Close grip bench", muscle: "arms", tags: ["compound", "triceps"], svg: "bench", desc: "The heavy tricep builder. Go heavy and progressive overload.", cues: ["Grip inside shoulder width (8-14 inches)", "Elbows tucked to sides", "Lower to lower chest", "Drive up hard with triceps"] },
+  { name: "Cable pushdown", muscle: "arms", tags: ["isolation", "triceps"], svg: "generic", desc: "Tricep staple. Rope attachment for better contraction.", cues: ["Elbows pinned to sides", "Full extension at bottom", "Control negative - 2 seconds", "Squeeze triceps hard at bottom"] },
+  { name: "JM press", muscle: "arms", tags: ["compound", "triceps", "advanced"], svg: "bench", desc: "Hybrid of close grip bench and skull crusher. Tricep destroyer.", cues: ["Close grip setup on bench", "Lower bar to chin area", "Elbows stay in front of bar", "Short range of motion"] },
+  { name: "Diamond push-ups", muscle: "arms", tags: ["bodyweight", "triceps"], svg: "plank", desc: "Push-ups with hands together. Brutal tricep builder.", cues: ["Form diamond shape with hands", "Chest touches hands at bottom", "Elbows stay close to body", "Full extension at top"] },
+
+  { name: "Hanging leg raises", muscle: "core", tags: ["bodyweight", "advanced"], svg: "generic", desc: "The gold standard for lower abs. Strict form or don't bother.", cues: ["Dead hang from pull-up bar", "Lift legs to 90 degrees (knees or straight)", "No swinging - strict form only", "Lower with control"] },
+  { name: "Ab wheel rollout", muscle: "core", tags: ["advanced"], svg: "generic", desc: "Full core demolisher. From knees first, then feet when strong enough.", cues: ["Start on knees, advance to feet later", "Roll out as far as possible without sagging", "Keep hips neutral - no arching", "Pull back with abs, not arms"] },
+  { name: "Hollow body hold", muscle: "core", tags: ["isometric", "advanced"], svg: "plank", desc: "Gymnast staple. Builds crazy core stability.", cues: ["Lie on back, legs straight", "Raise legs, arms, shoulders", "Lower back pressed into floor", "Hold for 30-60 seconds"] },
+  { name: "Dragon flag", muscle: "core", tags: ["advanced"], svg: "generic", desc: "Bruce Lee's ab exercise. Unreal full-body ab strength required.", cues: ["Lie on bench, grip behind head", "Raise whole body into vertical", "Lower slowly while keeping straight", "Only touch with upper back"] },
+  { name: "Plank", muscle: "core", tags: ["isometric", "bodyweight"], svg: "plank", desc: "Simple and effective. Target 2+ minutes, then add weight.", cues: ["Forearms on ground, body straight", "Squeeze glutes and abs", "Don't let hips sag or pike up", "Once 2 minutes is easy, add weight plate on back"] },
+  { name: "Copenhagen plank", muscle: "core", tags: ["advanced", "obliques"], svg: "plank", desc: "Adductor and oblique destroyer. Hard as hell.", cues: ["Side plank with top leg on bench", "Body elevated off ground", "Hold 20-60 seconds", "Builds adductor strength"] }
+];
+
+const articles = {
+  protein: { title: "How much protein do you actually need?", category: "Nutrition", date: "April 10, 2026", content: "<p>The fitness industry has pushed protein to absurd levels. Gym bros claiming 300g+ daily. But what does the science say?</p><h2>The research consensus</h2><p>Multiple meta-analyses from 2024-2026 consistently land on 1.6-2.2g per kg bodyweight for muscle growth. That's roughly 0.7-1g per lb. For a 180lb lifter, 126-180g daily.</p><h2>Meal distribution matters</h2><p>Split across 3-5 meals, 20-40g per meal maximizes muscle protein synthesis.</p><h2>Takeaway</h2><p>Stop stressing about 300g. Aim for 0.8-1g per lb across 4 meals.</p>" },
+  overload: { title: "Progressive overload: the only principle that matters", category: "Training", date: "April 5, 2026", content: "<p>You can follow the most sophisticated program ever written, but without progressive overload you're not growing.</p><h2>What it is</h2><p>Doing more over time. More weight, reps, sets, better form.</p><h2>How to implement</h2><p>Track every workout. Beat last session by one rep, one pound, or one set. That's it.</p>" },
+  creatine: { title: "The truth about creatine in 2026", category: "Supplements", date: "April 1, 2026", content: "<p>500+ studies. Here's what works.</p><h2>Type</h2><p>Monohydrate. Outperforms every other form in every study.</p><h2>Dose</h2><p>5g per day. Forever. Skip the loading phase.</p><h2>Results</h2><p>2-5 lb scale weight, 5-10% strength, 2-3% more muscle mass in 12 weeks.</p>" },
+  failure: { title: "Training to failure: when it helps, when it hurts", category: "Training", date: "March 28, 2026", content: "<p>The answer is: sometimes.</p><h2>Use failure for</h2><ul><li>Isolation exercises (curls, flyes, raises)</li><li>Last set of last exercise</li></ul><h2>Avoid failure on</h2><ul><li>Heavy compounds (squats, deadlifts)</li><li>Early in workout</li><li>Every single set</li></ul>" },
+  sleep: { title: "Sleep for strength: the muscle builder's guide", category: "Recovery", date: "March 22, 2026", content: "<p>You can't out-train poor sleep.</p><h2>The science</h2><p>70% of daily growth hormone released during deep sleep.</p><h2>Quality tips</h2><ul><li>60-65F room</li><li>Completely dark</li><li>No screens 60 min before</li><li>Consistent bedtime</li></ul>" },
+  cutting: { title: "Cutting without losing muscle", category: "Nutrition", date: "March 15, 2026", content: "<p>Losing fat while keeping muscle. Here's how.</p><h2>Protocol</h2><ul><li>500 cal deficit, no more</li><li>1-1.2g protein per lb</li><li>Keep training heavy</li><li>0.5-1% bodyweight loss per week max</li><li>Weekly refeed at maintenance</li></ul>" }
+};
+
+function renderExercises(filter, search) {
+  filter = filter || 'all';
+  search = search || '';
+  const grid = document.getElementById('exercise-grid');
+  const filtered = exercises.filter(function(e, idx) {
+    e._idx = idx;
+    let muscleMatch = true;
+    if (filter === 'advanced') {
+      muscleMatch = e.tags.indexOf('advanced') !== -1;
+    } else if (filter !== 'all') {
+      muscleMatch = e.muscle === filter;
+    }
+    const searchMatch = search === '' || e.name.toLowerCase().includes(search.toLowerCase()) || e.tags.some(function(t){return t.toLowerCase().includes(search.toLowerCase());});
+    return muscleMatch && searchMatch;
+  });
+  
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 2rem;">No exercises found.</p>';
+    return;
+  }
+  
+  grid.innerHTML = filtered.map(function(e) {
+    return '<div class="exercise-card" onclick="showExerciseModal(' + e._idx + ')"><div class="exercise-muscle">' + e.muscle + '</div><div class="exercise-name">' + e.name + '</div><div class="exercise-tags">' + e.tags.map(function(t){return '<span class="exercise-tag' + (t === 'advanced' ? ' advanced' : '') + '">' + t + '</span>'}).join('') + '</div><div class="exercise-click-hint">Click for illustration &amp; cues &rarr;</div></div>';
+  }).join('');
+}
+
+function showExerciseModal(idx) {
+  const e = exercises[idx];
+  const modal = document.getElementById('exercise-modal');
+  const body = document.getElementById('exercise-modal-body');
+  body.innerHTML = '<div class="exercise-modal-muscle">' + e.muscle + (e.tags.indexOf('advanced') !== -1 ? ' &middot; advanced' : '') + '</div><h2 class="exercise-modal-title">' + e.name + '</h2><div class="exercise-illustration">' + (exerciseSVGs[e.svg] || exerciseSVGs.generic) + '</div><h4>Overview</h4><p>' + e.desc + '</p><h4>Form cues</h4><ol>' + e.cues.map(function(c){return '<li>' + c + '</li>'}).join('') + '</ol><h4>Recommended</h4><p>' + getSetRepRec(e) + '</p>';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function getSetRepRec(e) {
+  if (e.tags.indexOf('heavy') !== -1) return '3-5 sets of 3-6 reps. Rest 3-5 min between sets.';
+  if (e.tags.indexOf('isolation') !== -1) return '3-4 sets of 10-15 reps. Rest 60-90 seconds.';
+  if (e.tags.indexOf('compound') !== -1) return '3-4 sets of 6-10 reps. Rest 2-3 min.';
+  if (e.tags.indexOf('isometric') !== -1) return '3 sets, hold 30-60 seconds.';
+  if (e.tags.indexOf('bodyweight') !== -1) return '3-4 sets to near failure. Add weight when easy.';
+  return '3-4 sets of 8-12 reps.';
+}
+
+function closeExerciseModal(event) {
+  if (!event || event.target.id === 'exercise-modal' || event.currentTarget.tagName === 'BUTTON') {
+    document.getElementById('exercise-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+var currentMuscleFilter = 'all';
+function filterByMuscle(event, muscle) {
+  document.querySelectorAll('#exercises .tab-buttons button').forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+  currentMuscleFilter = muscle;
+  const search = document.getElementById('exercise-search').value;
+  renderExercises(muscle, search);
+}
+
+function filterExercises() {
+  const search = document.getElementById('exercise-search').value;
+  renderExercises(currentMuscleFilter, search);
+}
+
+function showSection(sectionId) {
+  document.querySelectorAll('.nav-buttons button').forEach(function(b) { b.classList.remove('active'); });
+  const btn = document.querySelector('[data-section="' + sectionId + '"]');
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById(sectionId).classList.add('active');
+  document.getElementById('nav-buttons').classList.remove('open');
+  closeSearch();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showArticle(id) {
+  const article = articles[id];
+  if (!article) return;
+  showSection('articles');
+  document.getElementById('article-list').style.display = 'none';
+  const wrap = document.getElementById('article-content-wrap');
+  wrap.style.display = 'block';
+  wrap.innerHTML = '<div class="article-full"><button class="back-btn" onclick="backToArticles()">&larr; Back to articles</button><div class="article-meta">' + article.category + ' &middot; ' + article.date + '</div><h1>' + article.title + '</h1>' + article.content + '</div>';
+}
+
+function backToArticles() {
+  document.getElementById('article-list').style.display = 'block';
+  document.getElementById('article-content-wrap').style.display = 'none';
+}
+
+function toggleMenu() { document.getElementById('nav-buttons').classList.toggle('open'); }
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const newTheme = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  try { localStorage.setItem('theme', newTheme); } catch(e) {}
+}
+
+try { const savedTheme = localStorage.getItem('theme'); if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme); } catch(e) {}
+
+function toggleSearch() {
+  document.getElementById('search-overlay').classList.toggle('open');
+  if (document.getElementById('search-overlay').classList.contains('open')) document.getElementById('site-search').focus();
+}
+function closeSearch() { document.getElementById('search-overlay').classList.remove('open'); }
+function closeSearchOverlay(event) { if (event.target.id === 'search-overlay') closeSearch(); }
+
+const searchIndex = [
+  { title: 'Macro calculator', category: 'Tools', section: 'tools' },
+  { title: '1RM estimator', category: 'Tools', section: 'tools' },
+  { title: 'Plate calculator', category: 'Tools', section: 'tools' },
+  { title: 'Body fat calculator', category: 'Tools', section: 'tools' },
+  { title: 'Water intake', category: 'Tools', section: 'tools' },
+  { title: 'Workout logger', category: 'Tools', section: 'tracker' },
+  { title: 'Creatine', category: 'Supplements', section: 'supplements' },
+  { title: 'Whey protein', category: 'Supplements', section: 'supplements' },
+  { title: 'Beta-alanine', category: 'Supplements', section: 'supplements' },
+  { title: 'Energy drinks', category: 'Deals', section: 'deals' },
+  { title: 'Home gym equipment', category: 'Deals', section: 'deals' },
+  { title: 'Push pull legs', category: 'Training', section: 'training' },
+  { title: 'Upper lower split', category: 'Training', section: 'training' },
+  { title: 'Weird gains tips', category: 'Tips', section: 'weirdgains' },
+  { title: 'Exercise library', category: 'Exercises', section: 'exercises' },
+  { title: 'Community forum', category: 'Community', section: 'community' }
+];
+
+function siteSearch() {
+  const q = document.getElementById('site-search').value.toLowerCase();
+  const resultsEl = document.getElementById('search-results');
+  if (!q) { resultsEl.innerHTML = ''; return; }
+  const results = searchIndex.filter(function(r) { return r.title.toLowerCase().includes(q); });
+  if (results.length === 0) { resultsEl.innerHTML = '<p style="padding: 1rem; color: var(--text-muted);">No results found.</p>'; return; }
+  resultsEl.innerHTML = results.map(function(r) { return '<div class="search-result-item" onclick="showSection(\'' + r.section + '\')"><div class="search-result-category">' + r.category + '</div><div class="search-result-title">' + r.title + '</div></div>'; }).join('');
+}
+
+document.querySelectorAll('.nav-buttons button').forEach(function(button) {
+  button.addEventListener('click', function() { const section = button.getAttribute('data-section'); if (section) showSection(section); });
+});
+
+function updateMacros() {
+  const weight = parseFloat(document.getElementById('weight').value) || 185;
+  const activity = parseFloat(document.getElementById('activity').value) || 1.55;
+  const goal = document.getElementById('goal').value;
+  let tdee = weight * 11 * activity;
+  if (goal === 'deficit') tdee -= 500;
+  if (goal === 'surplus') tdee += 500;
+  const protein = Math.round(weight * 1.0);
+  const fat = Math.round(tdee * 0.3 / 9);
+  const carbs = Math.round((tdee - protein * 4 - fat * 9) / 4);
+  document.getElementById('tdee-result').textContent = Math.round(tdee);
+  document.getElementById('protein-result').textContent = protein + 'g';
+  document.getElementById('fat-result').textContent = fat + 'g';
+  document.getElementById('carbs-result').textContent = carbs + 'g';
+}
+
+function updateORM() {
+  const weight = parseFloat(document.getElementById('lift-weight').value) || 225;
+  const reps = parseFloat(document.getElementById('lift-reps').value) || 5;
+  document.getElementById('orm-result').textContent = Math.round(weight * (1 + reps / 30));
+}
+
+function updateWeeklyGain() {
+  const current = parseFloat(document.getElementById('body-weight').value) || 185;
+  const target = parseFloat(document.getElementById('target-weight').value) || 195;
+  const weeks = parseFloat(document.getElementById('target-weeks').value) || 12;
+  document.getElementById('weekly-gain').textContent = ((target - current) / weeks).toFixed(2) + ' lbs';
+}
+
+function updateWater() {
+  const weight = parseFloat(document.getElementById('water-weight').value) || 185;
+  const training = parseFloat(document.getElementById('water-training').value) || 1;
+  document.getElementById('water-result').textContent = Math.round(weight * 0.6 + training * 20);
+}
+
+function updateProteinPerMeal() {
+  const total = parseFloat(document.getElementById('prot-total').value) || 180;
+  const meals = parseFloat(document.getElementById('prot-meals').value) || 4;
+  document.getElementById('prot-per-meal').textContent = Math.round(total / meals) + 'g';
+}
+
+function updatePlates() {
+  const target = parseFloat(document.getElementById('plate-target').value) || 315;
+  const barWeight = parseFloat(document.getElementById('bar-weight').value) || 45;
+  const perSide = (target - barWeight) / 2;
+  const plateSizes = [45, 35, 25, 10, 5, 2.5];
+  const plateClasses = { 45: 'plate-45', 35: 'plate-35', 25: 'plate-25', 10: 'plate-10', 5: 'plate-5', 2.5: 'plate-2-5' };
+  let remaining = perSide;
+  const plates = [];
+  plateSizes.forEach(function(p) { const count = Math.floor(remaining / p); if (count > 0) { plates.push({ weight: p, count: count }); remaining -= count * p; } });
+  if (perSide <= 0 || remaining > 0.01) {
+    document.getElementById('plate-result').textContent = perSide <= 0 ? 'Just the bar!' : 'Cannot make exact weight';
+    document.getElementById('plate-visual').innerHTML = '';
+    return;
+  }
+  document.getElementById('plate-result').textContent = plates.map(function(p) { return p.count + 'x ' + p.weight; }).join(', ');
+  let visualHTML = '';
+  plates.forEach(function(p) { for (let i = 0; i < p.count; i++) visualHTML += '<div class="plate ' + plateClasses[p.weight] + '">' + p.weight + '</div>'; });
+  visualHTML += '<div class="bar"></div>';
+  plates.slice().reverse().forEach(function(p) { for (let i = 0; i < p.count; i++) visualHTML += '<div class="plate ' + plateClasses[p.weight] + '">' + p.weight + '</div>'; });
+  document.getElementById('plate-visual').innerHTML = visualHTML;
+}
+
+function updateBodyFat() {
+  const sex = document.getElementById('bf-sex').value;
+  const height = parseFloat(document.getElementById('bf-height').value) || 70;
+  const waist = parseFloat(document.getElementById('bf-waist').value) || 34;
+  const neck = parseFloat(document.getElementById('bf-neck').value) || 15;
+  let bf;
+  if (sex === 'male') {
+    document.getElementById('hip-group').style.display = 'none';
+    bf = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 36.76;
+  } else {
+    document.getElementById('hip-group').style.display = 'block';
+    const hip = parseFloat(document.getElementById('bf-hip').value) || 38;
+    bf = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(height) - 78.387;
+  }
+  document.getElementById('bf-result').textContent = bf.toFixed(1) + '%';
+}
+
+function filterPrograms(event, level) {
+  const programs = document.querySelectorAll('#programs .program-card');
+  const buttons = document.querySelectorAll('#training .tab-buttons button');
+  buttons.forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+  programs.forEach(function(p) { p.style.display = (level === 'all' || p.getAttribute('data-level') === level) ? 'block' : 'none'; });
+}
+
+function handleNewsletter(event) { event.preventDefault(); alert('Thanks for subscribing! (Connect Mailchimp to actually collect emails.)'); event.target.reset(); return false; }
+function handleContact(event) { const form = event.target; if (form.action.includes('YOUR_FORMSPREE_ID')) { event.preventDefault(); alert('Message received! (Set up Formspree to actually receive submissions.)'); form.reset(); return false; } return true; }
+
+let workoutLog = [];
+try { workoutLog = JSON.parse(localStorage.getItem('workoutLog') || '[]'); } catch(e) { workoutLog = []; }
+
+function renderLog() {
+  const container = document.getElementById('log-entries');
+  if (workoutLog.length === 0) {
+    container.innerHTML = '<p style="color: var(--text-muted); padding: 1rem; text-align: center;">No exercises logged yet.</p>';
+  } else {
+    container.innerHTML = workoutLog.map(function(e, i) {
+      return '<div class="log-entry"><input type="text" placeholder="Exercise" value="' + (e.exercise||'') + '" onchange="updateLog(' + i + ', \'exercise\', this.value)"><input type="number" placeholder="Sets" value="' + (e.sets||'') + '" onchange="updateLog(' + i + ', \'sets\', this.value)"><input type="number" placeholder="Reps" value="' + (e.reps||'') + '" onchange="updateLog(' + i + ', \'reps\', this.value)"><input type="number" placeholder="Weight" value="' + (e.weight||'') + '" onchange="updateLog(' + i + ', \'weight\', this.value)"><button class="log-delete" onclick="deleteLogEntry(' + i + ')">X</button></div>';
+    }).join('');
+  }
+  let totalSets = 0, totalReps = 0, totalVolume = 0;
+  workoutLog.forEach(function(e) {
+    const sets = parseFloat(e.sets) || 0, reps = parseFloat(e.reps) || 0, weight = parseFloat(e.weight) || 0;
+    totalSets += sets; totalReps += sets * reps; totalVolume += sets * reps * weight;
+  });
+  document.getElementById('total-sets').textContent = totalSets;
+  document.getElementById('total-reps').textContent = totalReps;
+  document.getElementById('total-volume').textContent = totalVolume.toLocaleString();
+  document.getElementById('total-exercises').textContent = workoutLog.length;
+  try { localStorage.setItem('workoutLog', JSON.stringify(workoutLog)); } catch(e) {}
+}
+
+function addLogEntry() { workoutLog.push({ exercise: '', sets: '', reps: '', weight: '' }); renderLog(); }
+function updateLog(i, field, value) { workoutLog[i][field] = value; renderLog(); }
+function deleteLogEntry(i) { workoutLog.splice(i, 1); renderLog(); }
+function clearLog() { if (confirm('Clear all logged exercises?')) { workoutLog = []; renderLog(); } }
+
+let forumUsername = '';
+let forumPosts = [];
+try { forumUsername = localStorage.getItem('forumUsername') || ''; } catch(e) {}
+try { forumPosts = JSON.parse(localStorage.getItem('forumPosts') || 'null') || getDefaultPosts(); } catch(e) { forumPosts = getDefaultPosts(); }
+
+function getDefaultPosts() {
+  return [
+    { id: 1, author: 'TyFromPhilly', title: 'Best beginner routine for someone returning after 6 months off?', content: 'Getting back into lifting after a 6 month layoff. Was running PPL before but lost a lot of strength. Should I jump back in or restart with something simpler?', date: Date.now() - 7200000, likes: 15, likedByMe: false, replies: [ { author: 'IronMike', content: 'Restart with full body 3x/week for 4 weeks then move to PPL. Your strength will come back fast due to muscle memory.', date: Date.now() - 6000000 } ] },
+    { id: 2, author: 'IronMinded', title: 'Protein timing: research update 2026', content: 'Just finished reading the latest meta-analysis on nutrient timing. Turns out daily total protein matters WAY more than when you eat it.', date: Date.now() - 28800000, likes: 28, likedByMe: false, replies: [] },
+    { id: 3, author: 'GainzGoblin', title: 'Cut from 205 to 185 in 12 weeks - here\'s what worked', content: 'Followed a consistent 500 calorie deficit, maintained protein at 1.2g per lb, and trained hard. Lost mostly fat.', date: Date.now() - 86400000, likes: 67, likedByMe: false, replies: [] }
+  ];
+}
+
+function saveForumPosts() { try { localStorage.setItem('forumPosts', JSON.stringify(forumPosts)); } catch(e) {} }
+
+function updateUsernameDisplay() {
+  const display = document.getElementById('username-display');
+  const input = document.getElementById('username-input');
+  if (forumUsername) { display.textContent = 'Posting as: ' + forumUsername; input.value = forumUsername; }
+  else display.textContent = '';
+}
+
+function setUsername() {
+  const name = document.getElementById('username-input').value.trim();
+  if (!name) { alert('Enter a username first'); return; }
+  forumUsername = name;
+  try { localStorage.setItem('forumUsername', name); } catch(e) {}
+  updateUsernameDisplay();
+}
+
+function createPost() {
+  if (!forumUsername) { alert('Set your username first!'); return; }
+  const title = document.getElementById('new-post-title').value.trim();
+  const content = document.getElementById('new-post-content').value.trim();
+  if (!title || !content) { alert('Title and message required'); return; }
+  forumPosts.unshift({ id: Date.now(), author: forumUsername, title: title, content: content, date: Date.now(), likes: 0, likedByMe: false, replies: [] });
+  document.getElementById('new-post-title').value = '';
+  document.getElementById('new-post-content').value = '';
+  saveForumPosts();
+  renderPosts();
+}
+
+function likePost(id) {
+  const post = forumPosts.find(function(p) { return p.id === id; });
+  if (post) { if (post.likedByMe) { post.likes--; post.likedByMe = false; } else { post.likes++; post.likedByMe = true; } saveForumPosts(); renderPosts(); }
+}
+
+function toggleReply(id) {
+  const form = document.getElementById('reply-form-' + id);
+  form.classList.toggle('open');
+}
+
+function submitReply(id) {
+  if (!forumUsername) { alert('Set your username first!'); return; }
+  const textarea = document.getElementById('reply-text-' + id);
+  const text = textarea.value.trim();
+  if (!text) return;
+  const post = forumPosts.find(function(p) { return p.id === id; });
+  if (post) { post.replies.push({ author: forumUsername, content: text, date: Date.now() }); saveForumPosts(); renderPosts(); }
+}
+
+function deletePost(id) {
+  if (!confirm('Delete this post?')) return;
+  forumPosts = forumPosts.filter(function(p) { return p.id !== id; });
+  saveForumPosts();
+  renderPosts();
+}
+
+function timeAgo(date) {
+  const secs = Math.floor((Date.now() - date) / 1000);
+  if (secs < 60) return 'just now';
+  if (secs < 3600) return Math.floor(secs / 60) + ' min ago';
+  if (secs < 86400) return Math.floor(secs / 3600) + ' hours ago';
+  if (secs < 604800) return Math.floor(secs / 86400) + ' days ago';
+  return new Date(date).toLocaleDateString();
+}
+
+function escapeHtml(text) { return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
+
+function renderPosts() {
+  const container = document.getElementById('forum-posts');
+  if (forumPosts.length === 0) { container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 2rem;">No posts yet. Be the first!</p>'; return; }
+  container.innerHTML = forumPosts.map(function(p) {
+    const isMine = p.author === forumUsername;
+    const repliesHTML = p.replies.map(function(r) {
+      return '<div class="reply"><div class="reply-header"><span class="reply-author">' + escapeHtml(r.author) + '</span><span class="reply-date">' + timeAgo(r.date) + '</span></div><div>' + escapeHtml(r.content) + '</div></div>';
+    }).join('');
+    return '<div class="forum-post"><div class="post-header"><div class="post-author">' + escapeHtml(p.author) + '</div><div class="post-date">' + timeAgo(p.date) + '</div></div><div class="post-title">' + escapeHtml(p.title) + '</div><div class="post-content">' + escapeHtml(p.content) + '</div>' + repliesHTML + '<div class="post-actions"><button class="post-action-btn' + (p.likedByMe ? ' liked' : '') + '" onclick="likePost(' + p.id + ')">&#9825; ' + p.likes + ' likes</button><button class="post-action-btn" onclick="toggleReply(' + p.id + ')">&#128172; Reply (' + p.replies.length + ')</button>' + (isMine ? '<button class="post-action-btn" onclick="deletePost(' + p.id + ')" style="border-color: #c82424; color: #c82424;">Delete</button>' : '') + '</div><div class="reply-form" id="reply-form-' + p.id + '"><textarea id="reply-text-' + p.id + '" placeholder="Your reply..."></textarea><button class="cta-button" onclick="submitReply(' + p.id + ')" style="margin-top: 0.5rem;">Post reply</button></div></div>';
+  }).join('');
+}
+
+['weight', 'activity', 'goal'].forEach(function(id) { document.getElementById(id).addEventListener('input', updateMacros); document.getElementById(id).addEventListener('change', updateMacros); });
+['lift-weight', 'lift-reps'].forEach(function(id) { document.getElementById(id).addEventListener('input', updateORM); });
+['body-weight', 'target-weight', 'target-weeks'].forEach(function(id) { document.getElementById(id).addEventListener('input', updateWeeklyGain); });
+['plate-target', 'bar-weight'].forEach(function(id) { document.getElementById(id).addEventListener('input', updatePlates); document.getElementById(id).addEventListener('change', updatePlates); });
+['bf-sex', 'bf-height', 'bf-waist', 'bf-neck', 'bf-hip'].forEach(function(id) { const el = document.getElementById(id); if (el) { el.addEventListener('input', updateBodyFat); el.addEventListener('change', updateBodyFat); } });
+['water-weight', 'water-training'].forEach(function(id) { document.getElementById(id).addEventListener('input', updateWater); });
+['prot-total', 'prot-meals'].forEach(function(id) { document.getElementById(id).addEventListener('input', updateProteinPerMeal); });
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeSearch(); closeExerciseModal(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); toggleSearch(); }
+});
+
+updateMacros();
+updateORM();
+updateWeeklyGain();
+updatePlates();
+updateBodyFat();
+updateWater();
+updateProteinPerMeal();
+renderExercises();
+renderLog();
+updateUsernameDisplay();
+renderPosts();
+</script>
+
+</body>
+</html>
