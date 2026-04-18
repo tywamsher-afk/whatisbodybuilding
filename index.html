@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>whatisbodybuilding.com - Complete Guide to Training, Nutrition &amp; Supplements</title>
-<meta name="description" content="Complete bodybuilding resource: training programs, nutrition calculators, supplement guides, exercise library with illustrations, workout tracker, and community forum.">
+<meta name="description" content="Complete bodybuilding resource: training programs, nutrition calculators, supplement guides, exercise library with illustrations and video demos, workout tracker, and community forum.">
 <meta name="keywords" content="bodybuilding, muscle building, workout programs, macro calculator, supplements, exercises, advanced lifting">
 <meta property="og:title" content="whatisbodybuilding.com - Complete Bodybuilding Guide">
-<meta property="og:description" content="Training programs, nutrition science, supplements, exercise library with illustrations, and forum for serious lifters.">
+<meta property="og:description" content="Training programs, nutrition science, supplements, exercise library with illustrations and video demos, and forum for serious lifters.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://whatisbodybuilding.com">
 <link rel="canonical" href="https://whatisbodybuilding.com">
@@ -15,6 +15,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
 <script>
@@ -40,6 +42,12 @@ html { scroll-behavior: smooth; }
   --accent: #ff3b00;
   --accent-hover: #e03300;
   --dark-bg: #0a0a0a;
+  --skin: #e8b594;
+  --skin-dark: #c89675;
+  --muscle: #ff3b00;
+  --bar: #2a2a2a;
+  --plate: #c82424;
+  --ground: #888;
 }
 
 [data-theme="dark"] {
@@ -51,6 +59,8 @@ html { scroll-behavior: smooth; }
   --text-muted: #666;
   --border: #2a2a2a;
   --border-strong: #3a3a3a;
+  --skin: #d9a684;
+  --skin-dark: #b88764;
 }
 
 body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; transition: background 0.3s, color 0.3s; }
@@ -94,15 +104,28 @@ header { background: var(--bg-card); border-bottom: 1px solid var(--border); pad
 
 .exercise-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; padding: 1rem; overflow-y: auto; }
 .exercise-modal.open { display: flex; }
-.exercise-modal-content { background: var(--bg-card); padding: 2rem; border-radius: 12px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
-.exercise-modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg-primary); border: 1px solid var(--border-strong); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--text-primary); }
+.exercise-modal-content { background: var(--bg-card); padding: 2rem; border-radius: 12px; max-width: 800px; width: 100%; max-height: 92vh; overflow-y: auto; position: relative; }
+.exercise-modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg-primary); border: 1px solid var(--border-strong); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 20px; color: var(--text-primary); z-index: 2; }
 .exercise-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; margin-bottom: 0.5rem; letter-spacing: 1px; padding-right: 3rem; }
 .exercise-modal-muscle { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 1.5rem; font-family: 'Oswald', sans-serif; }
-.exercise-illustration { background: var(--bg-primary); border-radius: 10px; padding: 2rem; margin-bottom: 1.5rem; display: flex; justify-content: center; align-items: center; min-height: 280px; }
+.exercise-illustration { background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-card) 100%); border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border); }
+.illustration-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; }
+.illustration-frame { text-align: center; }
+.illustration-label { font-family: 'Oswald', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600; }
+.illustration-arrow { font-size: 32px; color: var(--accent); text-align: center; }
+.illustration-svg { max-width: 100%; height: auto; max-height: 240px; }
 .exercise-modal-content h4 { font-family: 'Oswald', sans-serif; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; margin: 1.5rem 0 0.75rem; color: var(--accent); }
 .exercise-modal-content p { color: var(--text-primary); margin-bottom: 0.75rem; }
 .exercise-modal-content ul, .exercise-modal-content ol { margin: 0.5rem 0 1rem 1.5rem; color: var(--text-primary); }
 .exercise-modal-content li { margin-bottom: 0.5rem; }
+.video-button { display: inline-flex; align-items: center; gap: 8px; background: #c82424; color: #fff; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; margin-top: 1rem; transition: all 0.2s; }
+.video-button:hover { background: #a81e1e; transform: translateY(-1px); }
+.video-button::before { content: "\25B6"; font-size: 10px; }
+
+@media (max-width: 600px) {
+  .illustration-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+  .illustration-arrow { transform: rotate(90deg); font-size: 24px; margin: 0.5rem 0; }
+}
 
 main { max-width: 1300px; margin: 0 auto; padding: 2rem 1.5rem; }
 .section { display: none; animation: fadeIn 0.4s ease; }
@@ -341,7 +364,7 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 <div class="hero-content">
 <h1>BUILD. <span class="accent">LIFT.</span> DOMINATE.</h1>
 <div class="hero-tagline">The complete bodybuilding resource</div>
-<p>Training programs, nutrition science, supplement guides, recovery protocols, exercise library with illustrations, and insane gains tips. Free forever. No fluff. Just results.</p>
+<p>Training programs, nutrition science, supplement guides, recovery protocols, exercise library with illustrations and video demos, and insane gains tips. Free forever.</p>
 <div class="hero-buttons">
 <button class="cta-button" onclick="showSection('training')">Start training</button>
 <button class="cta-button secondary" onclick="showSection('tools')">Free calculators</button>
@@ -362,7 +385,7 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 <div class="card" onclick="showSection('nutrition')" style="cursor: pointer;"><h3>Nutrition science</h3><p>Macro breakdowns, meal timing, bulk/cut protocols.</p><a class="card-link">Learn nutrition &rarr;</a></div>
 <div class="card" onclick="showSection('supplements')" style="cursor: pointer;"><h3>Supplements guide</h3><p>Evidence-based recommendations with peer-reviewed dosing.</p><a class="card-link">Explore supplements &rarr;</a></div>
 <div class="card" onclick="showSection('weirdgains')" style="cursor: pointer;"><h3>Weird gains tips</h3><p>Bizarre but science-backed methods for insane muscle growth.</p><a class="card-link">See the tips &rarr;</a></div>
-<div class="card" onclick="showSection('exercises')" style="cursor: pointer;"><h3>Exercise library</h3><p>60+ exercises with illustrations. Advanced variations for serious lifters.</p><a class="card-link">Browse exercises &rarr;</a></div>
+<div class="card" onclick="showSection('exercises')" style="cursor: pointer;"><h3>Exercise library</h3><p>60+ exercises with start/end illustrations and video demos.</p><a class="card-link">Browse exercises &rarr;</a></div>
 <div class="card" onclick="showSection('deals')" style="cursor: pointer;"><h3>Deals &amp; gear</h3><p>Hand-picked supplements, equipment, and energy drinks at the best prices.</p><a class="card-link">Shop deals &rarr;</a></div>
 </div>
 
@@ -385,7 +408,7 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 
 <section id="training" class="section">
 <h2 class="section-title">Training programs</h2>
-<p class="section-subtitle">Structured programs designed for strength and hypertrophy. Pick based on your experience level and available training days.</p>
+<p class="section-subtitle">Structured programs designed for strength and hypertrophy.</p>
 
 <div class="tab-buttons">
 <button class="active" onclick="filterPrograms(event, 'all')">All</button>
@@ -395,56 +418,17 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 </div>
 
 <div id="programs">
-<div class="program-card" data-level="intermediate">
-<h4>Push pull legs (PPL) - 6 days/week</h4>
-<div class="meta">Intermediate &middot; 12 weeks &middot; Hypertrophy</div>
-<p style="color: var(--text-secondary); margin-bottom: 1rem;">Three alternating days split into push, pull, and leg focused sessions. Higher frequency allows more volume per muscle group.</p>
-<ul>
-<li>Push: Bench press, incline DB press, overhead press, cable flyes, tricep dips</li>
-<li>Pull: Deadlifts, rows, pull-ups, lat pulldowns, face pulls</li>
-<li>Legs: Squats, leg press, hamstring curls, leg extensions, calf raises</li>
-</ul>
-</div>
-
-<div class="program-card" data-level="beginner">
-<h4>Upper lower split - 4 days/week</h4>
-<div class="meta">Beginner to intermediate &middot; 8-12 weeks &middot; Strength &amp; hypertrophy</div>
-<p style="color: var(--text-secondary); margin-bottom: 1rem;">Two upper days, two lower days. Allows heavy lifting twice per week per muscle group.</p>
-<ul>
-<li>Upper A: Compound pressing, supplemental pressing, back work</li>
-<li>Upper B: Deadlifts, rows, supplemental pulling</li>
-<li>Lower A: Squats, quad emphasis</li>
-<li>Lower B: Deadlifts, hamstring and glute emphasis</li>
-</ul>
-</div>
-
-<div class="program-card" data-level="beginner">
-<h4>Full body 3x/week</h4>
-<div class="meta">Beginner &middot; 12+ weeks &middot; Strength foundation</div>
-<p style="color: var(--text-secondary); margin-bottom: 1rem;">Simple, effective routine. Each session hits all major muscle groups.</p>
-<ul>
-<li>Compound lifts: Squat, bench, row, deadlift</li>
-<li>Supplemental: Isolation for weak points</li>
-</ul>
-</div>
-
-<div class="program-card" data-level="advanced">
-<h4>Advanced periodization - 5 days/week</h4>
-<div class="meta">Advanced &middot; 16 weeks &middot; Peak strength</div>
-<p style="color: var(--text-secondary); margin-bottom: 1rem;">Block periodization with accumulation, intensification, and realization phases. For lifters with 5+ years experience.</p>
-<ul>
-<li>Phase 1: High volume (8-12 reps)</li>
-<li>Phase 2: Moderate volume, higher intensity (4-8 reps)</li>
-<li>Phase 3: Low volume, max effort (1-3 reps)</li>
-</ul>
-</div>
+<div class="program-card" data-level="intermediate"><h4>Push pull legs (PPL) - 6 days/week</h4><div class="meta">Intermediate &middot; 12 weeks &middot; Hypertrophy</div><p style="color: var(--text-secondary); margin-bottom: 1rem;">Three alternating days split into push, pull, and leg focused sessions.</p><ul><li>Push: Bench press, incline DB press, overhead press, cable flyes, tricep dips</li><li>Pull: Deadlifts, rows, pull-ups, lat pulldowns, face pulls</li><li>Legs: Squats, leg press, hamstring curls, leg extensions, calf raises</li></ul></div>
+<div class="program-card" data-level="beginner"><h4>Upper lower split - 4 days/week</h4><div class="meta">Beginner to intermediate &middot; 8-12 weeks</div><p style="color: var(--text-secondary); margin-bottom: 1rem;">Two upper days, two lower days. Heavy lifting twice per week per muscle group.</p><ul><li>Upper A: Compound pressing, back work</li><li>Lower A: Squats, quad emphasis</li><li>Upper B: Deadlifts, rows, supplemental pulling</li><li>Lower B: Deadlifts, hamstring and glute emphasis</li></ul></div>
+<div class="program-card" data-level="beginner"><h4>Full body 3x/week</h4><div class="meta">Beginner &middot; 12+ weeks &middot; Strength foundation</div><p style="color: var(--text-secondary); margin-bottom: 1rem;">Simple, effective routine. Each session hits all major muscle groups.</p><ul><li>Compound lifts: Squat, bench, row, deadlift</li><li>Supplemental: Isolation for weak points</li></ul></div>
+<div class="program-card" data-level="advanced"><h4>Advanced periodization - 5 days/week</h4><div class="meta">Advanced &middot; 16 weeks &middot; Peak strength</div><p style="color: var(--text-secondary); margin-bottom: 1rem;">Block periodization for lifters with 5+ years experience.</p><ul><li>Phase 1: High volume (8-12 reps)</li><li>Phase 2: Moderate volume, higher intensity (4-8 reps)</li><li>Phase 3: Low volume, max effort (1-3 reps)</li></ul></div>
 </div>
 
 <div class="affiliate-banner">
 <h3>Training gear</h3>
-<p>Apps and equipment we actually recommend</p>
+<p>Equipment we recommend</p>
 <div class="affiliate-links">
-<a href="https://www.amazon.com/s?k=olympic+barbell&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Barbells on Amazon</a>
+<a href="https://www.amazon.com/s?k=olympic+barbell&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Barbells</a>
 <a href="https://www.amazon.com/s?k=weight+plates&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Weight plates</a>
 <a href="https://www.amazon.com/s?k=power+rack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Power racks</a>
 <a href="https://www.amazon.com/s?k=lifting+belt&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Lifting belts</a>
@@ -454,23 +438,13 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 
 <section id="nutrition" class="section">
 <h2 class="section-title">Nutrition</h2>
-<p class="section-subtitle">Calculators and guides to nail your nutrition for muscle growth or fat loss.</p>
+<p class="section-subtitle">Calculators and guides to nail your nutrition.</p>
 
 <div class="calculator-section">
 <h3>Macro calculator</h3>
 <div class="form-group"><label>Body weight (lbs)</label><input type="number" id="weight" value="185"></div>
-<div class="form-group"><label>Activity level</label><select id="activity">
-<option value="1.2">Sedentary (little exercise)</option>
-<option value="1.375">Light (1-3 days/week)</option>
-<option value="1.55" selected>Moderate (4-5 days/week)</option>
-<option value="1.725">Heavy (6-7 days/week)</option>
-<option value="1.9">Very heavy (twice per day)</option>
-</select></div>
-<div class="form-group"><label>Goal</label><select id="goal">
-<option value="deficit">Cut (500 cal deficit)</option>
-<option value="maintenance" selected>Maintain</option>
-<option value="surplus">Bulk (500 cal surplus)</option>
-</select></div>
+<div class="form-group"><label>Activity level</label><select id="activity"><option value="1.2">Sedentary</option><option value="1.375">Light (1-3 days/week)</option><option value="1.55" selected>Moderate (4-5 days/week)</option><option value="1.725">Heavy (6-7 days/week)</option><option value="1.9">Very heavy</option></select></div>
+<div class="form-group"><label>Goal</label><select id="goal"><option value="deficit">Cut (500 cal deficit)</option><option value="maintenance" selected>Maintain</option><option value="surplus">Bulk (500 cal surplus)</option></select></div>
 <div class="calc-result"><div class="calc-result-label">Daily calorie target</div><div class="calc-result-value" id="tdee-result">2500</div></div>
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem;">
 <div class="calc-result"><div class="calc-result-label">Protein</div><div class="calc-result-value" id="protein-result" style="font-size: 36px;">180g</div></div>
@@ -481,9 +455,9 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 
 <h3 style="font-family: 'Bebas Neue'; font-size: 36px; margin: 3rem 0 1.5rem; letter-spacing: 2px;">Nutrition guides</h3>
 <div class="grid">
-<div class="card"><h3>Bulking</h3><p>Eat in a 500 calorie surplus. Aim for 0.8-1g protein per lb bodyweight. Prioritize dense carbs for energy.</p></div>
-<div class="card"><h3>Cutting</h3><p>Eat in a 500 calorie deficit. Maintain high protein (1-1.2g per lb). Reduce carbs, keep fat moderate.</p></div>
-<div class="card"><h3>Meal timing</h3><p>Post-workout: Fast carbs + protein within 2 hrs. Daily adherence matters more than timing.</p></div>
+<div class="card"><h3>Bulking</h3><p>500 calorie surplus. 0.8-1g protein per lb. Dense carbs for energy.</p></div>
+<div class="card"><h3>Cutting</h3><p>500 calorie deficit. 1-1.2g protein per lb. Keep fat moderate.</p></div>
+<div class="card"><h3>Meal timing</h3><p>Post-workout: Fast carbs + protein within 2 hrs. Daily totals matter most.</p></div>
 </div>
 
 <div class="affiliate-banner">
@@ -500,181 +474,85 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 
 <section id="supplements" class="section">
 <h2 class="section-title">Supplements</h2>
-<p class="section-subtitle">Evidence-based recommendations with peer-reviewed dosing. All legal, safe, and research-backed.</p>
+<p class="section-subtitle">Evidence-based recommendations with peer-reviewed dosing.</p>
 
 <div class="supplement-item">
 <div class="supplement-name">Creatine monohydrate <span class="supplement-badge">Top pick</span></div>
-<div class="supplement-dosage"><strong>Daily dose: 5g per day</strong>Timing: Any time. Works best with consistent daily use.</div>
-<p style="color: var(--text-secondary); font-size: 14px;">Most studied supplement. Increases strength and muscle mass by ~2-3%. No loading phase needed.</p>
+<div class="supplement-dosage"><strong>Daily dose: 5g per day</strong>Timing: Any time.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">Most studied supplement. +2-3% strength and muscle mass. No loading needed.</p>
 <a href="https://www.amazon.com/s?k=creatine+monohydrate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
 </div>
 
 <div class="supplement-item">
 <div class="supplement-name">Whey protein isolate <span class="supplement-badge">Top pick</span></div>
 <div class="supplement-dosage"><strong>Daily dose: 20-40g per serving</strong>Timing: Post-workout or with meals.</div>
-<p style="color: var(--text-secondary); font-size: 14px;">Equivalent to whole food protein. 1.6-2.2g per kg bodyweight daily is optimal for muscle growth.</p>
+<p style="color: var(--text-secondary); font-size: 14px;">1.6-2.2g per kg daily is optimal for muscle growth.</p>
 <a href="https://www.amazon.com/s?k=whey+protein+isolate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
 </div>
 
 <div class="supplement-item">
 <div class="supplement-name">Beta-alanine</div>
-<div class="supplement-dosage"><strong>Daily dose: 3-5g split into 2-3 servings</strong>Timing: With meals. Takes 3-4 weeks to see benefit.</div>
-<p style="color: var(--text-secondary); font-size: 14px;">~2-3% improvement in 60-240 second efforts. Best for higher rep ranges (8-15 reps).</p>
+<div class="supplement-dosage"><strong>Daily dose: 3-5g split into 2-3 servings</strong>Timing: With meals.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">+2-3% improvement in 60-240 second efforts. Best for high rep ranges.</p>
 <a href="https://www.amazon.com/s?k=beta+alanine&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
 </div>
 
 <div class="supplement-item">
 <div class="supplement-name">Caffeine</div>
-<div class="supplement-dosage"><strong>Daily dose: 3-6mg per kg bodyweight</strong>Timing: 30-60 minutes before workout.</div>
-<p style="color: var(--text-secondary); font-size: 14px;">5-6% strength improvement, better focus. Cycle off every 2-4 weeks.</p>
+<div class="supplement-dosage"><strong>Daily dose: 3-6mg per kg bodyweight</strong>Timing: 30-60 min pre-workout.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">+5-6% strength, better focus. Cycle off every 2-4 weeks.</p>
 <a href="https://www.amazon.com/s?k=caffeine+pills&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
 </div>
 
 <div class="supplement-item">
 <div class="supplement-name">Citrulline malate</div>
-<div class="supplement-dosage"><strong>Daily dose: 6-8g</strong>Timing: 60 minutes before workout.</div>
-<p style="color: var(--text-secondary); font-size: 14px;">Reduces soreness, improves blood flow. Better pumps.</p>
+<div class="supplement-dosage"><strong>Daily dose: 6-8g</strong>Timing: 60 min pre-workout.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">Better pumps, reduced soreness, more blood flow.</p>
 <a href="https://www.amazon.com/s?k=citrulline+malate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
 </div>
 
 <div class="supplement-item">
 <div class="supplement-name">Magnesium glycinate</div>
-<div class="supplement-dosage"><strong>Daily dose: 200-400mg before bed</strong>Timing: Evening for better sleep quality.</div>
-<p style="color: var(--text-secondary); font-size: 14px;">Improves sleep quality, reduces muscle soreness. Most people are deficient.</p>
+<div class="supplement-dosage"><strong>Daily dose: 200-400mg before bed</strong>Timing: Evening.</div>
+<p style="color: var(--text-secondary); font-size: 14px;">Better sleep quality, reduced soreness. Most people are deficient.</p>
 <a href="https://www.amazon.com/s?k=magnesium+glycinate&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="supplement-link">Buy on Amazon &rarr;</a>
 </div>
 </section>
 
 <section id="deals" class="section">
 <h2 class="section-title">Deals &amp; gear</h2>
-<p class="section-subtitle">Hand-picked supplements, energy drinks, and equipment. Updated regularly. Affiliate links support the site at no extra cost to you.</p>
+<p class="section-subtitle">Hand-picked supplements, energy drinks, and equipment. Affiliate links support the site at no extra cost to you.</p>
 
 <h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 2rem 0 1rem; letter-spacing: 2px;">Energy drinks</h3>
 <div class="grid">
-<div class="deal-card">
-<div class="deal-category">Pre-workout</div>
-<div class="deal-title">C4 Original Energy Drink (12-pack)</div>
-<div class="deal-description">200mg caffeine, zero sugar, beta-alanine. Solid pre-workout option from Cellucor.</div>
-<div class="deal-price">~$24</div>
-<a href="https://www.amazon.com/s?k=c4+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Pre-workout</div>
-<div class="deal-title">Bang Energy Drinks (12-pack)</div>
-<div class="deal-description">300mg caffeine, zero sugar, BCAAs. Heavy hitter for serious sessions.</div>
-<div class="deal-price">~$25</div>
-<a href="https://www.amazon.com/s?k=bang+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Budget pick</div>
-<div class="deal-title">Monster Zero Ultra (24-pack)</div>
-<div class="deal-description">140mg caffeine, zero sugar. Cheapest per can. Reliable daily driver.</div>
-<div class="deal-price">~$28</div>
-<a href="https://www.amazon.com/s?k=monster+zero+ultra+24+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Healthy pick</div>
-<div class="deal-title">Ghost Energy Drinks (12-pack)</div>
-<div class="deal-description">200mg natural caffeine, zero sugar, electrolytes. Cleaner ingredients.</div>
-<div class="deal-price">~$30</div>
-<a href="https://www.amazon.com/s?k=ghost+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
+<div class="deal-card"><div class="deal-category">Pre-workout</div><div class="deal-title">C4 Original Energy Drink (12-pack)</div><div class="deal-description">200mg caffeine, zero sugar, beta-alanine.</div><div class="deal-price">~$24</div><a href="https://www.amazon.com/s?k=c4+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Pre-workout</div><div class="deal-title">Bang Energy Drinks (12-pack)</div><div class="deal-description">300mg caffeine, zero sugar, BCAAs.</div><div class="deal-price">~$25</div><a href="https://www.amazon.com/s?k=bang+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Budget pick</div><div class="deal-title">Monster Zero Ultra (24-pack)</div><div class="deal-description">140mg caffeine, zero sugar. Cheapest per can.</div><div class="deal-price">~$28</div><a href="https://www.amazon.com/s?k=monster+zero+ultra+24+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Healthy pick</div><div class="deal-title">Ghost Energy Drinks (12-pack)</div><div class="deal-description">200mg natural caffeine, zero sugar.</div><div class="deal-price">~$30</div><a href="https://www.amazon.com/s?k=ghost+energy+drink+12+pack&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
 </div>
 
 <h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 3rem 0 1rem; letter-spacing: 2px;">Must-have supplements</h3>
 <div class="grid">
-<div class="deal-card">
-<div class="deal-category">Top Pick</div>
-<div class="deal-title">Creatine Monohydrate (1 lb)</div>
-<div class="deal-description">90 servings of 5g. Cheapest cost per serving. Micronized for easy mixing.</div>
-<div class="deal-price">~$15</div>
-<a href="https://www.amazon.com/s?k=creatine+monohydrate+micronized&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Top Pick</div>
-<div class="deal-title">Whey Protein Isolate (5 lb)</div>
-<div class="deal-description">~75 servings of 25g protein. Low carb, low fat, fast absorption.</div>
-<div class="deal-price">~$60</div>
-<a href="https://www.amazon.com/s?k=whey+protein+isolate+5+pound&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Sleep</div>
-<div class="deal-title">Magnesium Glycinate (240 caps)</div>
-<div class="deal-description">400mg per dose. Improves sleep quality. 4-month supply.</div>
-<div class="deal-price">~$20</div>
-<a href="https://www.amazon.com/s?k=magnesium+glycinate+400mg&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Pump</div>
-<div class="deal-title">Citrulline Malate (1 lb)</div>
-<div class="deal-description">60 servings at 8g. Insane pumps and reduced soreness.</div>
-<div class="deal-price">~$20</div>
-<a href="https://www.amazon.com/s?k=citrulline+malate+powder&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
+<div class="deal-card"><div class="deal-category">Top Pick</div><div class="deal-title">Creatine Monohydrate (1 lb)</div><div class="deal-description">90 servings. Cheapest cost per serving.</div><div class="deal-price">~$15</div><a href="https://www.amazon.com/s?k=creatine+monohydrate+micronized&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Top Pick</div><div class="deal-title">Whey Protein Isolate (5 lb)</div><div class="deal-description">~75 servings of 25g protein.</div><div class="deal-price">~$60</div><a href="https://www.amazon.com/s?k=whey+protein+isolate+5+pound&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Sleep</div><div class="deal-title">Magnesium Glycinate (240 caps)</div><div class="deal-description">400mg per dose. 4-month supply.</div><div class="deal-price">~$20</div><a href="https://www.amazon.com/s?k=magnesium+glycinate+400mg&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Pump</div><div class="deal-title">Citrulline Malate (1 lb)</div><div class="deal-description">60 servings at 8g. Insane pumps.</div><div class="deal-price">~$20</div><a href="https://www.amazon.com/s?k=citrulline+malate+powder&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
 </div>
 
 <h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 3rem 0 1rem; letter-spacing: 2px;">Home gym essentials</h3>
 <div class="grid">
-<div class="deal-card">
-<div class="deal-category">Essential</div>
-<div class="deal-title">Olympic Barbell (45 lb)</div>
-<div class="deal-description">Quality barbell rated for 700+ lbs. Good knurling, smooth sleeves.</div>
-<div class="deal-price">~$150</div>
-<a href="https://www.amazon.com/s?k=olympic+barbell+700+lb&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Essential</div>
-<div class="deal-title">Adjustable Dumbbells</div>
-<div class="deal-description">Space-saving alternative to full rack. 5-50 lb range per dumbbell.</div>
-<div class="deal-price">~$300</div>
-<a href="https://www.amazon.com/s?k=adjustable+dumbbells+50lb&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Safety</div>
-<div class="deal-title">Power Rack</div>
-<div class="deal-description">Squat and bench safely at home. Includes pull-up bar.</div>
-<div class="deal-price">~$500</div>
-<a href="https://www.amazon.com/s?k=power+rack+home+gym&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Accessory</div>
-<div class="deal-title">Lifting Belt (Leather)</div>
-<div class="deal-description">10mm leather belt for squats and deads. Support to 800+ lbs.</div>
-<div class="deal-price">~$60</div>
-<a href="https://www.amazon.com/s?k=10mm+lifting+belt+leather&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
+<div class="deal-card"><div class="deal-category">Essential</div><div class="deal-title">Olympic Barbell (45 lb)</div><div class="deal-description">Rated for 700+ lbs. Good knurling.</div><div class="deal-price">~$150</div><a href="https://www.amazon.com/s?k=olympic+barbell+700+lb&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Essential</div><div class="deal-title">Adjustable Dumbbells</div><div class="deal-description">5-50 lb range. Space-saving.</div><div class="deal-price">~$300</div><a href="https://www.amazon.com/s?k=adjustable+dumbbells+50lb&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Safety</div><div class="deal-title">Power Rack</div><div class="deal-description">Squat and bench safely. Pull-up bar included.</div><div class="deal-price">~$500</div><a href="https://www.amazon.com/s?k=power+rack+home+gym&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Accessory</div><div class="deal-title">Lifting Belt (Leather)</div><div class="deal-description">10mm leather. Support to 800+ lbs.</div><div class="deal-price">~$60</div><a href="https://www.amazon.com/s?k=10mm+lifting+belt+leather&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
 </div>
 
 <h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 3rem 0 1rem; letter-spacing: 2px;">Recovery gear</h3>
 <div class="grid">
-<div class="deal-card">
-<div class="deal-category">Recovery</div>
-<div class="deal-title">Massage Gun</div>
-<div class="deal-description">Percussive therapy for sore muscles. Better recovery.</div>
-<div class="deal-price">~$100</div>
-<a href="https://www.amazon.com/s?k=massage+gun+percussion&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Recovery</div>
-<div class="deal-title">Foam Roller (High Density)</div>
-<div class="deal-description">18-inch dense foam roller. Lasts forever.</div>
-<div class="deal-price">~$25</div>
-<a href="https://www.amazon.com/s?k=high+density+foam+roller&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Sleep</div>
-<div class="deal-title">Blackout Curtains</div>
-<div class="deal-description">Total darkness for better GH release during sleep.</div>
-<div class="deal-price">~$40</div>
-<a href="https://www.amazon.com/s?k=blackout+curtains+bedroom&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
-<div class="deal-card">
-<div class="deal-category">Tracking</div>
-<div class="deal-title">Heart Rate Monitor</div>
-<div class="deal-description">Chest strap HRM for accurate training data.</div>
-<div class="deal-price">~$50</div>
-<a href="https://www.amazon.com/s?k=heart+rate+monitor+chest&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a>
-</div>
+<div class="deal-card"><div class="deal-category">Recovery</div><div class="deal-title">Massage Gun</div><div class="deal-description">Percussive therapy for sore muscles.</div><div class="deal-price">~$100</div><a href="https://www.amazon.com/s?k=massage+gun+percussion&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Recovery</div><div class="deal-title">Foam Roller (High Density)</div><div class="deal-description">18-inch dense foam roller.</div><div class="deal-price">~$25</div><a href="https://www.amazon.com/s?k=high+density+foam+roller&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Sleep</div><div class="deal-title">Blackout Curtains</div><div class="deal-description">Total darkness for better GH release.</div><div class="deal-price">~$40</div><a href="https://www.amazon.com/s?k=blackout+curtains+bedroom&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
+<div class="deal-card"><div class="deal-category">Tracking</div><div class="deal-title">Heart Rate Monitor</div><div class="deal-description">Chest strap HRM for accurate data.</div><div class="deal-price">~$50</div><a href="https://www.amazon.com/s?k=heart+rate+monitor+chest&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="deal-button">Check on Amazon</a></div>
 </div>
 </section>
 
@@ -682,39 +560,24 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 <h2 class="section-title">Weird gains tips</h2>
 <p class="section-subtitle">Bizarre but scientifically-backed methods for insane muscle growth.</p>
 
-<div class="weird-tip"><div class="weird-tip-number">01</div><h3>Cold showers right after lifting KILL gains</h3><p>Taking a cold shower or ice bath within 4 hours of weight training can reduce muscle protein synthesis by up to 37%.</p><div class="science"><strong>Science:</strong> Cold blunts the inflammatory response your muscles need to grow. Save the cold plunge for non-training days.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">02</div><h3>Chewing gum makes you press more weight</h3><p>Chewing gum before heavy sets can increase strength output by 2-3% by activating the masseter muscle, which is neurally linked to grip and core activation.</p><div class="science"><strong>Science:</strong> The jaw clench reflex recruits more motor units throughout the body.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">03</div><h3>Listen to heavy music for 8% more strength</h3><p>Aggressive music (metal, rap, hardstyle) increases testosterone response and lift performance compared to calm music or silence.</p><div class="science"><strong>Science:</strong> Adrenaline release from arousing music directly impacts force production.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">04</div><h3>Eat a spoonful of honey before bed</h3><p>Slow-digesting carbs at night fuel overnight recovery. Honey specifically prevents the overnight cortisol spike that kills gains.</p><div class="science"><strong>Science:</strong> The liver uses fructose to restock glycogen and keep blood sugar stable during sleep.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">05</div><h3>Salt your pre-workout drink</h3><p>Adding 1/4 tsp of pink salt to your pre-workout water improves pumps, strength, and endurance.</p><div class="science"><strong>Science:</strong> Sodium drives water into muscle cells and improves nerve conduction.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">06</div><h3>Grip the bar with intent to bend it</h3><p>When benching, actively try to pull the bar apart. When squatting, spread the floor with your feet.</p><div class="science"><strong>Science:</strong> Irradiation principle - contracting nearby muscles hard increases neural drive to target muscles.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">07</div><h3>Sleep in a 62-degree room for +15% growth hormone</h3><p>Cooler bedroom temps significantly boost nighttime growth hormone release.</p><div class="science"><strong>Science:</strong> Lower core body temp extends deep sleep phases where GH is secreted.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">08</div><h3>Do calf raises first thing in the morning</h3><p>Training calves fasted in the morning activates different muscle fibers and breaks plateaus.</p><div class="science"><strong>Science:</strong> Fasted training hits high-threshold motor units harder. Calves respond to frequency.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">09</div><h3>The sock squat technique</h3><p>Squatting in just socks can increase depth, engage more glutes, and build better ankle mobility.</p><div class="science"><strong>Science:</strong> Thick-soled shoes reduce proprioception and alter squat mechanics.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">10</div><h3>Staring at yourself in the mirror</h3><p>Watching yourself lift improves mind-muscle connection by 15-22%, measured by EMG.</p><div class="science"><strong>Science:</strong> Visual feedback helps your brain recruit target muscles more effectively.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">11</div><h3>Drop sets on last set of every exercise</h3><p>One drop set at the end of your last set triggers extra hypertrophy with minimal recovery cost.</p><div class="science"><strong>Science:</strong> Additional metabolic stress without overloading the nervous system.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">12</div><h3>Ginger tea reduces muscle soreness 25%</h3><p>2g of ginger daily reduces delayed-onset muscle soreness as effectively as ibuprofen.</p><div class="science"><strong>Science:</strong> Gingerol compounds have strong anti-inflammatory properties.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">13</div><h3>Train legs last in your weekly split</h3><p>Save legs for the last training day. Heavy squats and deadlifts deplete your CNS.</p><div class="science"><strong>Science:</strong> Systemic fatigue from leg day affects all other lifts for 2-3 days.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">14</div><h3>Baking soda before high rep sets</h3><p>0.3g/kg of sodium bicarbonate 60 min pre-workout buffers lactic acid for 2-3 extra reps.</p><div class="science"><strong>Science:</strong> Sodium bicarbonate neutralizes hydrogen ions that cause muscle burn.</div></div>
-
-<div class="weird-tip"><div class="weird-tip-number">15</div><h3>Eat a banana with peanut butter pre-bed</h3><p>Slow carbs (banana) + slow protein/fat (PB) sustains amino acids for 7+ hours of overnight growth.</p><div class="science"><strong>Science:</strong> Similar amino acid sustenance as casein at much lower cost.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">01</div><h3>Cold showers right after lifting KILL gains</h3><p>Cold shower or ice bath within 4 hours of weight training can reduce muscle protein synthesis by up to 37%.</p><div class="science"><strong>Science:</strong> Cold blunts the inflammatory response muscles need to grow.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">02</div><h3>Chewing gum makes you press more</h3><p>Chewing gum before heavy sets can increase strength output by 2-3%.</p><div class="science"><strong>Science:</strong> Jaw clench reflex recruits more motor units throughout body.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">03</div><h3>Heavy music = 8% more strength</h3><p>Aggressive music increases testosterone response and lift performance.</p><div class="science"><strong>Science:</strong> Adrenaline from arousing music directly impacts force production.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">04</div><h3>Honey before bed</h3><p>Slow carbs at night fuel recovery without fat gain. Prevents cortisol spikes.</p><div class="science"><strong>Science:</strong> Liver uses fructose to restock glycogen and keep blood sugar stable.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">05</div><h3>Salt your pre-workout</h3><p>1/4 tsp pink salt in pre-workout water improves pumps and strength.</p><div class="science"><strong>Science:</strong> Sodium drives water into muscle cells and improves nerve conduction.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">06</div><h3>Try to bend the bar</h3><p>Actively pull bench press bar apart. Spread floor with feet during squats.</p><div class="science"><strong>Science:</strong> Irradiation principle - nearby muscle contraction increases neural drive.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">07</div><h3>Sleep in 62F for +15% GH</h3><p>Cool bedroom temps boost nighttime growth hormone release.</p><div class="science"><strong>Science:</strong> Lower core temp extends deep sleep phases where GH is secreted.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">08</div><h3>Morning fasted calves</h3><p>Training calves fasted activates different muscle fibers. Breaks plateaus.</p><div class="science"><strong>Science:</strong> Fasted training hits high-threshold motor units harder.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">09</div><h3>Sock squats</h3><p>Squatting in socks increases depth and engages more glutes.</p><div class="science"><strong>Science:</strong> Thick shoes reduce proprioception and alter mechanics.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">10</div><h3>Mirror stare</h3><p>Watching yourself lift improves mind-muscle connection 15-22%.</p><div class="science"><strong>Science:</strong> Visual feedback helps brain recruit target muscles better.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">11</div><h3>Final set drop set</h3><p>One drop set on last set triggers extra hypertrophy.</p><div class="science"><strong>Science:</strong> Metabolic stress without overloading nervous system.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">12</div><h3>Ginger = -25% soreness</h3><p>2g daily reduces DOMS as effectively as ibuprofen.</p><div class="science"><strong>Science:</strong> Gingerol compounds have strong anti-inflammatory properties.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">13</div><h3>Legs last in your week</h3><p>Heavy squats and deadlifts deplete CNS for 2-3 days.</p><div class="science"><strong>Science:</strong> Systemic fatigue affects all other lifts.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">14</div><h3>Baking soda for endurance</h3><p>0.3g/kg 60 min pre-workout buffers lactic acid.</p><div class="science"><strong>Science:</strong> Neutralizes hydrogen ions that cause muscle burn.</div></div>
+<div class="weird-tip"><div class="weird-tip-number">15</div><h3>Banana + PB pre-bed</h3><p>Slow carbs + slow protein sustains amino acids for 7+ hours.</p><div class="science"><strong>Science:</strong> Similar amino acid sustenance as casein at lower cost.</div></div>
 
 <div class="affiliate-banner">
 <h3>Gear for crazy gains</h3>
-<p>Tools that help you apply these tips</p>
 <div class="affiliate-links">
 <a href="https://www.amazon.com/s?k=raw+honey+local&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Raw honey</a>
 <a href="https://www.amazon.com/s?k=pink+himalayan+salt&amp;tag=YOUR-TAG-20" target="_blank" rel="noopener sponsored" class="affiliate-link">Pink salt</a>
@@ -726,7 +589,7 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 
 <section id="exercises" class="section">
 <h2 class="section-title">Exercise library</h2>
-<p class="section-subtitle">60+ exercises with illustrations. Click any exercise to see proper form, cues, and variations.</p>
+<p class="section-subtitle">60+ exercises with start/end illustrations showing the movement. Click any exercise for form cues and a video demo.</p>
 
 <input type="text" class="search-box" id="exercise-search" placeholder="Search exercises..." onkeyup="filterExercises()">
 
@@ -747,20 +610,19 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 <section id="recovery" class="section">
 <h2 class="section-title">Recovery</h2>
 <p class="section-subtitle">Optimize sleep, mobility, and recovery to maximize gains.</p>
-
 <div class="grid">
-<div class="card"><h3>Sleep protocols</h3><p>Sleep is where muscle is built. Aim for 7-9 hours nightly. Keep bedroom cool (62F), dark, and quiet.</p></div>
-<div class="card"><h3>Stretching &amp; mobility</h3><p>10-15 minutes daily improves recovery and prevents injury. Focus on hip flexors, hamstrings, shoulders.</p></div>
-<div class="card"><h3>Foam rolling</h3><p>30 seconds per muscle group, 2-3 times per week. Calves, quads, IT band, glutes, lats.</p></div>
-<div class="card"><h3>Deload weeks</h3><p>Every 4-6 weeks, reduce volume by 40-50%. Still train, but lighter. Crucial for long-term progress.</p></div>
-<div class="card"><h3>Hydration</h3><p>Aim for 0.5-1 oz per lb bodyweight daily. Electrolytes matter for performance and recovery.</p></div>
-<div class="card"><h3>Stress management</h3><p>Chronic stress elevates cortisol, killing gains. Meditate 10 minutes daily, maintain social connections.</p></div>
+<div class="card"><h3>Sleep</h3><p>7-9 hours nightly. Keep bedroom cool (62F), dark, and quiet.</p></div>
+<div class="card"><h3>Mobility</h3><p>10-15 min daily. Focus on hip flexors, hamstrings, shoulders.</p></div>
+<div class="card"><h3>Foam rolling</h3><p>30 seconds per muscle group, 2-3x per week.</p></div>
+<div class="card"><h3>Deload weeks</h3><p>Every 4-6 weeks, reduce volume by 40-50%.</p></div>
+<div class="card"><h3>Hydration</h3><p>0.5-1 oz per lb bodyweight daily. Electrolytes matter.</p></div>
+<div class="card"><h3>Stress management</h3><p>Chronic stress kills gains. Meditate 10 min daily.</p></div>
 </div>
 </section>
 
 <section id="tools" class="section">
 <h2 class="section-title">Calculators</h2>
-<p class="section-subtitle">Free tools for planning and optimizing your training and nutrition.</p>
+<p class="section-subtitle">Free tools for planning and optimizing.</p>
 
 <div class="calculator-section">
 <h3>1RM estimator</h3>
@@ -812,8 +674,7 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 
 <section id="tracker" class="section">
 <h2 class="section-title">Workout logger</h2>
-<p class="section-subtitle">Log your sets, reps, and weights. Saves automatically to your browser.</p>
-
+<p class="section-subtitle">Log sets, reps, weights. Saves automatically to your browser.</p>
 <div class="workout-log">
 <h3>Today's workout</h3>
 <div id="log-entries"></div>
@@ -832,27 +693,25 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 <div id="article-list">
 <h2 class="section-title">Articles</h2>
 <p class="section-subtitle">Deep dives on training, nutrition, and supplements.</p>
-
 <div class="grid">
-<div class="article-card" onclick="showArticle('protein')"><div class="article-image">01</div><div class="article-content"><div class="article-category">Nutrition</div><div class="article-title">How much protein do you actually need?</div><p class="article-excerpt">Latest research on protein intake for muscle building.</p></div></div>
-<div class="article-card" onclick="showArticle('overload')"><div class="article-image">02</div><div class="article-content"><div class="article-category">Training</div><div class="article-title">Progressive overload: the only principle that matters</div><p class="article-excerpt">What actually drives long-term gains.</p></div></div>
-<div class="article-card" onclick="showArticle('creatine')"><div class="article-image">03</div><div class="article-content"><div class="article-category">Supplements</div><div class="article-title">The truth about creatine in 2026</div><p class="article-excerpt">Timing, loading, and which type works best.</p></div></div>
-<div class="article-card" onclick="showArticle('failure')"><div class="article-image">04</div><div class="article-content"><div class="article-category">Training</div><div class="article-title">Training to failure: when it helps, when it hurts</div><p class="article-excerpt">The nuanced science of RIR and failure training.</p></div></div>
-<div class="article-card" onclick="showArticle('sleep')"><div class="article-image">05</div><div class="article-content"><div class="article-category">Recovery</div><div class="article-title">Sleep for strength: the muscle builder's guide</div><p class="article-excerpt">How sleep impacts strength and muscle growth.</p></div></div>
-<div class="article-card" onclick="showArticle('cutting')"><div class="article-image">06</div><div class="article-content"><div class="article-category">Nutrition</div><div class="article-title">Cutting without losing muscle</div><p class="article-excerpt">Proven strategies for preserving muscle during fat loss.</p></div></div>
+<div class="article-card" onclick="showArticle('protein')"><div class="article-image">01</div><div class="article-content"><div class="article-category">Nutrition</div><div class="article-title">How much protein do you actually need?</div><p class="article-excerpt">Latest research on protein intake.</p></div></div>
+<div class="article-card" onclick="showArticle('overload')"><div class="article-image">02</div><div class="article-content"><div class="article-category">Training</div><div class="article-title">Progressive overload: the only principle that matters</div><p class="article-excerpt">What actually drives gains.</p></div></div>
+<div class="article-card" onclick="showArticle('creatine')"><div class="article-image">03</div><div class="article-content"><div class="article-category">Supplements</div><div class="article-title">The truth about creatine in 2026</div><p class="article-excerpt">Timing, loading, which type.</p></div></div>
+<div class="article-card" onclick="showArticle('failure')"><div class="article-image">04</div><div class="article-content"><div class="article-category">Training</div><div class="article-title">Training to failure: when it helps, when it hurts</div><p class="article-excerpt">RIR and failure training.</p></div></div>
+<div class="article-card" onclick="showArticle('sleep')"><div class="article-image">05</div><div class="article-content"><div class="article-category">Recovery</div><div class="article-title">Sleep for strength</div><p class="article-excerpt">How sleep impacts muscle growth.</p></div></div>
+<div class="article-card" onclick="showArticle('cutting')"><div class="article-image">06</div><div class="article-content"><div class="article-category">Nutrition</div><div class="article-title">Cutting without losing muscle</div><p class="article-excerpt">Preserving muscle during fat loss.</p></div></div>
 </div>
 </div>
-
 <div id="article-content-wrap" style="display: none;"></div>
 </section>
 
 <section id="community" class="section">
 <h2 class="section-title">Community forum</h2>
-<p class="section-subtitle">Share progress, ask questions, debug your training. Posts save to your browser and persist across sessions.</p>
+<p class="section-subtitle">Share progress, ask questions. Live community — posts sync in real-time.</p>
 
 <div class="username-setup">
 <h3>Your username</h3>
-<p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 1rem;">Set your handle to post on the forum. Stored locally on your device.</p>
+<p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 1rem;">Set your handle to post on the forum.</p>
 <input type="text" id="username-input" placeholder="e.g., IronMike" maxlength="20">
 <button class="cta-button" onclick="setUsername()">Save</button>
 <p id="username-display" style="margin-top: 0.75rem; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; color: var(--accent);"></p>
@@ -860,32 +719,23 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 
 <div style="margin-bottom: 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem;">
 <h3 style="font-family: 'Oswald'; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">Start a new discussion</h3>
-<div class="form-group"><label>Title</label><input type="text" id="new-post-title" placeholder="e.g., Best beginner routine for getting back in shape"></div>
-<div class="form-group"><label>Your message</label><textarea id="new-post-content" rows="4" placeholder="Share your question, tip, or progress update..."></textarea></div>
+<div class="form-group"><label>Title</label><input type="text" id="new-post-title" placeholder="e.g., Best beginner routine"></div>
+<div class="form-group"><label>Your message</label><textarea id="new-post-content" rows="4" placeholder="Share your question, tip, or progress..."></textarea></div>
 <button class="cta-button" onclick="createPost()">Post discussion</button>
 </div>
 
 <h3 style="font-family: 'Bebas Neue'; font-size: 32px; margin: 2rem 0 1.5rem; letter-spacing: 2px;">Recent discussions</h3>
-
 <div id="forum-posts"></div>
 </section>
 
 <section id="contact" class="section">
 <h2 class="section-title">Contact</h2>
 <p class="section-subtitle">Questions, sponsorships, or partnerships? Get in touch.</p>
-
 <div class="contact-form">
 <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" onsubmit="return handleContact(event)">
 <div class="form-group"><label>Your name</label><input type="text" name="name" required></div>
 <div class="form-group"><label>Email</label><input type="email" name="email" required></div>
-<div class="form-group"><label>Reason for contact</label>
-<select name="reason">
-<option>General question</option>
-<option>Sponsorship inquiry</option>
-<option>Advertising</option>
-<option>Content suggestion</option>
-<option>Partnership</option>
-</select></div>
+<div class="form-group"><label>Reason</label><select name="reason"><option>General question</option><option>Sponsorship inquiry</option><option>Advertising</option><option>Content suggestion</option><option>Partnership</option></select></div>
 <div class="form-group"><label>Message</label><textarea name="message" rows="5" required></textarea></div>
 <button type="submit" class="cta-button">Send message</button>
 </form>
@@ -897,101 +747,375 @@ footer { background: var(--dark-bg); color: #999; padding: 3rem 2rem 2rem; margi
 <footer>
 <div class="footer-inner">
 <div class="footer-grid">
-<div class="footer-col">
-<div class="footer-logo">WHATISBODYBUILDING</div>
-<div class="footer-tagline">.com &middot; build &middot; grow &middot; dominate</div>
-<p style="color: #999; font-size: 13px; line-height: 1.7;">The complete resource for serious lifters. Free, science-backed content updated weekly.</p>
-</div>
+<div class="footer-col"><div class="footer-logo">WHATISBODYBUILDING</div><div class="footer-tagline">.com &middot; build &middot; grow &middot; dominate</div><p style="color: #999; font-size: 13px; line-height: 1.7;">The complete resource for serious lifters.</p></div>
 <div class="footer-col"><h4>Content</h4><a onclick="showSection('training')">Training</a><a onclick="showSection('nutrition')">Nutrition</a><a onclick="showSection('supplements')">Supplements</a><a onclick="showSection('recovery')">Recovery</a><a onclick="showSection('weirdgains')">Weird tips</a></div>
 <div class="footer-col"><h4>Tools</h4><a onclick="showSection('tools')">Calculators</a><a onclick="showSection('tracker')">Workout log</a><a onclick="showSection('exercises')">Exercise library</a><a onclick="showSection('deals')">Deals</a></div>
 <div class="footer-col"><h4>Company</h4><a onclick="showSection('contact')">Contact</a><a href="#">Privacy policy</a><a href="#">Terms of service</a><a href="#">Advertise</a></div>
 </div>
 <div class="footer-bottom">
 <p>&copy; 2026 whatisbodybuilding.com &middot; Built by lifters, for lifters</p>
-<p class="footer-disclosure">As an Amazon Associate, we earn from qualifying purchases. Clicking affiliate links costs you nothing extra but helps support the site. All content for informational purposes. Consult a healthcare professional before starting any fitness program.</p>
+<p class="footer-disclosure">As an Amazon Associate, we earn from qualifying purchases. Affiliate links cost nothing extra but support the site. All content for informational purposes. Consult a healthcare professional before starting any fitness program.</p>
 </div>
 </div>
 </footer>
 
 <script>
-const exerciseSVGs = {
-  bench: '<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><rect x="30" y="130" width="240" height="12" fill="#333" rx="2"/><rect x="40" y="142" width="12" height="40" fill="#555"/><rect x="248" y="142" width="12" height="40" fill="#555"/><ellipse cx="150" cy="110" rx="65" ry="18" fill="#f5a672"/><circle cx="150" cy="85" r="18" fill="#f5a672"/><rect x="60" y="55" width="180" height="8" fill="#888" rx="2"/><circle cx="50" cy="59" r="18" fill="#c82424"/><circle cx="250" cy="59" r="18" fill="#c82424"/><circle cx="30" cy="59" r="12" fill="#c82424"/><circle cx="270" cy="59" r="12" fill="#c82424"/><line x1="85" y1="95" x2="85" y2="63" stroke="#f5a672" stroke-width="8" stroke-linecap="round"/><line x1="215" y1="95" x2="215" y2="63" stroke="#f5a672" stroke-width="8" stroke-linecap="round"/></svg>',
-  squat: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="50" r="18" fill="#f5a672"/><path d="M 120 70 Q 150 100 180 70 L 180 140 Q 170 150 160 155 L 155 200 L 145 200 L 140 155 Q 130 150 120 140 Z" fill="#f5a672"/><rect x="70" y="60" width="160" height="8" fill="#888" rx="2"/><circle cx="60" cy="64" r="18" fill="#c82424"/><circle cx="240" cy="64" r="18" fill="#c82424"/><circle cx="40" cy="64" r="14" fill="#c82424"/><circle cx="260" cy="64" r="14" fill="#c82424"/><rect x="130" y="200" width="15" height="20" fill="#333"/><rect x="155" y="200" width="15" height="20" fill="#333"/><line x1="0" y1="225" x2="300" y2="225" stroke="#666" stroke-width="3"/></svg>',
-  deadlift: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="40" r="18" fill="#f5a672"/><path d="M 130 60 L 170 60 L 175 120 L 165 160 L 155 200 L 145 200 L 135 160 L 125 120 Z" fill="#f5a672"/><line x1="130" y1="80" x2="110" y2="165" stroke="#f5a672" stroke-width="12" stroke-linecap="round"/><line x1="170" y1="80" x2="190" y2="165" stroke="#f5a672" stroke-width="12" stroke-linecap="round"/><rect x="40" y="162" width="220" height="8" fill="#888" rx="2"/><circle cx="50" cy="166" r="24" fill="#c82424"/><circle cx="250" cy="166" r="24" fill="#c82424"/><circle cx="25" cy="166" r="16" fill="#c82424"/><circle cx="275" cy="166" r="16" fill="#c82424"/><rect x="135" y="200" width="15" height="22" fill="#333"/><rect x="155" y="200" width="15" height="22" fill="#333"/><line x1="0" y1="225" x2="300" y2="225" stroke="#666" stroke-width="3"/></svg>',
-  pullup: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><rect x="50" y="20" width="200" height="10" fill="#555" rx="2"/><rect x="50" y="0" width="10" height="30" fill="#555"/><rect x="240" y="0" width="10" height="30" fill="#555"/><circle cx="150" cy="70" r="18" fill="#f5a672"/><path d="M 130 90 L 170 90 L 170 175 L 155 175 L 150 200 L 145 175 L 130 175 Z" fill="#f5a672"/><line x1="130" y1="100" x2="110" y2="30" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="170" y1="100" x2="190" y2="30" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><circle cx="110" cy="30" r="8" fill="#f5a672"/><circle cx="190" cy="30" r="8" fill="#f5a672"/></svg>',
-  ohp: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="70" r="18" fill="#f5a672"/><path d="M 130 90 L 170 90 L 175 160 L 160 200 L 140 200 L 125 160 Z" fill="#f5a672"/><line x1="130" y1="100" x2="110" y2="50" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="170" y1="100" x2="190" y2="50" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><rect x="40" y="28" width="220" height="8" fill="#888" rx="2"/><circle cx="50" cy="32" r="20" fill="#c82424"/><circle cx="250" cy="32" r="20" fill="#c82424"/><circle cx="25" cy="32" r="14" fill="#c82424"/><circle cx="275" cy="32" r="14" fill="#c82424"/><line x1="0" y1="225" x2="300" y2="225" stroke="#666" stroke-width="3"/><rect x="135" y="200" width="15" height="22" fill="#333"/><rect x="155" y="200" width="15" height="22" fill="#333"/></svg>',
-  row: '<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="110" cy="60" r="15" fill="#f5a672"/><path d="M 95 75 L 125 75 L 140 130 L 160 140 L 160 150 L 130 145 L 115 145 Z" fill="#f5a672"/><line x1="95" y1="85" x2="60" y2="115" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="125" y1="85" x2="220" y2="115" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><rect x="190" y="108" width="60" height="8" fill="#888" rx="2"/><circle cx="240" cy="112" r="14" fill="#c82424"/><circle cx="200" cy="112" r="14" fill="#c82424"/><line x1="0" y1="175" x2="300" y2="175" stroke="#666" stroke-width="3"/></svg>',
-  curl: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="60" r="18" fill="#f5a672"/><path d="M 130 80 L 170 80 L 170 180 L 155 200 L 145 200 L 130 180 Z" fill="#f5a672"/><line x1="130" y1="95" x2="115" y2="125" stroke="#f5a672" stroke-width="11" stroke-linecap="round"/><line x1="115" y1="125" x2="140" y2="105" stroke="#f5a672" stroke-width="11" stroke-linecap="round"/><line x1="170" y1="95" x2="185" y2="125" stroke="#f5a672" stroke-width="11" stroke-linecap="round"/><line x1="185" y1="125" x2="160" y2="105" stroke="#f5a672" stroke-width="11" stroke-linecap="round"/><rect x="125" y="95" width="50" height="6" fill="#888" rx="2"/><circle cx="118" cy="98" r="10" fill="#c82424"/><circle cx="182" cy="98" r="10" fill="#c82424"/><line x1="0" y1="225" x2="300" y2="225" stroke="#666" stroke-width="3"/></svg>',
-  plank: '<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="60" cy="65" r="13" fill="#f5a672"/><path d="M 70 60 L 240 60 L 240 75 L 70 75 Z" fill="#f5a672"/><line x1="70" y1="75" x2="60" y2="110" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="235" y1="75" x2="235" y2="110" stroke="#f5a672" stroke-width="10" stroke-linecap="round"/><line x1="0" y1="115" x2="300" y2="115" stroke="#666" stroke-width="3"/></svg>',
-  generic: '<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;"><circle cx="150" cy="70" r="20" fill="#f5a672"/><path d="M 125 95 L 175 95 L 175 170 L 160 200 L 140 200 L 125 170 Z" fill="#f5a672"/><line x1="125" y1="105" x2="100" y2="145" stroke="#f5a672" stroke-width="12" stroke-linecap="round"/><line x1="175" y1="105" x2="200" y2="145" stroke="#f5a672" stroke-width="12" stroke-linecap="round"/><line x1="0" y1="220" x2="300" y2="220" stroke="#666" stroke-width="3"/></svg>'
+function svgBase(children) {
+  return '<svg viewBox="0 0 260 280" xmlns="http://www.w3.org/2000/svg" class="illustration-svg"><rect width="260" height="280" fill="transparent"/><line x1="0" y1="260" x2="260" y2="260" stroke="#888" stroke-width="2"/>' + children + '</svg>';
+}
+
+function stickFigure(x, y, pose) {
+  const skin = '#e8b594';
+  let head, torso, arms, legs;
+  
+  if (pose === 'stand') {
+    head = '<circle cx="' + x + '" cy="' + (y - 90) + '" r="12" fill="' + skin + '"/>';
+    torso = '<rect x="' + (x-12) + '" y="' + (y-78) + '" width="24" height="48" rx="6" fill="' + skin + '"/>';
+    arms = '<line x1="' + (x-12) + '" y1="' + (y-72) + '" x2="' + (x-22) + '" y2="' + (y-30) + '" stroke="' + skin + '" stroke-width="8" stroke-linecap="round"/><line x1="' + (x+12) + '" y1="' + (y-72) + '" x2="' + (x+22) + '" y2="' + (y-30) + '" stroke="' + skin + '" stroke-width="8" stroke-linecap="round"/>';
+    legs = '<line x1="' + (x-6) + '" y1="' + (y-30) + '" x2="' + (x-8) + '" y2="' + y + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/><line x1="' + (x+6) + '" y1="' + (y-30) + '" x2="' + (x+8) + '" y2="' + y + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/>';
+  } else if (pose === 'squat-down') {
+    head = '<circle cx="' + x + '" cy="' + (y - 60) + '" r="12" fill="' + skin + '"/>';
+    torso = '<path d="M ' + (x-12) + ' ' + (y-48) + ' L ' + (x+12) + ' ' + (y-48) + ' L ' + (x+14) + ' ' + (y-18) + ' L ' + (x-14) + ' ' + (y-18) + ' Z" fill="' + skin + '"/>';
+    arms = '<line x1="' + (x-12) + '" y1="' + (y-42) + '" x2="' + (x-24) + '" y2="' + (y-60) + '" stroke="' + skin + '" stroke-width="7" stroke-linecap="round"/><line x1="' + (x+12) + '" y1="' + (y-42) + '" x2="' + (x+24) + '" y2="' + (y-60) + '" stroke="' + skin + '" stroke-width="7" stroke-linecap="round"/>';
+    legs = '<line x1="' + (x-8) + '" y1="' + (y-18) + '" x2="' + (x-22) + '" y2="' + (y-10) + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/><line x1="' + (x-22) + '" y1="' + (y-10) + '" x2="' + (x-14) + '" y2="' + y + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/><line x1="' + (x+8) + '" y1="' + (y-18) + '" x2="' + (x+22) + '" y2="' + (y-10) + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/><line x1="' + (x+22) + '" y1="' + (y-10) + '" x2="' + (x+14) + '" y2="' + y + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/>';
+  } else if (pose === 'squat-low') {
+    head = '<circle cx="' + x + '" cy="' + (y - 40) + '" r="12" fill="' + skin + '"/>';
+    torso = '<path d="M ' + (x-14) + ' ' + (y-28) + ' L ' + (x+14) + ' ' + (y-28) + ' L ' + (x+16) + ' ' + y + ' L ' + (x-16) + ' ' + y + ' Z" fill="' + skin + '"/>';
+    arms = '<line x1="' + (x-12) + '" y1="' + (y-22) + '" x2="' + (x-30) + '" y2="' + (y-40) + '" stroke="' + skin + '" stroke-width="7" stroke-linecap="round"/><line x1="' + (x+12) + '" y1="' + (y-22) + '" x2="' + (x+30) + '" y2="' + (y-40) + '" stroke="' + skin + '" stroke-width="7" stroke-linecap="round"/>';
+    legs = '<line x1="' + (x-10) + '" y1="' + y + '" x2="' + (x-28) + '" y2="' + y + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/><line x1="' + (x-28) + '" y1="' + y + '" x2="' + (x-18) + '" y2="' + (y+5) + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/><line x1="' + (x+10) + '" y1="' + y + '" x2="' + (x+28) + '" y2="' + y + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/><line x1="' + (x+28) + '" y1="' + y + '" x2="' + (x+18) + '" y2="' + (y+5) + '" stroke="' + skin + '" stroke-width="10" stroke-linecap="round"/>';
+  }
+  return head + torso + arms + legs;
+}
+
+function loadedBar(y, bar_width) {
+  bar_width = bar_width || 200;
+  const left = 130 - bar_width/2;
+  const right = 130 + bar_width/2;
+  return '<rect x="' + left + '" y="' + (y-3) + '" width="' + bar_width + '" height="6" fill="#2a2a2a" rx="2"/>' +
+         '<circle cx="' + (left+10) + '" cy="' + y + '" r="20" fill="#c82424" stroke="#222" stroke-width="2"/>' +
+         '<circle cx="' + (left+10) + '" cy="' + y + '" r="5" fill="#444"/>' +
+         '<circle cx="' + (right-10) + '" cy="' + y + '" r="20" fill="#c82424" stroke="#222" stroke-width="2"/>' +
+         '<circle cx="' + (right-10) + '" cy="' + y + '" r="5" fill="#444"/>';
+}
+
+function dumbbell(x, y) {
+  return '<rect x="' + (x-4) + '" y="' + (y-2) + '" width="8" height="4" fill="#555"/>' +
+         '<rect x="' + (x-12) + '" y="' + (y-8) + '" width="8" height="16" fill="#333" rx="1"/>' +
+         '<rect x="' + (x+4) + '" y="' + (y-8) + '" width="8" height="16" fill="#333" rx="1"/>';
+}
+
+function bench(y) {
+  return '<rect x="50" y="' + y + '" width="160" height="10" fill="#444" rx="2"/>' +
+         '<rect x="60" y="' + (y+10) + '" width="8" height="30" fill="#555"/>' +
+         '<rect x="192" y="' + (y+10) + '" width="8" height="30" fill="#555"/>';
+}
+
+const exerciseMovements = {
+  'bench-press': {
+    start: function() {
+      return svgBase(
+        bench(155) +
+        '<circle cx="130" cy="130" r="12" fill="#e8b594"/>' +
+        '<rect x="100" y="140" width="60" height="18" rx="6" fill="#e8b594"/>' +
+        '<line x1="105" y1="145" x2="85" y2="120" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="155" y1="145" x2="175" y2="120" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        loadedBar(115) +
+        '<line x1="160" y1="158" x2="190" y2="158" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>'
+      );
+    },
+    end: function() {
+      return svgBase(
+        bench(155) +
+        '<circle cx="130" cy="130" r="12" fill="#e8b594"/>' +
+        '<rect x="100" y="140" width="60" height="18" rx="6" fill="#e8b594"/>' +
+        '<line x1="105" y1="145" x2="95" y2="155" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="155" y1="145" x2="165" y2="155" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        loadedBar(150) +
+        '<line x1="160" y1="158" x2="190" y2="158" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>'
+      );
+    }
+  },
+  'squat': {
+    start: function() { return svgBase(loadedBar(172) + stickFigure(130, 260, 'stand').replace('cy="' + (260-90) + '"', 'cy="170"')); },
+    end: function() {
+      return svgBase(
+        '<circle cx="130" cy="120" r="12" fill="#e8b594"/>' +
+        '<path d="M 116 132 L 144 132 L 146 160 L 114 160 Z" fill="#e8b594"/>' +
+        '<line x1="120" y1="140" x2="102" y2="165" stroke="#e8b594" stroke-width="7" stroke-linecap="round"/>' +
+        '<line x1="140" y1="140" x2="158" y2="165" stroke="#e8b594" stroke-width="7" stroke-linecap="round"/>' +
+        '<line x1="120" y1="160" x2="96" y2="220" stroke="#e8b594" stroke-width="11" stroke-linecap="round"/>' +
+        '<line x1="96" y1="220" x2="116" y2="260" stroke="#e8b594" stroke-width="11" stroke-linecap="round"/>' +
+        '<line x1="140" y1="160" x2="164" y2="220" stroke="#e8b594" stroke-width="11" stroke-linecap="round"/>' +
+        '<line x1="164" y1="220" x2="144" y2="260" stroke="#e8b594" stroke-width="11" stroke-linecap="round"/>' +
+        loadedBar(125)
+      );
+    }
+  },
+  'deadlift': {
+    start: function() {
+      return svgBase(
+        '<circle cx="130" cy="115" r="12" fill="#e8b594"/>' +
+        '<path d="M 116 127 L 144 127 L 148 180 L 112 180 Z" fill="#e8b594"/>' +
+        '<line x1="118" y1="135" x2="102" y2="235" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="142" y1="135" x2="158" y2="235" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="115" y1="180" x2="108" y2="260" stroke="#e8b594" stroke-width="12" stroke-linecap="round"/>' +
+        '<line x1="145" y1="180" x2="152" y2="260" stroke="#e8b594" stroke-width="12" stroke-linecap="round"/>' +
+        loadedBar(240)
+      );
+    },
+    end: function() {
+      return svgBase(
+        '<circle cx="130" cy="90" r="12" fill="#e8b594"/>' +
+        '<rect x="116" y="102" width="28" height="70" fill="#e8b594" rx="4"/>' +
+        '<line x1="118" y1="110" x2="102" y2="180" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="142" y1="110" x2="158" y2="180" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="120" y1="172" x2="108" y2="260" stroke="#e8b594" stroke-width="12" stroke-linecap="round"/>' +
+        '<line x1="140" y1="172" x2="152" y2="260" stroke="#e8b594" stroke-width="12" stroke-linecap="round"/>' +
+        loadedBar(185)
+      );
+    }
+  },
+  'ohp': {
+    start: function() {
+      return svgBase(
+        stickFigure(130, 260, 'stand') +
+        '<rect x="30" y="173" width="200" height="6" fill="#2a2a2a" rx="2"/>' +
+        '<circle cx="40" cy="176" r="18" fill="#c82424"/>' +
+        '<circle cx="220" cy="176" r="18" fill="#c82424"/>'
+      );
+    },
+    end: function() {
+      return svgBase(
+        stickFigure(130, 260, 'stand').replace(/x2="(\d+)" y2="230"/g, 'x2="$1" y2="130"') +
+        '<rect x="30" y="128" width="200" height="6" fill="#2a2a2a" rx="2"/>' +
+        '<circle cx="40" cy="131" r="18" fill="#c82424"/>' +
+        '<circle cx="220" cy="131" r="18" fill="#c82424"/>'
+      );
+    }
+  },
+  'row': {
+    start: function() {
+      return svgBase(
+        '<circle cx="80" cy="155" r="12" fill="#e8b594"/>' +
+        '<rect x="75" y="165" width="70" height="14" rx="4" fill="#e8b594" transform="rotate(10 110 172)"/>' +
+        '<line x1="150" y1="180" x2="180" y2="230" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="135" y1="175" x2="180" y2="230" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="130" y1="185" x2="120" y2="260" stroke="#e8b594" stroke-width="12" stroke-linecap="round"/>' +
+        '<line x1="150" y1="185" x2="160" y2="260" stroke="#e8b594" stroke-width="12" stroke-linecap="round"/>' +
+        '<rect x="170" y="227" width="40" height="6" fill="#2a2a2a" rx="2"/>' +
+        '<circle cx="215" cy="230" r="14" fill="#c82424"/>'
+      );
+    },
+    end: function() {
+      return svgBase(
+        '<circle cx="80" cy="155" r="12" fill="#e8b594"/>' +
+        '<rect x="75" y="165" width="70" height="14" rx="4" fill="#e8b594" transform="rotate(10 110 172)"/>' +
+        '<line x1="150" y1="180" x2="170" y2="195" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="135" y1="175" x2="170" y2="190" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="130" y1="185" x2="120" y2="260" stroke="#e8b594" stroke-width="12" stroke-linecap="round"/>' +
+        '<line x1="150" y1="185" x2="160" y2="260" stroke="#e8b594" stroke-width="12" stroke-linecap="round"/>' +
+        '<rect x="160" y="192" width="40" height="6" fill="#2a2a2a" rx="2"/>' +
+        '<circle cx="205" cy="195" r="14" fill="#c82424"/>'
+      );
+    }
+  },
+  'pullup': {
+    start: function() {
+      return svgBase(
+        '<rect x="30" y="20" width="200" height="8" fill="#555" rx="2"/>' +
+        '<rect x="30" y="0" width="10" height="28" fill="#555"/>' +
+        '<rect x="220" y="0" width="10" height="28" fill="#555"/>' +
+        '<circle cx="130" cy="80" r="12" fill="#e8b594"/>' +
+        '<rect x="118" y="92" width="24" height="60" rx="4" fill="#e8b594"/>' +
+        '<line x1="120" y1="98" x2="90" y2="28" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="140" y1="98" x2="170" y2="28" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="122" y1="152" x2="118" y2="220" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>' +
+        '<line x1="138" y1="152" x2="142" y2="220" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>'
+      );
+    },
+    end: function() {
+      return svgBase(
+        '<rect x="30" y="20" width="200" height="8" fill="#555" rx="2"/>' +
+        '<rect x="30" y="0" width="10" height="28" fill="#555"/>' +
+        '<rect x="220" y="0" width="10" height="28" fill="#555"/>' +
+        '<circle cx="130" cy="42" r="12" fill="#e8b594"/>' +
+        '<rect x="118" y="54" width="24" height="60" rx="4" fill="#e8b594"/>' +
+        '<line x1="120" y1="58" x2="90" y2="28" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="140" y1="58" x2="170" y2="28" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="122" y1="114" x2="118" y2="185" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>' +
+        '<line x1="138" y1="114" x2="142" y2="185" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>'
+      );
+    }
+  },
+  'curl': {
+    start: function() {
+      return svgBase(
+        stickFigure(130, 260, 'stand') +
+        dumbbell(108, 232) + dumbbell(152, 232)
+      );
+    },
+    end: function() {
+      return svgBase(
+        '<circle cx="130" cy="170" r="12" fill="#e8b594"/>' +
+        '<rect x="118" y="182" width="24" height="48" rx="4" fill="#e8b594"/>' +
+        '<line x1="120" y1="190" x2="108" y2="232" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="108" y1="232" x2="118" y2="195" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="140" y1="190" x2="152" y2="232" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="152" y1="232" x2="142" y2="195" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="124" y1="230" x2="120" y2="260" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>' +
+        '<line x1="136" y1="230" x2="140" y2="260" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>' +
+        dumbbell(118, 195) + dumbbell(142, 195)
+      );
+    }
+  },
+  'dip': {
+    start: function() {
+      return svgBase(
+        '<rect x="45" y="100" width="14" height="130" fill="#555"/>' +
+        '<rect x="201" y="100" width="14" height="130" fill="#555"/>' +
+        '<rect x="45" y="100" width="170" height="8" fill="#555"/>' +
+        '<circle cx="130" cy="90" r="12" fill="#e8b594"/>' +
+        '<rect x="118" y="102" width="24" height="50" rx="4" fill="#e8b594"/>' +
+        '<line x1="122" y1="108" x2="65" y2="108" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="138" y1="108" x2="195" y2="108" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="122" y1="152" x2="114" y2="210" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>' +
+        '<line x1="138" y1="152" x2="146" y2="210" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>'
+      );
+    },
+    end: function() {
+      return svgBase(
+        '<rect x="45" y="100" width="14" height="130" fill="#555"/>' +
+        '<rect x="201" y="100" width="14" height="130" fill="#555"/>' +
+        '<rect x="45" y="100" width="170" height="8" fill="#555"/>' +
+        '<circle cx="130" cy="160" r="12" fill="#e8b594"/>' +
+        '<rect x="118" y="172" width="24" height="40" rx="4" fill="#e8b594"/>' +
+        '<line x1="122" y1="180" x2="90" y2="140" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="90" y1="140" x2="65" y2="108" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="138" y1="180" x2="170" y2="140" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="170" y1="140" x2="195" y2="108" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="122" y1="212" x2="114" y2="250" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>' +
+        '<line x1="138" y1="212" x2="146" y2="250" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>'
+      );
+    }
+  },
+  'lateral-raise': {
+    start: function() {
+      return svgBase(
+        stickFigure(130, 260, 'stand') +
+        dumbbell(108, 232) + dumbbell(152, 232)
+      );
+    },
+    end: function() {
+      return svgBase(
+        '<circle cx="130" cy="170" r="12" fill="#e8b594"/>' +
+        '<rect x="118" y="182" width="24" height="48" rx="4" fill="#e8b594"/>' +
+        '<line x1="118" y1="188" x2="70" y2="178" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="142" y1="188" x2="190" y2="178" stroke="#e8b594" stroke-width="8" stroke-linecap="round"/>' +
+        '<line x1="124" y1="230" x2="120" y2="260" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>' +
+        '<line x1="136" y1="230" x2="140" y2="260" stroke="#e8b594" stroke-width="10" stroke-linecap="round"/>' +
+        dumbbell(70, 178) + dumbbell(190, 178)
+      );
+    }
+  },
+  'plank': {
+    start: function() {
+      return svgBase(
+        '<circle cx="70" cy="200" r="12" fill="#e8b594"/>' +
+        '<rect x="80" y="192" width="140" height="16" rx="4" fill="#e8b594"/>' +
+        '<line x1="82" y1="208" x2="78" y2="250" stroke="#e8b594" stroke-width="9" stroke-linecap="round"/>' +
+        '<line x1="78" y1="250" x2="64" y2="260" stroke="#e8b594" stroke-width="9" stroke-linecap="round"/>' +
+        '<line x1="215" y1="208" x2="225" y2="250" stroke="#e8b594" stroke-width="11" stroke-linecap="round"/>'
+      );
+    },
+    end: function() { return exerciseMovements.plank.start(); }
+  },
+  'pushup': {
+    start: function() {
+      return svgBase(
+        '<circle cx="65" cy="170" r="12" fill="#e8b594"/>' +
+        '<rect x="75" y="162" width="140" height="16" rx="4" fill="#e8b594"/>' +
+        '<line x1="78" y1="178" x2="72" y2="240" stroke="#e8b594" stroke-width="9" stroke-linecap="round"/>' +
+        '<line x1="72" y1="240" x2="62" y2="260" stroke="#e8b594" stroke-width="9" stroke-linecap="round"/>' +
+        '<line x1="210" y1="178" x2="220" y2="255" stroke="#e8b594" stroke-width="11" stroke-linecap="round"/>'
+      );
+    },
+    end: function() {
+      return svgBase(
+        '<circle cx="65" cy="225" r="12" fill="#e8b594"/>' +
+        '<rect x="75" y="218" width="140" height="16" rx="4" fill="#e8b594"/>' +
+        '<line x1="78" y1="234" x2="72" y2="260" stroke="#e8b594" stroke-width="9" stroke-linecap="round"/>' +
+        '<line x1="210" y1="234" x2="220" y2="258" stroke="#e8b594" stroke-width="11" stroke-linecap="round"/>'
+      );
+    }
+  }
 };
 
 const exercises = [
-  { name: "Barbell bench press", muscle: "chest", tags: ["compound"], svg: "bench", desc: "The king of chest exercises. Builds raw pressing power and chest mass.", cues: ["Retract shoulder blades and pin to bench", "Feet flat on floor, arch lower back slightly", "Grip just wider than shoulder width", "Lower bar to lower chest with control", "Drive bar up explosively, elbows at 45-75 degrees"] },
-  { name: "Incline dumbbell press", muscle: "chest", tags: ["compound", "upper chest"], svg: "bench", desc: "Targets upper chest and front delts. Better range of motion than barbell version.", cues: ["Bench at 30-45 degree incline", "Dumbbells start at shoulder level", "Press up and slightly in, meeting at top", "Control the descent, feel the stretch"] },
-  { name: "Svend press", muscle: "chest", tags: ["isolation", "advanced"], svg: "generic", desc: "Hold two weight plates flat together at chest level, press forward slowly. Insane upper inner chest pump.", cues: ["Two 5-10 lb plates sandwiched together", "Press flat hands together hard whole time", "Arms parallel to floor at all times", "Push plates straight forward, not up"] },
-  { name: "Dumbbell pullover", muscle: "chest", tags: ["isolation", "advanced"], svg: "generic", desc: "Old-school exercise for chest and serratus. Arnold's favorite for expanding ribcage.", cues: ["Lie perpendicular on bench, only upper back on pad", "Hold single DB over chest, arms slightly bent", "Lower DB behind head in smooth arc", "Feel stretch in chest and lats, return slowly"] },
-  { name: "Deficit push-ups", muscle: "chest", tags: ["bodyweight", "advanced"], svg: "generic", desc: "Push-ups with hands elevated on blocks for greater range of motion. Brutal on chest.", cues: ["Hands on 4-6 inch blocks or handles", "Lower chest below hand level", "Keep body in straight line", "Full extension at top"] },
-  { name: "Cable crossovers", muscle: "chest", tags: ["isolation"], svg: "generic", desc: "Constant tension chest isolation. Adjust pulleys high for lower chest, low for upper chest.", cues: ["Slight forward lean", "Soft elbow bend maintained throughout", "Arc the weight, don't press", "Squeeze chest hard at bottom"] },
-  { name: "Dips", muscle: "chest", tags: ["compound", "bodyweight"], svg: "generic", desc: "Bodyweight compound for chest, triceps, and shoulders. Lean forward for chest emphasis.", cues: ["Lean torso forward 30 degrees for chest", "Lower until shoulders below elbows", "Drive up with chest, not triceps", "Add weight once 12+ bodyweight reps"] },
-  { name: "Guillotine press", muscle: "chest", tags: ["compound", "advanced"], svg: "bench", desc: "Vince Gironda's secret for upper chest. Bar lowered to neck, elbows high.", cues: ["Elbows flared out 90 degrees", "Lower bar slowly to upper neck/collarbone", "Use 60-70% of normal bench weight", "Stop if shoulders hurt"] },
+  { name: "Barbell bench press", muscle: "chest", tags: ["compound"], anim: "bench-press", video: "barbell bench press form", desc: "The king of chest exercises. Builds raw pressing power and mass.", cues: ["Retract shoulder blades, pin to bench", "Feet flat on floor, slight lower back arch", "Grip just wider than shoulder width", "Lower bar to lower chest with control", "Drive bar up explosively, elbows at 45-75 degrees"] },
+  { name: "Incline dumbbell press", muscle: "chest", tags: ["compound", "upper chest"], anim: "bench-press", video: "incline dumbbell press form", desc: "Targets upper chest and front delts. Better range of motion than barbell.", cues: ["Bench at 30-45 degree incline", "Dumbbells start at shoulder level", "Press up and slightly in", "Control the descent, feel the stretch"] },
+  { name: "Svend press", muscle: "chest", tags: ["isolation", "advanced"], anim: "bench-press", video: "svend press chest exercise", desc: "Hold two weight plates flat together at chest level, press forward slowly. Insane inner chest pump.", cues: ["Two 5-10 lb plates sandwiched together", "Press flat hands together hard whole time", "Arms parallel to floor at all times", "Push plates straight forward, not up"] },
+  { name: "Dumbbell pullover", muscle: "chest", tags: ["isolation", "advanced"], anim: "bench-press", video: "dumbbell pullover chest exercise", desc: "Old-school exercise for chest and serratus. Arnold's favorite for expanding ribcage.", cues: ["Lie perpendicular on bench", "Hold single DB over chest, slight elbow bend", "Lower DB behind head in smooth arc", "Feel stretch in chest and lats"] },
+  { name: "Deficit push-ups", muscle: "chest", tags: ["bodyweight", "advanced"], anim: "pushup", video: "deficit push ups form", desc: "Push-ups with hands elevated for greater range of motion. Brutal.", cues: ["Hands on 4-6 inch blocks", "Lower chest below hand level", "Keep body in straight line", "Full extension at top"] },
+  { name: "Cable crossovers", muscle: "chest", tags: ["isolation"], anim: "bench-press", video: "cable crossover chest exercise", desc: "Constant tension chest isolation. High pulleys for lower chest, low for upper.", cues: ["Slight forward lean", "Soft elbow bend throughout", "Arc the weight, don't press", "Squeeze chest hard at bottom"] },
+  { name: "Dips", muscle: "chest", tags: ["compound", "bodyweight"], anim: "dip", video: "chest dips form", desc: "Bodyweight compound. Lean forward for chest emphasis.", cues: ["Lean torso forward 30 degrees", "Lower until shoulders below elbows", "Drive up with chest, not triceps", "Add weight once 12+ reps"] },
+  { name: "Guillotine press", muscle: "chest", tags: ["compound", "advanced"], anim: "bench-press", video: "guillotine press vince gironda", desc: "Vince Gironda's secret for upper chest. Bar lowered to neck, elbows high.", cues: ["Elbows flared 90 degrees", "Lower bar slowly to upper neck", "Use 60-70% of normal bench weight", "Stop if shoulders hurt"] },
 
-  { name: "Conventional deadlift", muscle: "back", tags: ["compound", "heavy"], svg: "deadlift", desc: "The ultimate full-body strength builder. Targets hamstrings, glutes, back, traps.", cues: ["Bar over mid-foot, shoulders over bar", "Grip just outside knees", "Chest up, flat back, neutral neck", "Drive floor away with legs", "Lock out hips, don't hyperextend"] },
-  { name: "Pendlay row", muscle: "back", tags: ["compound"], svg: "row", desc: "Strict barbell row starting from floor each rep. Builds mass and thickness.", cues: ["Torso parallel to floor", "Bar starts on floor each rep", "Pull to lower chest explosively", "Reset on floor between reps"] },
-  { name: "Meadows row", muscle: "back", tags: ["compound", "advanced"], svg: "row", desc: "Landmine row variation from John Meadows. Perfect back-to-elbow tracking.", cues: ["Use landmine or corner of room", "Stagger stance, same side as working arm", "Row with elbow out wide toward ribs", "Squeeze at top, controlled negative"] },
-  { name: "Seal row", muscle: "back", tags: ["compound", "advanced"], svg: "row", desc: "Chest-supported row on flat bench. Isolates back by removing lower body assistance.", cues: ["Lie face down on elevated flat bench", "Bar must touch bench each rep", "Pull elbows up and back", "No body english - strict form only"] },
-  { name: "T-bar row", muscle: "back", tags: ["compound"], svg: "row", desc: "Landmine version focused on mid-back thickness. Arnold's favorite.", cues: ["Straddle bar with narrow stance", "Slight knee bend, hinge at hips", "Pull to lower chest", "Full stretch at bottom"] },
-  { name: "Pull-ups", muscle: "back", tags: ["compound", "bodyweight"], svg: "pullup", desc: "The gold standard for lat development. Wide grip for width, neutral for thickness.", cues: ["Hang from dead stop each rep", "Pull chest to bar, not chin over", "Drive elbows down and back", "Controlled negative - 2 seconds minimum"] },
-  { name: "Weighted chin-ups", muscle: "back", tags: ["compound", "advanced"], svg: "pullup", desc: "Underhand grip pull-ups with added weight. Better for biceps than pull-ups.", cues: ["Use dip belt to add weight", "Full dead hang start", "Chin over bar at top", "Work up to +90 lbs for 5 reps"] },
-  { name: "Face pulls", muscle: "back", tags: ["isolation", "rear delts"], svg: "generic", desc: "Best exercise for rear delts and shoulder health. Should be a staple.", cues: ["Rope attachment at face height", "Pull to forehead, elbows high", "External rotation at end range", "3-4 sets of 15-20 reps minimum"] },
-  { name: "Reverse hyper", muscle: "back", tags: ["isolation", "lower back"], svg: "generic", desc: "Louie Simmons classic. Builds and decompresses the lower back simultaneously.", cues: ["Lie face down on hyper bench", "Hang legs below", "Raise legs to parallel with back", "Controlled descent"] },
-  { name: "Rack pulls", muscle: "back", tags: ["compound", "heavy"], svg: "deadlift", desc: "Deadlifts from mid-shin or knee height. Lets you overload traps and upper back.", cues: ["Pins set at knee height", "Setup like conventional deadlift", "Use 110-130% of normal DL weight", "Focus on upper back contraction"] },
+  { name: "Conventional deadlift", muscle: "back", tags: ["compound", "heavy"], anim: "deadlift", video: "conventional deadlift form", desc: "The ultimate full-body strength builder. Hamstrings, glutes, back, traps.", cues: ["Bar over mid-foot, shoulders over bar", "Grip just outside knees", "Chest up, flat back, neutral neck", "Drive floor away with legs", "Lock out hips, don't hyperextend"] },
+  { name: "Pendlay row", muscle: "back", tags: ["compound"], anim: "row", video: "pendlay row form", desc: "Strict barbell row from floor each rep. Builds mass and thickness.", cues: ["Torso parallel to floor", "Bar starts on floor each rep", "Pull to lower chest explosively", "Reset on floor between reps"] },
+  { name: "Meadows row", muscle: "back", tags: ["compound", "advanced"], anim: "row", video: "meadows row landmine", desc: "Landmine row from John Meadows. Perfect back-to-elbow tracking.", cues: ["Use landmine or corner", "Stagger stance, same side as working arm", "Row with elbow out wide toward ribs", "Squeeze at top, controlled negative"] },
+  { name: "Seal row", muscle: "back", tags: ["compound", "advanced"], anim: "row", video: "seal row form", desc: "Chest-supported row. Isolates back by removing body assistance.", cues: ["Lie face down on elevated bench", "Bar must touch bench each rep", "Pull elbows up and back", "No body english - strict only"] },
+  { name: "T-bar row", muscle: "back", tags: ["compound"], anim: "row", video: "t bar row form", desc: "Landmine version for mid-back thickness. Arnold's favorite.", cues: ["Straddle bar with narrow stance", "Slight knee bend, hinge at hips", "Pull to lower chest", "Full stretch at bottom"] },
+  { name: "Pull-ups", muscle: "back", tags: ["compound", "bodyweight"], anim: "pullup", video: "proper pull up form", desc: "Gold standard for lat development. Wide for width, neutral for thickness.", cues: ["Hang from dead stop each rep", "Pull chest to bar", "Drive elbows down and back", "Controlled negative - 2 seconds"] },
+  { name: "Weighted chin-ups", muscle: "back", tags: ["compound", "advanced"], anim: "pullup", video: "weighted chin up form", desc: "Underhand grip with added weight. Better for biceps than pull-ups.", cues: ["Use dip belt to add weight", "Full dead hang start", "Chin over bar at top", "Work up to +90 lbs for 5 reps"] },
+  { name: "Face pulls", muscle: "back", tags: ["isolation", "rear delts"], anim: "row", video: "face pulls form", desc: "Best exercise for rear delts and shoulder health. Staple.", cues: ["Rope attachment at face height", "Pull to forehead, elbows high", "External rotation at end range", "3-4 sets of 15-20 reps"] },
+  { name: "Reverse hyper", muscle: "back", tags: ["isolation", "lower back"], anim: "plank", video: "reverse hyper exercise", desc: "Louie Simmons classic. Builds and decompresses lower back.", cues: ["Lie face down on hyper bench", "Hang legs below", "Raise legs to parallel", "Controlled descent"] },
+  { name: "Rack pulls", muscle: "back", tags: ["compound", "heavy"], anim: "deadlift", video: "rack pulls form", desc: "Deadlifts from knee height. Overload traps and upper back.", cues: ["Pins at knee height", "Setup like conventional DL", "Use 110-130% of normal DL weight", "Focus on upper back contraction"] },
 
-  { name: "Back squat", muscle: "legs", tags: ["compound", "quads"], svg: "squat", desc: "The king of all lifts. Builds total leg mass and strength.", cues: ["Bar on upper traps (high) or rear delts (low)", "Feet shoulder width, toes slightly out", "Break at hips and knees simultaneously", "Knees track over toes", "Drive through heels to stand"] },
-  { name: "Front squat", muscle: "legs", tags: ["compound", "quads"], svg: "squat", desc: "Quad-dominant squat. Forces upright torso, hits quads harder than back squat.", cues: ["Bar racked on front delts", "Elbows high throughout movement", "Upright torso maintained", "Full depth below parallel"] },
-  { name: "Bulgarian split squat", muscle: "legs", tags: ["compound", "unilateral"], svg: "generic", desc: "Brutal unilateral leg builder. Fixes imbalances and builds serious glutes.", cues: ["Rear foot elevated on bench", "Front foot 2-3 feet from bench", "Descend straight down, not forward", "Front knee tracks over toe"] },
-  { name: "Romanian deadlift", muscle: "legs", tags: ["compound", "hamstrings"], svg: "deadlift", desc: "The best hamstring builder. Hip hinge movement with slight knee bend.", cues: ["Slight knee bend, maintain throughout", "Push hips back, bar stays close to legs", "Lower until stretch in hamstrings", "Drive hips forward to stand"] },
-  { name: "Hack squat", muscle: "legs", tags: ["compound", "quads"], svg: "generic", desc: "Machine-based quad builder. Takes lower back out of the equation.", cues: ["Shoulders under pads", "Feet lower on platform for quads", "Full depth, no bouncing", "Drive knees forward slightly"] },
-  { name: "Nordic curl", muscle: "legs", tags: ["bodyweight", "advanced"], svg: "generic", desc: "Bodyweight hamstring killer. Incredibly hard, builds tendinous strength.", cues: ["Kneel, feet anchored", "Lower body forward slowly", "Fight gravity all the way down", "Push back up with hands if needed"] },
-  { name: "Sissy squat", muscle: "legs", tags: ["bodyweight", "advanced"], svg: "generic", desc: "Old-school quad isolation. Lean back while squatting - hits quads HARD.", cues: ["Heels elevated on plates", "Hold rack for balance", "Lean back while bending knees", "Body forms straight line from knee to head"] },
-  { name: "Walking lunges", muscle: "legs", tags: ["compound", "unilateral"], svg: "generic", desc: "Great for glutes, quads, and conditioning. Take long steps for glutes.", cues: ["Step forward 3-4 feet", "Back knee nearly touches ground", "Drive through front heel to step through", "Maintain upright torso"] },
-  { name: "Calf raises (standing)", muscle: "legs", tags: ["isolation", "calves"], svg: "generic", desc: "Standing calf raises hit gastrocnemius. Go heavy and do 15-30 reps.", cues: ["Ball of foot on block", "Full stretch at bottom", "Pause at top for 1 second", "Very slow negative - 3 seconds"] },
-  { name: "Leg curl (lying)", muscle: "legs", tags: ["isolation", "hamstrings"], svg: "generic", desc: "Hamstring isolation. Prone version hits hamstrings better than seated.", cues: ["Hips pressed into pad", "Full range of motion", "Squeeze at top hard", "Controlled negative"] },
+  { name: "Back squat", muscle: "legs", tags: ["compound", "quads"], anim: "squat", video: "back squat proper form", desc: "The king of all lifts. Builds total leg mass and strength.", cues: ["Bar on upper traps or rear delts", "Feet shoulder width, toes slightly out", "Break at hips and knees together", "Knees track over toes", "Drive through heels"] },
+  { name: "Front squat", muscle: "legs", tags: ["compound", "quads"], anim: "squat", video: "front squat form", desc: "Quad-dominant squat. Forces upright torso.", cues: ["Bar on front delts", "Elbows high throughout", "Upright torso maintained", "Full depth below parallel"] },
+  { name: "Bulgarian split squat", muscle: "legs", tags: ["compound", "unilateral"], anim: "squat", video: "bulgarian split squat form", desc: "Brutal unilateral leg builder. Fixes imbalances, builds glutes.", cues: ["Rear foot elevated on bench", "Front foot 2-3 feet from bench", "Descend straight down", "Front knee tracks over toe"] },
+  { name: "Romanian deadlift", muscle: "legs", tags: ["compound", "hamstrings"], anim: "deadlift", video: "romanian deadlift form", desc: "Best hamstring builder. Hip hinge with slight knee bend.", cues: ["Slight knee bend throughout", "Push hips back, bar stays close", "Lower until hamstring stretch", "Drive hips forward to stand"] },
+  { name: "Hack squat", muscle: "legs", tags: ["compound", "quads"], anim: "squat", video: "hack squat machine", desc: "Machine quad builder. Takes lower back out.", cues: ["Shoulders under pads", "Feet lower on platform for quads", "Full depth, no bouncing", "Drive knees forward slightly"] },
+  { name: "Nordic curl", muscle: "legs", tags: ["bodyweight", "advanced"], anim: "plank", video: "nordic hamstring curl", desc: "Bodyweight hamstring killer. Incredibly hard.", cues: ["Kneel, feet anchored", "Lower body forward slowly", "Fight gravity all the way down", "Push back up with hands if needed"] },
+  { name: "Sissy squat", muscle: "legs", tags: ["bodyweight", "advanced"], anim: "squat", video: "sissy squat form", desc: "Old-school quad isolation. Lean back while squatting.", cues: ["Heels elevated on plates", "Hold rack for balance", "Lean back while bending knees", "Body straight from knee to head"] },
+  { name: "Walking lunges", muscle: "legs", tags: ["compound", "unilateral"], anim: "squat", video: "walking lunges form", desc: "Great for glutes, quads, and conditioning.", cues: ["Step forward 3-4 feet", "Back knee nearly touches ground", "Drive through front heel", "Maintain upright torso"] },
+  { name: "Calf raises (standing)", muscle: "legs", tags: ["isolation", "calves"], anim: "squat", video: "standing calf raise form", desc: "Standing calf raises hit gastrocnemius. Go heavy for 15-30 reps.", cues: ["Ball of foot on block", "Full stretch at bottom", "Pause at top for 1 second", "Very slow negative"] },
+  { name: "Leg curl (lying)", muscle: "legs", tags: ["isolation", "hamstrings"], anim: "plank", video: "lying leg curl form", desc: "Hamstring isolation. Prone hits better than seated.", cues: ["Hips pressed into pad", "Full range of motion", "Squeeze at top hard", "Controlled negative"] },
 
-  { name: "Overhead press", muscle: "shoulders", tags: ["compound", "heavy"], svg: "ohp", desc: "The true measure of upper body strength. Builds massive shoulders.", cues: ["Grip just outside shoulders", "Bar at upper chest start position", "Drive bar overhead, pull through under bar", "Lock out with bar over mid-foot"] },
-  { name: "Seated dumbbell press", muscle: "shoulders", tags: ["compound"], svg: "ohp", desc: "Allows natural shoulder rotation. Easier on joints than barbell.", cues: ["Dumbbells at shoulder level", "Press up and slightly in", "Don't lock out - maintain tension", "Control descent"] },
-  { name: "Lateral raises", muscle: "shoulders", tags: ["isolation", "side delts"], svg: "generic", desc: "THE shoulder width exercise. Most lifters go too heavy.", cues: ["Slight forward lean", "Lead with elbows, not hands", "Raise to parallel, no higher", "Pause at top for 1 second", "Go LIGHT - 10-15 lb DBs for most"] },
-  { name: "Cable lateral raise", muscle: "shoulders", tags: ["isolation", "advanced"], svg: "generic", desc: "Constant tension on side delts. Better than dumbbells for most.", cues: ["Cable at lowest pulley", "Cable behind body for better arc", "Smooth up and down", "Don't use momentum"] },
-  { name: "Arnold press", muscle: "shoulders", tags: ["compound"], svg: "ohp", desc: "Arnold's signature press. Rotates DBs throughout rep for full delt recruitment.", cues: ["Start with palms facing you", "Press while rotating palms out", "End with palms forward overhead", "Reverse on way down"] },
-  { name: "Handstand push-ups", muscle: "shoulders", tags: ["bodyweight", "advanced"], svg: "generic", desc: "Advanced bodyweight shoulder press. Wall supports initially.", cues: ["Kick up to handstand against wall", "Lower head to floor with control", "Press back up explosively", "Deficit version with hands on blocks"] },
-  { name: "Upright row", muscle: "shoulders", tags: ["compound"], svg: "generic", desc: "Controversial but effective for traps and side delts. Use wider grip for safety.", cues: ["Wider grip - shoulder width", "Pull to upper chest, not chin", "Elbows higher than wrists", "Stop if shoulders hurt"] },
+  { name: "Overhead press", muscle: "shoulders", tags: ["compound", "heavy"], anim: "ohp", video: "overhead press form", desc: "True measure of upper body strength. Massive shoulders.", cues: ["Grip just outside shoulders", "Bar at upper chest start", "Drive bar overhead, pull through", "Lock out bar over mid-foot"] },
+  { name: "Seated dumbbell press", muscle: "shoulders", tags: ["compound"], anim: "ohp", video: "seated dumbbell shoulder press", desc: "Natural shoulder rotation. Easier on joints than barbell.", cues: ["Dumbbells at shoulder level", "Press up and slightly in", "Don't lock out - maintain tension", "Control descent"] },
+  { name: "Lateral raises", muscle: "shoulders", tags: ["isolation", "side delts"], anim: "lateral-raise", video: "lateral raise form", desc: "THE shoulder width exercise. Most lifters go too heavy.", cues: ["Slight forward lean", "Lead with elbows, not hands", "Raise to parallel, no higher", "Pause at top for 1 second", "Go LIGHT"] },
+  { name: "Cable lateral raise", muscle: "shoulders", tags: ["isolation", "advanced"], anim: "lateral-raise", video: "cable lateral raise form", desc: "Constant tension on side delts. Better than dumbbells for most.", cues: ["Cable at lowest pulley", "Cable behind body for better arc", "Smooth up and down", "Don't use momentum"] },
+  { name: "Arnold press", muscle: "shoulders", tags: ["compound"], anim: "ohp", video: "arnold press form", desc: "Arnold's signature. Rotates DBs for full delt recruitment.", cues: ["Start with palms facing you", "Press while rotating palms out", "End with palms forward overhead", "Reverse on way down"] },
+  { name: "Handstand push-ups", muscle: "shoulders", tags: ["bodyweight", "advanced"], anim: "pushup", video: "handstand pushup tutorial", desc: "Advanced bodyweight shoulder press.", cues: ["Kick up to handstand against wall", "Lower head to floor with control", "Press back up explosively", "Deficit version with blocks"] },
+  { name: "Upright row", muscle: "shoulders", tags: ["compound"], anim: "row", video: "upright row form", desc: "Hits traps and side delts. Use wider grip for safety.", cues: ["Wider grip - shoulder width", "Pull to upper chest, not chin", "Elbows higher than wrists", "Stop if shoulders hurt"] },
 
-  { name: "Barbell curl", muscle: "arms", tags: ["isolation", "biceps"], svg: "curl", desc: "Classic bicep builder. Strict form maximizes growth.", cues: ["Elbows pinned to sides", "Full range - full extension to full flex", "No swinging or hip movement", "Squeeze hard at top for 1 second"] },
-  { name: "Hammer curl", muscle: "arms", tags: ["isolation", "biceps"], svg: "curl", desc: "Hits brachialis and brachioradialis. Gives arms thickness.", cues: ["Neutral grip throughout (palms facing)", "Elbows pinned", "Can use slight swing for last reps", "Alternate or both at once"] },
-  { name: "Preacher curl", muscle: "arms", tags: ["isolation", "biceps"], svg: "curl", desc: "Isolates biceps by removing body involvement. Great for peak development.", cues: ["Chest firmly on pad", "Don't fully extend - stop 3/4 way down", "Slow 3-second negative", "Explode on concentric"] },
-  { name: "21s", muscle: "arms", tags: ["isolation", "advanced"], svg: "curl", desc: "7 bottom half + 7 top half + 7 full reps = 21 total. Nuclear pump.", cues: ["7 reps from bottom to middle only", "7 reps from middle to top only", "7 full range reps", "Use 40-50% of normal curl weight"] },
-  { name: "Zottman curl", muscle: "arms", tags: ["isolation", "advanced"], svg: "curl", desc: "Supinated up, pronated down. Hits biceps AND forearms in one move.", cues: ["Curl up with palms facing you", "Rotate to palms down at top", "Lower slowly with palms down", "Rotate back to palms up at bottom"] },
-  { name: "Skull crushers", muscle: "arms", tags: ["isolation", "triceps"], svg: "generic", desc: "Classic tricep mass builder. EZ bar is kinder on wrists than straight bar.", cues: ["Bar starts over forehead", "Lower behind head slowly", "Keep elbows pointed up", "Don't flare elbows out"] },
-  { name: "Close grip bench", muscle: "arms", tags: ["compound", "triceps"], svg: "bench", desc: "The heavy tricep builder. Go heavy and progressive overload.", cues: ["Grip inside shoulder width (8-14 inches)", "Elbows tucked to sides", "Lower to lower chest", "Drive up hard with triceps"] },
-  { name: "Cable pushdown", muscle: "arms", tags: ["isolation", "triceps"], svg: "generic", desc: "Tricep staple. Rope attachment for better contraction.", cues: ["Elbows pinned to sides", "Full extension at bottom", "Control negative - 2 seconds", "Squeeze triceps hard at bottom"] },
-  { name: "JM press", muscle: "arms", tags: ["compound", "triceps", "advanced"], svg: "bench", desc: "Hybrid of close grip bench and skull crusher. Tricep destroyer.", cues: ["Close grip setup on bench", "Lower bar to chin area", "Elbows stay in front of bar", "Short range of motion"] },
-  { name: "Diamond push-ups", muscle: "arms", tags: ["bodyweight", "triceps"], svg: "plank", desc: "Push-ups with hands together. Brutal tricep builder.", cues: ["Form diamond shape with hands", "Chest touches hands at bottom", "Elbows stay close to body", "Full extension at top"] },
+  { name: "Barbell curl", muscle: "arms", tags: ["isolation", "biceps"], anim: "curl", video: "barbell curl form", desc: "Classic bicep builder. Strict form maximizes growth.", cues: ["Elbows pinned to sides", "Full range - full extension to flex", "No swinging or hip movement", "Squeeze hard at top for 1 second"] },
+  { name: "Hammer curl", muscle: "arms", tags: ["isolation", "biceps"], anim: "curl", video: "hammer curl form", desc: "Hits brachialis and brachioradialis. Arms thickness.", cues: ["Neutral grip throughout", "Elbows pinned", "Slight swing for last reps", "Alternate or both at once"] },
+  { name: "Preacher curl", muscle: "arms", tags: ["isolation", "biceps"], anim: "curl", video: "preacher curl form", desc: "Isolates biceps. Great for peak development.", cues: ["Chest firmly on pad", "Don't fully extend - stop 3/4 down", "Slow 3-second negative", "Explode on concentric"] },
+  { name: "21s", muscle: "arms", tags: ["isolation", "advanced"], anim: "curl", video: "21s bicep curls", desc: "7 bottom half + 7 top half + 7 full reps. Nuclear pump.", cues: ["7 reps bottom to middle only", "7 reps middle to top only", "7 full range reps", "Use 40-50% of normal weight"] },
+  { name: "Zottman curl", muscle: "arms", tags: ["isolation", "advanced"], anim: "curl", video: "zottman curl form", desc: "Supinated up, pronated down. Biceps AND forearms.", cues: ["Curl up with palms facing you", "Rotate to palms down at top", "Lower slowly with palms down", "Rotate back at bottom"] },
+  { name: "Skull crushers", muscle: "arms", tags: ["isolation", "triceps"], anim: "bench-press", video: "skull crushers form", desc: "Classic tricep mass builder. EZ bar for wrist comfort.", cues: ["Bar starts over forehead", "Lower behind head slowly", "Keep elbows pointed up", "Don't flare elbows out"] },
+  { name: "Close grip bench", muscle: "arms", tags: ["compound", "triceps"], anim: "bench-press", video: "close grip bench press", desc: "Heavy tricep builder. Go heavy and progressive overload.", cues: ["Grip inside shoulder width", "Elbows tucked to sides", "Lower to lower chest", "Drive up with triceps"] },
+  { name: "Cable pushdown", muscle: "arms", tags: ["isolation", "triceps"], anim: "curl", video: "tricep cable pushdown", desc: "Tricep staple. Rope for better contraction.", cues: ["Elbows pinned to sides", "Full extension at bottom", "Control negative - 2 seconds", "Squeeze triceps hard"] },
+  { name: "JM press", muscle: "arms", tags: ["compound", "triceps", "advanced"], anim: "bench-press", video: "jm press tutorial", desc: "Hybrid of close grip bench and skull crusher. Tricep destroyer.", cues: ["Close grip setup on bench", "Lower bar to chin area", "Elbows stay in front of bar", "Short range of motion"] },
+  { name: "Diamond push-ups", muscle: "arms", tags: ["bodyweight", "triceps"], anim: "pushup", video: "diamond push up form", desc: "Push-ups with hands together. Brutal tricep builder.", cues: ["Form diamond with hands", "Chest touches hands at bottom", "Elbows stay close to body", "Full extension at top"] },
 
-  { name: "Hanging leg raises", muscle: "core", tags: ["bodyweight", "advanced"], svg: "generic", desc: "The gold standard for lower abs. Strict form or don't bother.", cues: ["Dead hang from pull-up bar", "Lift legs to 90 degrees (knees or straight)", "No swinging - strict form only", "Lower with control"] },
-  { name: "Ab wheel rollout", muscle: "core", tags: ["advanced"], svg: "generic", desc: "Full core demolisher. From knees first, then feet when strong enough.", cues: ["Start on knees, advance to feet later", "Roll out as far as possible without sagging", "Keep hips neutral - no arching", "Pull back with abs, not arms"] },
-  { name: "Hollow body hold", muscle: "core", tags: ["isometric", "advanced"], svg: "plank", desc: "Gymnast staple. Builds crazy core stability.", cues: ["Lie on back, legs straight", "Raise legs, arms, shoulders", "Lower back pressed into floor", "Hold for 30-60 seconds"] },
-  { name: "Dragon flag", muscle: "core", tags: ["advanced"], svg: "generic", desc: "Bruce Lee's ab exercise. Unreal full-body ab strength required.", cues: ["Lie on bench, grip behind head", "Raise whole body into vertical", "Lower slowly while keeping straight", "Only touch with upper back"] },
-  { name: "Plank", muscle: "core", tags: ["isometric", "bodyweight"], svg: "plank", desc: "Simple and effective. Target 2+ minutes, then add weight.", cues: ["Forearms on ground, body straight", "Squeeze glutes and abs", "Don't let hips sag or pike up", "Once 2 minutes is easy, add weight plate on back"] },
-  { name: "Copenhagen plank", muscle: "core", tags: ["advanced", "obliques"], svg: "plank", desc: "Adductor and oblique destroyer. Hard as hell.", cues: ["Side plank with top leg on bench", "Body elevated off ground", "Hold 20-60 seconds", "Builds adductor strength"] }
+  { name: "Hanging leg raises", muscle: "core", tags: ["bodyweight", "advanced"], anim: "pullup", video: "hanging leg raise form", desc: "Gold standard for lower abs. Strict form or don't bother.", cues: ["Dead hang from pull-up bar", "Lift legs to 90 degrees", "No swinging - strict only", "Lower with control"] },
+  { name: "Ab wheel rollout", muscle: "core", tags: ["advanced"], anim: "plank", video: "ab wheel rollout form", desc: "Full core demolisher. Knees first, then feet.", cues: ["Start on knees, progress to feet", "Roll out without sagging", "Keep hips neutral", "Pull back with abs, not arms"] },
+  { name: "Hollow body hold", muscle: "core", tags: ["isometric", "advanced"], anim: "plank", video: "hollow body hold gymnast", desc: "Gymnast staple. Crazy core stability.", cues: ["Lie on back, legs straight", "Raise legs, arms, shoulders", "Lower back pressed into floor", "Hold for 30-60 seconds"] },
+  { name: "Dragon flag", muscle: "core", tags: ["advanced"], anim: "plank", video: "dragon flag tutorial", desc: "Bruce Lee's ab exercise. Unreal core strength required.", cues: ["Lie on bench, grip behind head", "Raise body vertical", "Lower slowly keeping straight", "Only touch with upper back"] },
+  { name: "Plank", muscle: "core", tags: ["isometric", "bodyweight"], anim: "plank", video: "plank proper form", desc: "Simple and effective. Target 2+ minutes, then add weight.", cues: ["Forearms on ground, body straight", "Squeeze glutes and abs", "Don't let hips sag or pike", "Once 2 min easy, add weight plate"] },
+  { name: "Copenhagen plank", muscle: "core", tags: ["advanced", "obliques"], anim: "plank", video: "copenhagen plank tutorial", desc: "Adductor and oblique destroyer.", cues: ["Side plank with top leg on bench", "Body elevated off ground", "Hold 20-60 seconds", "Builds adductor strength"] }
 ];
 
 const articles = {
-  protein: { title: "How much protein do you actually need?", category: "Nutrition", date: "April 10, 2026", content: "<p>The fitness industry has pushed protein to absurd levels. Gym bros claiming 300g+ daily. But what does the science say?</p><h2>The research consensus</h2><p>Multiple meta-analyses from 2024-2026 consistently land on 1.6-2.2g per kg bodyweight for muscle growth. That's roughly 0.7-1g per lb. For a 180lb lifter, 126-180g daily.</p><h2>Meal distribution matters</h2><p>Split across 3-5 meals, 20-40g per meal maximizes muscle protein synthesis.</p><h2>Takeaway</h2><p>Stop stressing about 300g. Aim for 0.8-1g per lb across 4 meals.</p>" },
-  overload: { title: "Progressive overload: the only principle that matters", category: "Training", date: "April 5, 2026", content: "<p>You can follow the most sophisticated program ever written, but without progressive overload you're not growing.</p><h2>What it is</h2><p>Doing more over time. More weight, reps, sets, better form.</p><h2>How to implement</h2><p>Track every workout. Beat last session by one rep, one pound, or one set. That's it.</p>" },
-  creatine: { title: "The truth about creatine in 2026", category: "Supplements", date: "April 1, 2026", content: "<p>500+ studies. Here's what works.</p><h2>Type</h2><p>Monohydrate. Outperforms every other form in every study.</p><h2>Dose</h2><p>5g per day. Forever. Skip the loading phase.</p><h2>Results</h2><p>2-5 lb scale weight, 5-10% strength, 2-3% more muscle mass in 12 weeks.</p>" },
-  failure: { title: "Training to failure: when it helps, when it hurts", category: "Training", date: "March 28, 2026", content: "<p>The answer is: sometimes.</p><h2>Use failure for</h2><ul><li>Isolation exercises (curls, flyes, raises)</li><li>Last set of last exercise</li></ul><h2>Avoid failure on</h2><ul><li>Heavy compounds (squats, deadlifts)</li><li>Early in workout</li><li>Every single set</li></ul>" },
-  sleep: { title: "Sleep for strength: the muscle builder's guide", category: "Recovery", date: "March 22, 2026", content: "<p>You can't out-train poor sleep.</p><h2>The science</h2><p>70% of daily growth hormone released during deep sleep.</p><h2>Quality tips</h2><ul><li>60-65F room</li><li>Completely dark</li><li>No screens 60 min before</li><li>Consistent bedtime</li></ul>" },
-  cutting: { title: "Cutting without losing muscle", category: "Nutrition", date: "March 15, 2026", content: "<p>Losing fat while keeping muscle. Here's how.</p><h2>Protocol</h2><ul><li>500 cal deficit, no more</li><li>1-1.2g protein per lb</li><li>Keep training heavy</li><li>0.5-1% bodyweight loss per week max</li><li>Weekly refeed at maintenance</li></ul>" }
+  protein: { title: "How much protein do you actually need?", category: "Nutrition", date: "April 10, 2026", content: "<p>The fitness industry has pushed protein to absurd levels. What does the science say?</p><h2>The research consensus</h2><p>Meta-analyses from 2024-2026 consistently land on 1.6-2.2g per kg for muscle growth. Roughly 0.7-1g per lb. For 180lb lifter, 126-180g daily.</p><h2>Meal distribution</h2><p>Split across 3-5 meals, 20-40g per meal.</p><h2>Takeaway</h2><p>Aim for 0.8-1g per lb across 4 meals.</p>" },
+  overload: { title: "Progressive overload: the only principle that matters", category: "Training", date: "April 5, 2026", content: "<p>Without progressive overload, you're not growing.</p><h2>What it is</h2><p>Doing more over time. Weight, reps, sets, better form.</p><h2>How</h2><p>Track every workout. Beat last session by one rep, one pound, or one set.</p>" },
+  creatine: { title: "The truth about creatine in 2026", category: "Supplements", date: "April 1, 2026", content: "<p>500+ studies. Here's what works.</p><h2>Type</h2><p>Monohydrate. Outperforms every other form.</p><h2>Dose</h2><p>5g per day. Skip loading.</p><h2>Results</h2><p>2-5 lb scale weight, 5-10% strength, 2-3% more muscle in 12 weeks.</p>" },
+  failure: { title: "Training to failure: when it helps, when it hurts", category: "Training", date: "March 28, 2026", content: "<p>Sometimes.</p><h2>Use failure for</h2><ul><li>Isolation exercises</li><li>Last set of last exercise</li></ul><h2>Avoid on</h2><ul><li>Heavy compounds</li><li>Early in workout</li><li>Every set</li></ul>" },
+  sleep: { title: "Sleep for strength", category: "Recovery", date: "March 22, 2026", content: "<p>Can't out-train poor sleep.</p><h2>Science</h2><p>70% of daily growth hormone during deep sleep.</p><h2>Tips</h2><ul><li>60-65F room</li><li>Completely dark</li><li>No screens 60 min before</li><li>Consistent bedtime</li></ul>" },
+  cutting: { title: "Cutting without losing muscle", category: "Nutrition", date: "March 15, 2026", content: "<p>How to preserve muscle during fat loss.</p><h2>Protocol</h2><ul><li>500 cal deficit max</li><li>1-1.2g protein per lb</li><li>Keep training heavy</li><li>0.5-1% loss per week</li><li>Weekly refeed at maintenance</li></ul>" }
 };
 
 function renderExercises(filter, search) {
@@ -1001,22 +1125,14 @@ function renderExercises(filter, search) {
   const filtered = exercises.filter(function(e, idx) {
     e._idx = idx;
     let muscleMatch = true;
-    if (filter === 'advanced') {
-      muscleMatch = e.tags.indexOf('advanced') !== -1;
-    } else if (filter !== 'all') {
-      muscleMatch = e.muscle === filter;
-    }
+    if (filter === 'advanced') muscleMatch = e.tags.indexOf('advanced') !== -1;
+    else if (filter !== 'all') muscleMatch = e.muscle === filter;
     const searchMatch = search === '' || e.name.toLowerCase().includes(search.toLowerCase()) || e.tags.some(function(t){return t.toLowerCase().includes(search.toLowerCase());});
     return muscleMatch && searchMatch;
   });
-  
-  if (filtered.length === 0) {
-    grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 2rem;">No exercises found.</p>';
-    return;
-  }
-  
+  if (filtered.length === 0) { grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 2rem;">No exercises found.</p>'; return; }
   grid.innerHTML = filtered.map(function(e) {
-    return '<div class="exercise-card" onclick="showExerciseModal(' + e._idx + ')"><div class="exercise-muscle">' + e.muscle + '</div><div class="exercise-name">' + e.name + '</div><div class="exercise-tags">' + e.tags.map(function(t){return '<span class="exercise-tag' + (t === 'advanced' ? ' advanced' : '') + '">' + t + '</span>'}).join('') + '</div><div class="exercise-click-hint">Click for illustration &amp; cues &rarr;</div></div>';
+    return '<div class="exercise-card" onclick="showExerciseModal(' + e._idx + ')"><div class="exercise-muscle">' + e.muscle + '</div><div class="exercise-name">' + e.name + '</div><div class="exercise-tags">' + e.tags.map(function(t){return '<span class="exercise-tag' + (t === 'advanced' ? ' advanced' : '') + '">' + t + '</span>'}).join('') + '</div><div class="exercise-click-hint">See illustration &amp; video &rarr;</div></div>';
   }).join('');
 }
 
@@ -1024,22 +1140,34 @@ function showExerciseModal(idx) {
   const e = exercises[idx];
   const modal = document.getElementById('exercise-modal');
   const body = document.getElementById('exercise-modal-body');
-  body.innerHTML = '<div class="exercise-modal-muscle">' + e.muscle + (e.tags.indexOf('advanced') !== -1 ? ' &middot; advanced' : '') + '</div><h2 class="exercise-modal-title">' + e.name + '</h2><div class="exercise-illustration">' + (exerciseSVGs[e.svg] || exerciseSVGs.generic) + '</div><h4>Overview</h4><p>' + e.desc + '</p><h4>Form cues</h4><ol>' + e.cues.map(function(c){return '<li>' + c + '</li>'}).join('') + '</ol><h4>Recommended</h4><p>' + getSetRepRec(e) + '</p>';
+  const anim = exerciseMovements[e.anim] || exerciseMovements['bench-press'];
+  const videoURL = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(e.video);
+  body.innerHTML = '<div class="exercise-modal-muscle">' + e.muscle + (e.tags.indexOf('advanced') !== -1 ? ' &middot; advanced' : '') + '</div>' +
+    '<h2 class="exercise-modal-title">' + e.name + '</h2>' +
+    '<div class="exercise-illustration"><div class="illustration-grid">' +
+    '<div class="illustration-frame"><div class="illustration-label">Start position</div>' + anim.start() + '</div>' +
+    '<div class="illustration-arrow">&rarr;</div>' +
+    '<div class="illustration-frame"><div class="illustration-label">End position</div>' + anim.end() + '</div>' +
+    '</div></div>' +
+    '<h4>Overview</h4><p>' + e.desc + '</p>' +
+    '<h4>Form cues</h4><ol>' + e.cues.map(function(c){return '<li>' + c + '</li>'}).join('') + '</ol>' +
+    '<h4>Recommended sets &amp; reps</h4><p>' + getSetRepRec(e) + '</p>' +
+    '<a href="' + videoURL + '" target="_blank" rel="noopener" class="video-button">Watch video demos on YouTube</a>';
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function getSetRepRec(e) {
-  if (e.tags.indexOf('heavy') !== -1) return '3-5 sets of 3-6 reps. Rest 3-5 min between sets.';
-  if (e.tags.indexOf('isolation') !== -1) return '3-4 sets of 10-15 reps. Rest 60-90 seconds.';
+  if (e.tags.indexOf('heavy') !== -1) return '3-5 sets of 3-6 reps. Rest 3-5 min.';
+  if (e.tags.indexOf('isolation') !== -1) return '3-4 sets of 10-15 reps. Rest 60-90 sec.';
   if (e.tags.indexOf('compound') !== -1) return '3-4 sets of 6-10 reps. Rest 2-3 min.';
   if (e.tags.indexOf('isometric') !== -1) return '3 sets, hold 30-60 seconds.';
-  if (e.tags.indexOf('bodyweight') !== -1) return '3-4 sets to near failure. Add weight when easy.';
+  if (e.tags.indexOf('bodyweight') !== -1) return '3-4 sets to near failure.';
   return '3-4 sets of 8-12 reps.';
 }
 
 function closeExerciseModal(event) {
-  if (!event || event.target.id === 'exercise-modal' || event.currentTarget.tagName === 'BUTTON') {
+  if (!event || event.target.id === 'exercise-modal' || (event.currentTarget && event.currentTarget.tagName === 'BUTTON')) {
     document.getElementById('exercise-modal').classList.remove('open');
     document.body.style.overflow = '';
   }
@@ -1050,14 +1178,10 @@ function filterByMuscle(event, muscle) {
   document.querySelectorAll('#exercises .tab-buttons button').forEach(function(b) { b.classList.remove('active'); });
   event.target.classList.add('active');
   currentMuscleFilter = muscle;
-  const search = document.getElementById('exercise-search').value;
-  renderExercises(muscle, search);
+  renderExercises(muscle, document.getElementById('exercise-search').value);
 }
 
-function filterExercises() {
-  const search = document.getElementById('exercise-search').value;
-  renderExercises(currentMuscleFilter, search);
-}
+function filterExercises() { renderExercises(currentMuscleFilter, document.getElementById('exercise-search').value); }
 
 function showSection(sectionId) {
   document.querySelectorAll('.nav-buttons button').forEach(function(b) { b.classList.remove('active'); });
@@ -1071,8 +1195,7 @@ function showSection(sectionId) {
 }
 
 function showArticle(id) {
-  const article = articles[id];
-  if (!article) return;
+  const article = articles[id]; if (!article) return;
   showSection('articles');
   document.getElementById('article-list').style.display = 'none';
   const wrap = document.getElementById('article-content-wrap');
@@ -1080,11 +1203,7 @@ function showArticle(id) {
   wrap.innerHTML = '<div class="article-full"><button class="back-btn" onclick="backToArticles()">&larr; Back to articles</button><div class="article-meta">' + article.category + ' &middot; ' + article.date + '</div><h1>' + article.title + '</h1>' + article.content + '</div>';
 }
 
-function backToArticles() {
-  document.getElementById('article-list').style.display = 'block';
-  document.getElementById('article-content-wrap').style.display = 'none';
-}
-
+function backToArticles() { document.getElementById('article-list').style.display = 'block'; document.getElementById('article-content-wrap').style.display = 'none'; }
 function toggleMenu() { document.getElementById('nav-buttons').classList.toggle('open'); }
 
 function toggleTheme() {
@@ -1150,32 +1269,27 @@ function updateMacros() {
   document.getElementById('fat-result').textContent = fat + 'g';
   document.getElementById('carbs-result').textContent = carbs + 'g';
 }
-
 function updateORM() {
   const weight = parseFloat(document.getElementById('lift-weight').value) || 225;
   const reps = parseFloat(document.getElementById('lift-reps').value) || 5;
   document.getElementById('orm-result').textContent = Math.round(weight * (1 + reps / 30));
 }
-
 function updateWeeklyGain() {
   const current = parseFloat(document.getElementById('body-weight').value) || 185;
   const target = parseFloat(document.getElementById('target-weight').value) || 195;
   const weeks = parseFloat(document.getElementById('target-weeks').value) || 12;
   document.getElementById('weekly-gain').textContent = ((target - current) / weeks).toFixed(2) + ' lbs';
 }
-
 function updateWater() {
   const weight = parseFloat(document.getElementById('water-weight').value) || 185;
   const training = parseFloat(document.getElementById('water-training').value) || 1;
   document.getElementById('water-result').textContent = Math.round(weight * 0.6 + training * 20);
 }
-
 function updateProteinPerMeal() {
   const total = parseFloat(document.getElementById('prot-total').value) || 180;
   const meals = parseFloat(document.getElementById('prot-meals').value) || 4;
   document.getElementById('prot-per-meal').textContent = Math.round(total / meals) + 'g';
 }
-
 function updatePlates() {
   const target = parseFloat(document.getElementById('plate-target').value) || 315;
   const barWeight = parseFloat(document.getElementById('bar-weight').value) || 45;
@@ -1185,11 +1299,7 @@ function updatePlates() {
   let remaining = perSide;
   const plates = [];
   plateSizes.forEach(function(p) { const count = Math.floor(remaining / p); if (count > 0) { plates.push({ weight: p, count: count }); remaining -= count * p; } });
-  if (perSide <= 0 || remaining > 0.01) {
-    document.getElementById('plate-result').textContent = perSide <= 0 ? 'Just the bar!' : 'Cannot make exact weight';
-    document.getElementById('plate-visual').innerHTML = '';
-    return;
-  }
+  if (perSide <= 0 || remaining > 0.01) { document.getElementById('plate-result').textContent = perSide <= 0 ? 'Just the bar!' : 'Cannot make exact'; document.getElementById('plate-visual').innerHTML = ''; return; }
   document.getElementById('plate-result').textContent = plates.map(function(p) { return p.count + 'x ' + p.weight; }).join(', ');
   let visualHTML = '';
   plates.forEach(function(p) { for (let i = 0; i < p.count; i++) visualHTML += '<div class="plate ' + plateClasses[p.weight] + '">' + p.weight + '</div>'; });
@@ -1197,78 +1307,133 @@ function updatePlates() {
   plates.slice().reverse().forEach(function(p) { for (let i = 0; i < p.count; i++) visualHTML += '<div class="plate ' + plateClasses[p.weight] + '">' + p.weight + '</div>'; });
   document.getElementById('plate-visual').innerHTML = visualHTML;
 }
-
 function updateBodyFat() {
   const sex = document.getElementById('bf-sex').value;
   const height = parseFloat(document.getElementById('bf-height').value) || 70;
   const waist = parseFloat(document.getElementById('bf-waist').value) || 34;
   const neck = parseFloat(document.getElementById('bf-neck').value) || 15;
   let bf;
-  if (sex === 'male') {
-    document.getElementById('hip-group').style.display = 'none';
-    bf = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 36.76;
-  } else {
-    document.getElementById('hip-group').style.display = 'block';
-    const hip = parseFloat(document.getElementById('bf-hip').value) || 38;
-    bf = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(height) - 78.387;
-  }
+  if (sex === 'male') { document.getElementById('hip-group').style.display = 'none'; bf = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 36.76; }
+  else { document.getElementById('hip-group').style.display = 'block'; const hip = parseFloat(document.getElementById('bf-hip').value) || 38; bf = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(height) - 78.387; }
   document.getElementById('bf-result').textContent = bf.toFixed(1) + '%';
 }
-
 function filterPrograms(event, level) {
-  const programs = document.querySelectorAll('#programs .program-card');
-  const buttons = document.querySelectorAll('#training .tab-buttons button');
-  buttons.forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('#training .tab-buttons button').forEach(function(b) { b.classList.remove('active'); });
   event.target.classList.add('active');
-  programs.forEach(function(p) { p.style.display = (level === 'all' || p.getAttribute('data-level') === level) ? 'block' : 'none'; });
+  document.querySelectorAll('#programs .program-card').forEach(function(p) { p.style.display = (level === 'all' || p.getAttribute('data-level') === level) ? 'block' : 'none'; });
 }
 
-function handleNewsletter(event) { event.preventDefault(); alert('Thanks for subscribing! (Connect Mailchimp to actually collect emails.)'); event.target.reset(); return false; }
-function handleContact(event) { const form = event.target; if (form.action.includes('YOUR_FORMSPREE_ID')) { event.preventDefault(); alert('Message received! (Set up Formspree to actually receive submissions.)'); form.reset(); return false; } return true; }
+function handleNewsletter(event) { event.preventDefault(); alert('Thanks for subscribing!'); event.target.reset(); return false; }
+function handleContact(event) { const form = event.target; if (form.action.includes('YOUR_FORMSPREE_ID')) { event.preventDefault(); alert('Message received!'); form.reset(); return false; } return true; }
 
 let workoutLog = [];
 try { workoutLog = JSON.parse(localStorage.getItem('workoutLog') || '[]'); } catch(e) { workoutLog = []; }
 
 function renderLog() {
   const container = document.getElementById('log-entries');
-  if (workoutLog.length === 0) {
-    container.innerHTML = '<p style="color: var(--text-muted); padding: 1rem; text-align: center;">No exercises logged yet.</p>';
-  } else {
+  if (workoutLog.length === 0) { container.innerHTML = '<p style="color: var(--text-muted); padding: 1rem; text-align: center;">No exercises logged yet.</p>'; }
+  else {
     container.innerHTML = workoutLog.map(function(e, i) {
       return '<div class="log-entry"><input type="text" placeholder="Exercise" value="' + (e.exercise||'') + '" onchange="updateLog(' + i + ', \'exercise\', this.value)"><input type="number" placeholder="Sets" value="' + (e.sets||'') + '" onchange="updateLog(' + i + ', \'sets\', this.value)"><input type="number" placeholder="Reps" value="' + (e.reps||'') + '" onchange="updateLog(' + i + ', \'reps\', this.value)"><input type="number" placeholder="Weight" value="' + (e.weight||'') + '" onchange="updateLog(' + i + ', \'weight\', this.value)"><button class="log-delete" onclick="deleteLogEntry(' + i + ')">X</button></div>';
     }).join('');
   }
   let totalSets = 0, totalReps = 0, totalVolume = 0;
-  workoutLog.forEach(function(e) {
-    const sets = parseFloat(e.sets) || 0, reps = parseFloat(e.reps) || 0, weight = parseFloat(e.weight) || 0;
-    totalSets += sets; totalReps += sets * reps; totalVolume += sets * reps * weight;
-  });
+  workoutLog.forEach(function(e) { const sets = parseFloat(e.sets) || 0, reps = parseFloat(e.reps) || 0, weight = parseFloat(e.weight) || 0; totalSets += sets; totalReps += sets * reps; totalVolume += sets * reps * weight; });
   document.getElementById('total-sets').textContent = totalSets;
   document.getElementById('total-reps').textContent = totalReps;
   document.getElementById('total-volume').textContent = totalVolume.toLocaleString();
   document.getElementById('total-exercises').textContent = workoutLog.length;
   try { localStorage.setItem('workoutLog', JSON.stringify(workoutLog)); } catch(e) {}
 }
-
 function addLogEntry() { workoutLog.push({ exercise: '', sets: '', reps: '', weight: '' }); renderLog(); }
 function updateLog(i, field, value) { workoutLog[i][field] = value; renderLog(); }
 function deleteLogEntry(i) { workoutLog.splice(i, 1); renderLog(); }
 function clearLog() { if (confirm('Clear all logged exercises?')) { workoutLog = []; renderLog(); } }
 
+/* =========================================================================
+   SUPABASE FORUM - Replace the two placeholder values below after signup.
+   See instructions in HANDOFF or in the chat where this was built.
+   ========================================================================= */
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+let sb = null;
 let forumUsername = '';
 let forumPosts = [];
+let likedPostIds = new Set();
 try { forumUsername = localStorage.getItem('forumUsername') || ''; } catch(e) {}
-try { forumPosts = JSON.parse(localStorage.getItem('forumPosts') || 'null') || getDefaultPosts(); } catch(e) { forumPosts = getDefaultPosts(); }
+try { likedPostIds = new Set(JSON.parse(localStorage.getItem('likedPostIds') || '[]')); } catch(e) {}
 
-function getDefaultPosts() {
-  return [
-    { id: 1, author: 'TyFromPhilly', title: 'Best beginner routine for someone returning after 6 months off?', content: 'Getting back into lifting after a 6 month layoff. Was running PPL before but lost a lot of strength. Should I jump back in or restart with something simpler?', date: Date.now() - 7200000, likes: 15, likedByMe: false, replies: [ { author: 'IronMike', content: 'Restart with full body 3x/week for 4 weeks then move to PPL. Your strength will come back fast due to muscle memory.', date: Date.now() - 6000000 } ] },
-    { id: 2, author: 'IronMinded', title: 'Protein timing: research update 2026', content: 'Just finished reading the latest meta-analysis on nutrient timing. Turns out daily total protein matters WAY more than when you eat it.', date: Date.now() - 28800000, likes: 28, likedByMe: false, replies: [] },
-    { id: 3, author: 'GainzGoblin', title: 'Cut from 205 to 185 in 12 weeks - here\'s what worked', content: 'Followed a consistent 500 calorie deficit, maintained protein at 1.2g per lb, and trained hard. Lost mostly fat.', date: Date.now() - 86400000, likes: 67, likedByMe: false, replies: [] }
-  ];
+function forumConfigured() {
+  return SUPABASE_URL && SUPABASE_URL.indexOf('YOUR_') !== 0 && SUPABASE_ANON_KEY && SUPABASE_ANON_KEY.indexOf('YOUR_') !== 0;
 }
 
-function saveForumPosts() { try { localStorage.setItem('forumPosts', JSON.stringify(forumPosts)); } catch(e) {} }
+function showForumError(msg) {
+  const c = document.getElementById('forum-posts');
+  if (c) c.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 2rem;">' + msg + '</p>';
+}
+
+async function initForum() {
+  updateUsernameDisplay();
+  if (!forumConfigured()) {
+    showForumError('Forum is being set up. Check back soon!');
+    return;
+  }
+  if (typeof supabase === 'undefined') {
+    showForumError('Forum failed to load. Refresh the page.');
+    return;
+  }
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  await loadPosts();
+  subscribeRealtime();
+}
+
+async function loadPosts() {
+  try {
+    const { data: posts, error: pErr } = await sb
+      .from('forum_posts')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(100);
+    if (pErr) throw pErr;
+    const postIds = (posts || []).map(function(p) { return p.id; });
+    let replies = [];
+    if (postIds.length > 0) {
+      const { data: reps, error: rErr } = await sb
+        .from('forum_replies')
+        .select('*')
+        .in('post_id', postIds)
+        .order('created_at', { ascending: true });
+      if (rErr) throw rErr;
+      replies = reps || [];
+    }
+    forumPosts = (posts || []).map(function(p) {
+      return {
+        id: p.id,
+        author: p.author,
+        title: p.title,
+        content: p.content,
+        date: new Date(p.created_at).getTime(),
+        likes: p.likes || 0,
+        replies: replies.filter(function(r) { return r.post_id === p.id; }).map(function(r) {
+          return { id: r.id, author: r.author, content: r.content, date: new Date(r.created_at).getTime() };
+        })
+      };
+    });
+    renderPosts();
+  } catch (e) {
+    console.error('Forum load error:', e);
+    showForumError('Could not load posts. Check your connection.');
+  }
+}
+
+function subscribeRealtime() {
+  if (!sb) return;
+  sb.channel('forum-changes')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'forum_posts' }, function() { loadPosts(); })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'forum_replies' }, function() { loadPosts(); })
+    .subscribe();
+}
 
 function updateUsernameDisplay() {
   const display = document.getElementById('username-display');
@@ -1276,51 +1441,87 @@ function updateUsernameDisplay() {
   if (forumUsername) { display.textContent = 'Posting as: ' + forumUsername; input.value = forumUsername; }
   else display.textContent = '';
 }
-
 function setUsername() {
   const name = document.getElementById('username-input').value.trim();
   if (!name) { alert('Enter a username first'); return; }
+  if (name.length > 20) { alert('Username too long (20 char max)'); return; }
   forumUsername = name;
   try { localStorage.setItem('forumUsername', name); } catch(e) {}
   updateUsernameDisplay();
 }
 
-function createPost() {
+async function createPost() {
+  if (!sb) { alert('Forum not ready yet. Try again in a second.'); return; }
   if (!forumUsername) { alert('Set your username first!'); return; }
-  const title = document.getElementById('new-post-title').value.trim();
-  const content = document.getElementById('new-post-content').value.trim();
+  const titleEl = document.getElementById('new-post-title');
+  const contentEl = document.getElementById('new-post-content');
+  const title = titleEl.value.trim();
+  const content = contentEl.value.trim();
   if (!title || !content) { alert('Title and message required'); return; }
-  forumPosts.unshift({ id: Date.now(), author: forumUsername, title: title, content: content, date: Date.now(), likes: 0, likedByMe: false, replies: [] });
-  document.getElementById('new-post-title').value = '';
-  document.getElementById('new-post-content').value = '';
-  saveForumPosts();
-  renderPosts();
+  if (title.length > 200) { alert('Title too long (200 char max)'); return; }
+  if (content.length > 5000) { alert('Message too long (5000 char max)'); return; }
+  try {
+    const { error } = await sb.from('forum_posts').insert({ author: forumUsername, title: title, content: content });
+    if (error) throw error;
+    titleEl.value = '';
+    contentEl.value = '';
+  } catch (e) {
+    console.error('Post error:', e);
+    alert('Could not post. Try again.');
+  }
 }
 
-function likePost(id) {
+async function likePost(id) {
+  if (!sb) return;
   const post = forumPosts.find(function(p) { return p.id === id; });
-  if (post) { if (post.likedByMe) { post.likes--; post.likedByMe = false; } else { post.likes++; post.likedByMe = true; } saveForumPosts(); renderPosts(); }
+  if (!post) return;
+  const alreadyLiked = likedPostIds.has(id);
+  const newCount = alreadyLiked ? Math.max(0, post.likes - 1) : post.likes + 1;
+  // optimistic UI
+  post.likes = newCount;
+  if (alreadyLiked) likedPostIds.delete(id); else likedPostIds.add(id);
+  try { localStorage.setItem('likedPostIds', JSON.stringify(Array.from(likedPostIds))); } catch(e) {}
+  renderPosts();
+  try {
+    const { error } = await sb.from('forum_posts').update({ likes: newCount }).eq('id', id);
+    if (error) throw error;
+  } catch (e) {
+    console.error('Like error:', e);
+  }
 }
 
 function toggleReply(id) {
-  const form = document.getElementById('reply-form-' + id);
-  form.classList.toggle('open');
+  const el = document.getElementById('reply-form-' + id);
+  if (el) el.classList.toggle('open');
 }
 
-function submitReply(id) {
+async function submitReply(id) {
+  if (!sb) { alert('Forum not ready yet.'); return; }
   if (!forumUsername) { alert('Set your username first!'); return; }
   const textarea = document.getElementById('reply-text-' + id);
   const text = textarea.value.trim();
   if (!text) return;
-  const post = forumPosts.find(function(p) { return p.id === id; });
-  if (post) { post.replies.push({ author: forumUsername, content: text, date: Date.now() }); saveForumPosts(); renderPosts(); }
+  if (text.length > 2000) { alert('Reply too long (2000 char max)'); return; }
+  try {
+    const { error } = await sb.from('forum_replies').insert({ post_id: id, author: forumUsername, content: text });
+    if (error) throw error;
+    textarea.value = '';
+  } catch (e) {
+    console.error('Reply error:', e);
+    alert('Could not post reply. Try again.');
+  }
 }
 
-function deletePost(id) {
-  if (!confirm('Delete this post?')) return;
-  forumPosts = forumPosts.filter(function(p) { return p.id !== id; });
-  saveForumPosts();
-  renderPosts();
+async function deletePost(id) {
+  if (!sb) return;
+  if (!confirm('Delete this post? This cannot be undone.')) return;
+  try {
+    const { error } = await sb.from('forum_posts').delete().eq('id', id).eq('author', forumUsername);
+    if (error) throw error;
+  } catch (e) {
+    console.error('Delete error:', e);
+    alert('Could not delete. You can only delete your own posts.');
+  }
 }
 
 function timeAgo(date) {
@@ -1331,18 +1532,17 @@ function timeAgo(date) {
   if (secs < 604800) return Math.floor(secs / 86400) + ' days ago';
   return new Date(date).toLocaleDateString();
 }
-
-function escapeHtml(text) { return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
+function escapeHtml(text) { return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
 
 function renderPosts() {
   const container = document.getElementById('forum-posts');
-  if (forumPosts.length === 0) { container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 2rem;">No posts yet. Be the first!</p>'; return; }
+  if (!container) return;
+  if (forumPosts.length === 0) { container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 2rem;">No posts yet. Be the first to start a discussion!</p>'; return; }
   container.innerHTML = forumPosts.map(function(p) {
     const isMine = p.author === forumUsername;
-    const repliesHTML = p.replies.map(function(r) {
-      return '<div class="reply"><div class="reply-header"><span class="reply-author">' + escapeHtml(r.author) + '</span><span class="reply-date">' + timeAgo(r.date) + '</span></div><div>' + escapeHtml(r.content) + '</div></div>';
-    }).join('');
-    return '<div class="forum-post"><div class="post-header"><div class="post-author">' + escapeHtml(p.author) + '</div><div class="post-date">' + timeAgo(p.date) + '</div></div><div class="post-title">' + escapeHtml(p.title) + '</div><div class="post-content">' + escapeHtml(p.content) + '</div>' + repliesHTML + '<div class="post-actions"><button class="post-action-btn' + (p.likedByMe ? ' liked' : '') + '" onclick="likePost(' + p.id + ')">&#9825; ' + p.likes + ' likes</button><button class="post-action-btn" onclick="toggleReply(' + p.id + ')">&#128172; Reply (' + p.replies.length + ')</button>' + (isMine ? '<button class="post-action-btn" onclick="deletePost(' + p.id + ')" style="border-color: #c82424; color: #c82424;">Delete</button>' : '') + '</div><div class="reply-form" id="reply-form-' + p.id + '"><textarea id="reply-text-' + p.id + '" placeholder="Your reply..."></textarea><button class="cta-button" onclick="submitReply(' + p.id + ')" style="margin-top: 0.5rem;">Post reply</button></div></div>';
+    const likedByMe = likedPostIds.has(p.id);
+    const repliesHTML = p.replies.map(function(r) { return '<div class="reply"><div class="reply-header"><span class="reply-author">' + escapeHtml(r.author) + '</span><span class="reply-date">' + timeAgo(r.date) + '</span></div><div>' + escapeHtml(r.content) + '</div></div>'; }).join('');
+    return '<div class="forum-post"><div class="post-header"><div class="post-author">' + escapeHtml(p.author) + '</div><div class="post-date">' + timeAgo(p.date) + '</div></div><div class="post-title">' + escapeHtml(p.title) + '</div><div class="post-content">' + escapeHtml(p.content) + '</div>' + repliesHTML + '<div class="post-actions"><button class="post-action-btn' + (likedByMe ? ' liked' : '') + '" onclick="likePost(\'' + p.id + '\')">&#9825; ' + p.likes + '</button><button class="post-action-btn" onclick="toggleReply(\'' + p.id + '\')">&#128172; Reply (' + p.replies.length + ')</button>' + (isMine ? '<button class="post-action-btn" onclick="deletePost(\'' + p.id + '\')" style="border-color: #c82424; color: #c82424;">Delete</button>' : '') + '</div><div class="reply-form" id="reply-form-' + p.id + '"><textarea id="reply-text-' + p.id + '" placeholder="Your reply..."></textarea><button class="cta-button" onclick="submitReply(\'' + p.id + '\')" style="margin-top: 0.5rem;">Post reply</button></div></div>';
   }).join('');
 }
 
@@ -1359,17 +1559,8 @@ document.addEventListener('keydown', function(e) {
   if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); toggleSearch(); }
 });
 
-updateMacros();
-updateORM();
-updateWeeklyGain();
-updatePlates();
-updateBodyFat();
-updateWater();
-updateProteinPerMeal();
-renderExercises();
-renderLog();
-updateUsernameDisplay();
-renderPosts();
+updateMacros(); updateORM(); updateWeeklyGain(); updatePlates(); updateBodyFat(); updateWater(); updateProteinPerMeal();
+renderExercises(); renderLog(); updateUsernameDisplay(); initForum();
 </script>
 
 </body>
