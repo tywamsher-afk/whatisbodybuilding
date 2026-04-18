@@ -2828,9 +2828,22 @@ Would you be open to a brief call to discuss what a fit might look like?
 <!-- ==================== JAVASCRIPT ==================== -->
 <script>
 // ===== SUPABASE CONFIG =====
+// Wrapped in try/catch so that if the Supabase CDN fails to load (ad-blocker,
+// offline, network issue, etc.), the rest of the script still executes and
+// navigation/tools keep working. Forum/admin features degrade gracefully.
 const SUPABASE_URL = 'https://ghjcutbkzkkooeveyqvx.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoamN1dGJremtrb29ldmV5cXZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MTk0MTIsImV4cCI6MjA5MjA5NTQxMn0.vxvOrRoSx_Szku3z8o8s1vrzLW5-z-GKLcXgzumOz4w';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let sb = null;
+try {
+  if (typeof supabase !== 'undefined' && supabase.createClient) {
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } else {
+    console.warn('Supabase library not loaded — forum and admin publish features will be disabled.');
+  }
+} catch (e) {
+  console.warn('Supabase init failed:', e);
+  sb = null;
+}
 
 // ===== NAVIGATION =====
 function showSection(id) {
@@ -3486,36 +3499,6 @@ const articles = [
   },
 ];
 
-function renderArticles() {
-  const grid = document.getElementById('articlesGrid');
-  if (!grid) return;
-  grid.innerHTML = articles.map((a, i) => `
-    <div class="article-card" onclick="openArticle(${i})">
-      <div class="article-card-cat">${a.cat}</div>
-      <div class="article-card-body">
-        <div class="article-card-title">${a.title}</div>
-        <div class="article-card-excerpt">${a.excerpt}</div>
-      </div>
-      <div class="article-card-footer">
-        <span class="article-readmore">Read Article →</span>
-        <span class="article-readtime">${a.readtime}</span>
-      </div>
-    </div>`).join('');
-}
-
-function openArticle(i) {
-  const a = articles[i];
-  document.getElementById('modalCat').textContent = a.cat;
-  document.getElementById('modalTitle').textContent = a.title;
-  document.getElementById('modalBody').innerHTML = a.body;
-  document.getElementById('articleModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeArticleModal() {
-  document.getElementById('articleModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
 // ===== FORUM =====
 let replyingTo = null;
 
@@ -3611,11 +3594,13 @@ async function submitReply(postId) {
   }
 }
 
-// Subscribe to real-time forum updates
-sb.channel('forum').on('postgres_changes', { event: '*', schema: 'public', table: 'forum_posts' }, () => {
-  const forumSection = document.getElementById('forum');
-  if (forumSection && forumSection.classList.contains('active')) loadForum();
-}).subscribe();
+// Subscribe to real-time forum updates (only if Supabase is available)
+if (sb) {
+  sb.channel('forum').on('postgres_changes', { event: '*', schema: 'public', table: 'forum_posts' }, () => {
+    const forumSection = document.getElementById('forum');
+    if (forumSection && forumSection.classList.contains('active')) loadForum();
+  }).subscribe();
+}
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
