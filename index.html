@@ -1369,6 +1369,207 @@ section.active { display: block; }
    ============================ */
 #forum .content { padding: 0 24px 80px; max-width: 800px; margin: 0 auto; }
 
+/* ===== NEWS FEED ===== */
+.news-wrap {
+  background: var(--carbon);
+  border: 1px solid var(--carbon3);
+  border-radius: 2px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.news-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--carbon3);
+  background: var(--carbon2);
+}
+.news-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.news-live-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--blood);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(255,59,0,0.7);
+  animation: newsPulse 2s infinite;
+}
+@keyframes newsPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,59,0,0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(255,59,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,59,0,0); }
+}
+.news-title {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.news-refresh-btn {
+  background: none;
+  border: 1px solid var(--carbon3);
+  color: var(--ash);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.news-refresh-btn:hover { color: var(--white); border-color: var(--blood); }
+.news-refresh-btn:disabled { opacity: 0.5; cursor: wait; }
+.news-list { padding: 4px 0; }
+.news-item {
+  display: block;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--carbon3);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+.news-item:last-child { border-bottom: none; }
+.news-item:hover { background: var(--carbon2); }
+.news-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 6px;
+}
+.news-item-source { color: var(--blood); }
+.news-item-time { color: var(--smoke); }
+.news-item-title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--white);
+  font-weight: 500;
+}
+.news-item:hover .news-item-title { color: var(--blood); }
+.news-empty {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--ash);
+  font-size: 13px;
+  font-family: var(--font-ui);
+}
+
+/* ===== FORUM CONTROLS (search + category pills) ===== */
+.forum-controls {
+  background: var(--carbon);
+  border: 1px solid var(--carbon3);
+  border-radius: 2px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+.forum-search-wrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+.forum-search-wrap::before {
+  content: "⌕";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--smoke);
+  font-size: 16px;
+  pointer-events: none;
+}
+.forum-search-input {
+  width: 100%;
+  background: var(--carbon2);
+  border: 1px solid var(--carbon3);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px 14px 10px 36px;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.forum-search-input:focus { border-color: var(--blood); }
+.forum-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.forum-pill {
+  background: var(--carbon2);
+  border: 1px solid var(--carbon3);
+  color: var(--ash);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.forum-pill:hover { color: var(--white); border-color: var(--smoke); }
+.forum-pill.active {
+  background: var(--blood);
+  color: #fff;
+  border-color: var(--blood);
+}
+.forum-pill .pill-count {
+  opacity: 0.7;
+  margin-left: 4px;
+  font-weight: 400;
+}
+.forum-select {
+  width: 100%;
+  background: var(--carbon2);
+  border: 1px solid var(--carbon3);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 2px;
+  outline: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.forum-select:focus { border-color: var(--blood); }
+.forum-post-category {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blood);
+  border: 1px solid var(--blood);
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.forum-results-info {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--smoke);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  padding-left: 4px;
+}
+
 .forum-new-post {
   background: var(--carbon);
   border: 1px solid var(--carbon3);
@@ -1721,11 +1922,11 @@ footer {
         <div class="hero-stat-label">Exercises</div>
       </div>
       <div class="hero-stat-item">
-        <div class="hero-stat-num">8</div>
+        <div class="hero-stat-num">7</div>
         <div class="hero-stat-label">Calculators</div>
       </div>
       <div class="hero-stat-item">
-        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-num">12</div>
         <div class="hero-stat-label">Legend Profiles</div>
       </div>
       <div class="hero-stat-item">
@@ -1942,6 +2143,162 @@ footer {
             Phil's path shows the college-to-bodybuilding pivot is real — but it requires elite-level genetics, obsessive training, and at least a few years of financial scraping before sponsorship money arrives.
           </div>
           <div class="legend-source">Sources: Wikipedia, multiple verified biographical sources</div>
+        </div>
+      </div>
+
+      <!-- Dorian Yates -->
+      <div class="legend-card">
+        <div class="legend-number">07</div>
+        <div class="legend-card-header">
+          <div>
+            <div class="legend-card-name">Dorian Yates</div>
+            <div class="legend-card-title">6× Mr. Olympia · "The Shadow" · HIT Pioneer</div>
+          </div>
+        </div>
+        <div class="legend-card-body">
+          <div class="legend-detail-label">Before Fame</div>
+          <div class="legend-detail-text">Born April 19, 1962 in Solihull, England. Father died of a heart attack when Dorian was 13. At 19, caught damaging a tailor's shop with friends — sentenced to three months in a youth detention center. He first started training seriously during that detention. Went on to win 1984 Mr. Birmingham and the British Heavyweight title in 1986.</div>
+          <div class="legend-detail-label">How He Built Wealth</div>
+          <div class="legend-detail-text">In 1987 he purchased Temple Gym in Birmingham — well before his Olympia run — giving him an owned asset from day one. Won Mr. Olympia 6 consecutive times from 1992 to 1997, retiring as reigning champion despite a torn tricep three weeks before his final contest. Reportedly turned down several large supplement endorsement deals during his career to protect his privacy.</div>
+          <button class="legend-toggle-btn" onclick="toggleLegend(this)">Read full profile ↓</button>
+        </div>
+        <div class="legend-expanded">
+          <div class="legend-expanded-content">
+            <strong style="color:var(--blood);font-family:var(--font-ui);letter-spacing:0.5px;">Supplement empire:</strong> Co-founded CNP Professional with Kerry Kayes in 1998. Left in 2006 to launch Dorian Yates Ultimate Formulas. Founded DY Nutrition in 2011 (his current flagship brand, specializing in pre-workouts). Launched EU Peptides in 2010, exited in 2012.<br><br>
+            <strong style="color:var(--blood);font-family:var(--font-ui);">Training legacy:</strong> Popularized High-Intensity Training (HIT) in the 1990s — short, all-out sessions versus the marathon volume of his contemporaries. Influenced directly by Mike Mentzer. Estimated net worth around $4M.<br><br>
+            Dorian's lesson: own the gym, own the brand, and say no to deals that don't align. The asset base was in place before the Olympia wins.
+          </div>
+          <div class="legend-source">Sources: Wikipedia, IMDb, Generation Iron, Celebrity Net Worth</div>
+        </div>
+      </div>
+
+      <!-- Jay Cutler -->
+      <div class="legend-card">
+        <div class="legend-number">08</div>
+        <div class="legend-card-header">
+          <div>
+            <div class="legend-card-name">Jay Cutler</div>
+            <div class="legend-card-title">4× Mr. Olympia · Founder, Cutler Nutrition</div>
+          </div>
+        </div>
+        <div class="legend-card-body">
+          <div class="legend-detail-label">Before Fame</div>
+          <div class="legend-detail-text">Born August 3, 1973 in Worcester, Massachusetts. Started working in his brother's concrete construction business, Cutler Bros. Concrete, at age 11 — mixing and pouring concrete as a preteen. Studied Criminal Justice at Quinsigamond Community College, originally intending to become a corrections officer. Started lifting at 18.</div>
+          <div class="legend-detail-label">The Rivalry</div>
+          <div class="legend-detail-text">Won back-to-back Arnold Classics in 2002, 2003, 2004. Finished runner-up to Ronnie Coleman at the Mr. Olympia four times before finally dethroning him in 2006. Won Olympia again in 2007, lost to Dexter Jackson in 2008, then came back to win 2009 and 2010 — the first bodybuilder in history to reclaim the title after losing it. Six-time Olympia runner-up (most in history).</div>
+          <button class="legend-toggle-btn" onclick="toggleLegend(this)">Read full profile ↓</button>
+        </div>
+        <div class="legend-expanded">
+          <div class="legend-expanded-content">
+            <strong style="color:var(--blood);font-family:var(--font-ui);">Business portfolio:</strong> Cutler Nutrition (supplements), Cutler Athletics (apparel), Four Crowns Apparel, Jay's Pet Butter (pitched on Shark Tank). Early mail-order business selling autographed photos starting in 1995 after his first sponsorship.<br><br>
+            <strong style="color:var(--blood);font-family:var(--font-ui);">The media play:</strong> Active YouTube channel, podcasts, social content. Books include <em>No-Nonsense Guide to Successful Bodybuilding</em> and <em>CEO Muscle</em>. Retired from competition in 2013. Estimated net worth around $30M — one of the wealthiest bodybuilders in history.<br><br>
+            Jay's lesson: turn notoriety into infrastructure. He never had a single viral moment. He just showed up, competed 15+ years, and built a compounding brand.
+          </div>
+          <div class="legend-source">Sources: Wikipedia, Generation Iron, EssentiallySports, Sportskeeda</div>
+        </div>
+      </div>
+
+      <!-- Kai Greene -->
+      <div class="legend-card">
+        <div class="legend-number">09</div>
+        <div class="legend-card-header">
+          <div>
+            <div class="legend-card-name">Kai Greene</div>
+            <div class="legend-card-title">3× Arnold Classic · "The People's Champ" · Artist</div>
+          </div>
+        </div>
+        <div class="legend-card-body">
+          <div class="legend-detail-label">Before Fame</div>
+          <div class="legend-detail-text">Born July 12, 1975 in Brooklyn. From age 6, raised in foster care and residential treatment centers. A seventh-grade English teacher noticed his rapid physical development and introduced him to teen bodybuilding as an outlet. He has stated he used Arnold Schwarzenegger's <em>New Encyclopedia of Modern Bodybuilding</em> as a tool to learn how to read.</div>
+          <div class="legend-detail-label">The Career</div>
+          <div class="legend-detail-text">Trained at 5th Avenue Gym and later Johnny Lats Gym in NYC under coach Jakob Panotas starting in 1996. Won 1999 NPC Team Universe, took a five-year competitive hiatus, then won 2004 NPC Team Universe to earn his pro card. Won Arnold Classic in 2009, 2010, and 2016. Finished runner-up at Mr. Olympia three consecutive years — 2012, 2013, 2014 — in a bitter rivalry with Phil Heath.</div>
+          <button class="legend-toggle-btn" onclick="toggleLegend(this)">Read full profile ↓</button>
+        </div>
+        <div class="legend-expanded">
+          <div class="legend-expanded-content">
+            <strong style="color:var(--blood);font-family:var(--font-ui);">The 2015 dispute:</strong> Did not register for 2015 Mr. Olympia after launching his supplement company Dynamik Muscle while still under contract with Weider Publications (which operates the Olympia). Has never competed at Olympia since.<br><br>
+            <strong style="color:var(--blood);font-family:var(--font-ui);">Beyond the stage:</strong> Starred in the Generation Iron documentaries and in his own 2022 biopic <em>Kai</em>. Acting role in Stranger Things Season 2 (2017). Active visual artist — held a solo art show in 2011. Dynamik Muscle folded into Redcon1 (2020), where he is now a featured athlete. Estimated net worth $1–2M.<br><br>
+            Kai's lesson: you can be the best without ever winning the biggest title. Brand, story, and artistry outlast placements.
+          </div>
+          <div class="legend-source">Sources: Wikipedia, Generation Iron, Kai (2022 documentary)</div>
+        </div>
+      </div>
+
+      <!-- Franco Columbu -->
+      <div class="legend-card">
+        <div class="legend-number">10</div>
+        <div class="legend-card-header">
+          <div>
+            <div class="legend-card-name">Franco Columbu</div>
+            <div class="legend-card-title">2× Mr. Olympia · Boxer · Chiropractor · Arnold's Training Partner</div>
+          </div>
+        </div>
+        <div class="legend-card-body">
+          <div class="legend-detail-label">Before Fame</div>
+          <div class="legend-detail-text">Born August 7, 1941 in Ollolai, Sardinia, Italy. Worked as a shepherd as a boy. Competed as a professional boxer in Europe before meeting Arnold Schwarzenegger at a weightlifting competition in Germany in the mid-1960s. Emigrated to the United States with Arnold in 1969 at Joe Weider's invitation.</div>
+          <div class="legend-detail-label">The Hustle Before Hollywood</div>
+          <div class="legend-detail-text">Co-founded Columbu &amp; Schwarzenegger Bricklaying with Arnold in California — the two-man masonry business that funded their early years before either of them made real money from bodybuilding. Won Mr. Olympia in 1976 (lightweight/short class) and won the Olympia overall title in 1981 at age 40 after a comeback.</div>
+          <button class="legend-toggle-btn" onclick="toggleLegend(this)">Read full profile ↓</button>
+        </div>
+        <div class="legend-expanded">
+          <div class="legend-expanded-content">
+            <strong style="color:var(--blood);font-family:var(--font-ui);">The second career:</strong> Earned a Doctor of Chiropractic degree and ran a practice in Los Angeles for decades. Authored numerous books on bodybuilding, nutrition, and chiropractic care. Known for his phenomenal strength — bench press records and powerlifting feats at a bodyweight of around 185 lbs.<br><br>
+            <strong style="color:var(--blood);font-family:var(--font-ui);">Filmography:</strong> Appeared in <em>Pumping Iron</em> (1977), <em>Conan the Barbarian</em> (1982), <em>The Terminator</em> (1984), and <em>The Running Man</em> (1987) — usually alongside Arnold. Passed away August 30, 2019 in Sardinia.<br><br>
+            Franco's lesson: have a second profession. He was never broke because he always had a trade — bricklayer, then chiropractor. Bodybuilding was the passion. The trade was the floor.
+          </div>
+          <div class="legend-source">Sources: Wikipedia, IMDb, Pumping Iron (1977)</div>
+        </div>
+      </div>
+
+      <!-- Lee Haney -->
+      <div class="legend-card">
+        <div class="legend-number">11</div>
+        <div class="legend-card-header">
+          <div>
+            <div class="legend-card-name">Lee Haney</div>
+            <div class="legend-card-title">8× Mr. Olympia · Most Olympia Wins (tied w/ Coleman)</div>
+          </div>
+        </div>
+        <div class="legend-card-body">
+          <div class="legend-detail-label">Before Fame</div>
+          <div class="legend-detail-text">Born November 11, 1959 in Spartanburg, South Carolina. Won AAU Teen Mr. America in 1979 while still a teenager. Won NPC Junior Nationals and NPC Nationals in 1982, and took the IFBB World Amateur Championships the same year — earning his pro card before his 23rd birthday.</div>
+          <div class="legend-detail-label">The Dynasty</div>
+          <div class="legend-detail-text">Won Mr. Olympia 8 consecutive times from 1984 to 1991 — a record that stood alone until Ronnie Coleman tied it in 2005. Retired as reigning Olympia champion in 1991 at age 32 while still at the top. Known for proportion, symmetry, and a practice of "stimulate, don't annihilate" — a deliberate counter to the extreme volume of his era.</div>
+          <button class="legend-toggle-btn" onclick="toggleLegend(this)">Read full profile ↓</button>
+        </div>
+        <div class="legend-expanded">
+          <div class="legend-expanded-content">
+            <strong style="color:var(--blood);font-family:var(--font-ui);">After the stage:</strong> Appointed by President George H.W. Bush to chair the President's Council on Physical Fitness and Sports (1998–2002). Hosted <em>TotaLee Fit with Lee Haney</em> on Trinity Broadcasting Network. Founded the Lee Haney Games, an annual youth fitness and nutrition event.<br><br>
+            <strong style="color:var(--blood);font-family:var(--font-ui);">Character:</strong> Outspoken Christian, built a platform around youth mentorship and discipleship. Estimated net worth around $5.5M. No supplement empire, no clothing line — his brand is speaking, coaching, and faith-based outreach.<br><br>
+            Lee's lesson: not every champion builds a commercial empire. Some turn the title into ministry, mentorship, and a simpler life. Retire on top and choose what matters to you.
+          </div>
+          <div class="legend-source">Sources: Wikipedia, President's Council on Fitness historical records</div>
+        </div>
+      </div>
+
+      <!-- Sam Sulek -->
+      <div class="legend-card">
+        <div class="legend-number">12</div>
+        <div class="legend-card-header">
+          <div>
+            <div class="legend-card-name">Sam Sulek</div>
+            <div class="legend-card-title">IFBB Pro · YouTube's Most-Watched Bodybuilder</div>
+          </div>
+        </div>
+        <div class="legend-card-body">
+          <div class="legend-detail-label">Before Fame</div>
+          <div class="legend-detail-text">Born February 7, 2002 in Delaware, Ohio. Started competitive diving at age 8 and was a high-level diver and gymnast through high school at Delaware Hayes High School. Enrolled at Miami University (Ohio) in 2020 on the diving team, studying mechanical engineering. Quit diving to focus on lifting, then transitioned to bodybuilding.</div>
+          <div class="legend-detail-label">The YouTube Explosion</div>
+          <div class="legend-detail-text">Posted his first bodybuilding video on YouTube January 19, 2023 — raw, unedited, 30-40 minute gym vlogs with minimalist titles. No polish, no production. Channel crossed millions of subscribers within a year. Chris Bumstead publicly named him the future of the sport in 2023. Signed with Hosstile Nutrition (Fouad Abiad's brand) mid-2023; did not renew in mid-2024.</div>
+          <button class="legend-toggle-btn" onclick="toggleLegend(this)">Read full profile ↓</button>
+        </div>
+        <div class="legend-expanded">
+          <div class="legend-expanded-content">
+            <strong style="color:var(--blood);font-family:var(--font-ui);">Competitive debut:</strong> February 2025 — won Classic Physique overall at the NPC Legends Classic in Las Vegas. Won Classic Physique overall at the 2025 NPC Arnold Amateur, earning his IFBB Pro card. Now officially a professional bodybuilder.<br><br>
+            <strong style="color:var(--blood);font-family:var(--font-ui);">Style:</strong> Influenced heavily by Mike Mentzer's HIT — short, brutal sessions. Notoriously casual diet during bulks (Krispy Kreme donuts, milk, gas station food) while running 5,000+ calorie days. Estimated net worth $1.5M–$3M.<br><br>
+            Sam's lesson: format beats production. He doesn't edit, doesn't chase thumbnails, doesn't game titles — and has outrun creators who do all three. Consistency and authenticity compounded into a brand in under two years.
+          </div>
+          <div class="legend-source">Sources: Wikipedia, The New York Times, The Guardian, BarBend, Generation Iron</div>
         </div>
       </div>
 
@@ -2265,7 +2622,6 @@ footer {
       <button class="tool-tab-btn" onclick="switchToolTab('water',this)">Water</button>
       <button class="tool-tab-btn" onclick="switchToolTab('protein',this)">Protein/Meal</button>
       <button class="tool-tab-btn" onclick="switchToolTab('metrics',this)">Body Metrics</button>
-      <button class="tool-tab-btn" onclick="switchToolTab('plates',this)">Plates</button>
       <button class="tool-tab-btn" onclick="switchToolTab('logger',this)">Workout Log</button>
     </div>
 
@@ -2453,31 +2809,6 @@ footer {
         <button class="calc-btn" onclick="calcMetrics()">Calculate</button>
         <div class="calc-result" id="met-result">
           <div class="calc-result-detail" id="met-detail"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PLATES -->
-    <div class="tool-panel" id="tool-plates">
-      <div class="calc-form">
-        <div class="calc-title">Plate Calculator</div>
-        <div class="calc-desc">What plates to load on each side of a standard 45lb barbell.</div>
-        <div class="form-row">
-          <label class="form-label">Total Weight (lbs)</label>
-          <input class="form-input" type="number" id="plate-total" placeholder="315">
-        </div>
-        <div class="form-row">
-          <label class="form-label">Bar Weight (lbs)</label>
-          <select class="form-select" id="plate-bar">
-            <option value="45" selected>45 lb (standard)</option>
-            <option value="35">35 lb</option>
-            <option value="25">25 lb</option>
-          </select>
-        </div>
-        <button class="calc-btn" onclick="calcPlates()">Calculate</button>
-        <div class="calc-result" id="plate-result">
-          <div class="calc-result-label">Plates per side</div>
-          <div class="calc-result-detail" id="plate-detail"></div>
         </div>
       </div>
     </div>
@@ -2695,18 +3026,62 @@ Would you be open to a brief call to discuss what a fit might look like?
 <!-- ==================== FORUM ==================== -->
 <section id="forum">
   <div class="section-header">
-    <div class="section-eyebrow">Real-Time · Open Posting · No Account Required</div>
+    <div class="section-eyebrow">Live Pulse · Open Posting · No Account Required</div>
     <div class="section-title">Forum</div>
-    <div class="section-sub">Post your questions, share your progress, call out bad advice. Username only — no login, no email.</div>
+    <div class="section-sub">Real-time bodybuilding news pulled from the top industry sources, plus open community discussion. Username only — no login, no email.</div>
   </div>
   <div class="content">
+
+    <!-- LIVE NEWS FEED -->
+    <div class="news-wrap">
+      <div class="news-header">
+        <div class="news-title-row">
+          <div class="news-live-dot"></div>
+          <div class="news-title">Industry News · Live</div>
+        </div>
+        <button class="news-refresh-btn" id="newsRefreshBtn" onclick="loadNews(true)">Refresh</button>
+      </div>
+      <div class="news-list" id="newsList">
+        <div class="news-empty">Loading latest headlines...</div>
+      </div>
+    </div>
+
+    <!-- FORUM CONTROLS -->
+    <div class="forum-controls">
+      <div class="forum-search-wrap">
+        <input class="forum-search-input" type="text" id="forumSearch" placeholder="Search posts by keyword or username..." oninput="renderForumFiltered()">
+      </div>
+      <div class="forum-pills" id="forumPills">
+        <button class="forum-pill active" data-cat="all" onclick="setForumCategory('all')">All</button>
+        <button class="forum-pill" data-cat="Training" onclick="setForumCategory('Training')">Training</button>
+        <button class="forum-pill" data-cat="Nutrition" onclick="setForumCategory('Nutrition')">Nutrition</button>
+        <button class="forum-pill" data-cat="Supps" onclick="setForumCategory('Supps')">Supps</button>
+        <button class="forum-pill" data-cat="Gear" onclick="setForumCategory('Gear')">Gear</button>
+        <button class="forum-pill" data-cat="Legends" onclick="setForumCategory('Legends')">Legends</button>
+        <button class="forum-pill" data-cat="Get Paid" onclick="setForumCategory('Get Paid')">Get Paid</button>
+        <button class="forum-pill" data-cat="General" onclick="setForumCategory('General')">General</button>
+      </div>
+    </div>
+
+    <!-- NEW POST -->
     <div class="forum-new-post">
       <h3>New Post</h3>
       <input class="forum-input" type="text" id="forumUsername" placeholder="Username">
+      <select class="forum-select" id="forumCategory">
+        <option value="General">General</option>
+        <option value="Training">Training</option>
+        <option value="Nutrition">Nutrition</option>
+        <option value="Supps">Supps</option>
+        <option value="Gear">Gear</option>
+        <option value="Legends">Legends</option>
+        <option value="Get Paid">Get Paid</option>
+      </select>
       <input class="forum-input" type="text" id="forumTitle" placeholder="Post title">
       <textarea class="forum-textarea" id="forumBody" placeholder="What's on your mind?"></textarea>
       <button class="calc-btn" onclick="submitForumPost()">Post</button>
     </div>
+
+    <div class="forum-results-info" id="forumResultsInfo"></div>
     <div id="forumPosts">
       <div class="forum-loading">Loading posts...</div>
     </div>
@@ -2857,7 +3232,7 @@ function showSection(id) {
   }
   // Update nav active state
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-  if (id === 'forum') loadForum();
+  if (id === 'forum') { loadForum(); loadNews(false); }
   if (id === 'exercises') renderExercises('all');
   if (id === 'articles') renderArticles();
   if (id === 'tools') renderLogger();
@@ -2898,6 +3273,12 @@ const searchableContent = [
   { title: 'David Laid', section: 'legends', desc: 'Gymshark Creative Director. Built career from one transformation video.' },
   { title: 'Tren Twins', section: 'legends', desc: 'Christian & Michael Gaiera. Feral Supplements founders.' },
   { title: 'Phil Heath', section: 'legends', desc: '7× Mr. Olympia. Former college basketball player.' },
+  { title: 'Dorian Yates', section: 'legends', desc: '6× Mr. Olympia. HIT pioneer. Temple Gym owner. DY Nutrition.' },
+  { title: 'Jay Cutler', section: 'legends', desc: '4× Mr. Olympia. Cutler Nutrition founder. $30M net worth.' },
+  { title: 'Kai Greene', section: 'legends', desc: '3× Arnold Classic. The People\'s Champ. Artist and actor.' },
+  { title: 'Franco Columbu', section: 'legends', desc: '2× Mr. Olympia. Arnold\'s bricklaying partner. Chiropractor.' },
+  { title: 'Lee Haney', section: 'legends', desc: '8× Mr. Olympia. Record-holder tied with Coleman. Youth mentor.' },
+  { title: 'Sam Sulek', section: 'legends', desc: 'IFBB Pro. YouTube\'s most-watched bodybuilder. Ohio native.' },
   { title: 'Creatine', section: 'supps', desc: 'Most studied supplement. 3-5g daily. Evidence A.' },
   { title: 'Macro Calculator', section: 'tools', desc: 'Calculate daily calories and macronutrients' },
   { title: '1RM Calculator', section: 'tools', desc: 'Estimate one-rep max from submaximal set' },
@@ -3176,24 +3557,6 @@ function calcMetrics() {
   if (lm) detail += `<br><br>Lean Mass: ${lm} lbs<br>Fat Mass: ${fm} lbs`;
   document.getElementById('met-detail').innerHTML = detail;
   document.getElementById('met-result').classList.add('show');
-}
-
-function calcPlates() {
-  const total = parseFloat(document.getElementById('plate-total').value);
-  const bar = parseFloat(document.getElementById('plate-bar').value);
-  if (!total) return alert('Enter total weight.');
-  if (total <= bar) return alert('Total must exceed bar weight.');
-  const perSide = (total - bar) / 2;
-  const plateTypes = [100, 55, 45, 35, 25, 10, 5, 2.5];
-  let remaining = perSide;
-  let result = [];
-  for (const p of plateTypes) {
-    const count = Math.floor(remaining / p);
-    if (count > 0) { result.push(`${count}×${p}lb`); remaining -= count * p; }
-  }
-  remaining = Math.round(remaining * 10) / 10;
-  document.getElementById('plate-result').classList.add('show');
-  document.getElementById('plate-detail').innerHTML = result.join(' + ') + (remaining > 0 ? ` <span style="color:var(--blood);">(+${remaining}lb needed)</span>` : '') + `<br><span style="font-size:12px;color:var(--ash);">Each side. ${perSide}lbs per side.</span>`;
 }
 
 // ===== WORKOUT LOGGER =====
@@ -3503,32 +3866,101 @@ const articles = [
 
 // ===== FORUM =====
 let replyingTo = null;
+let forumCache = [];        // holds all fetched posts
+let forumCategory = 'all';  // active category filter
+let forumHasCategoryCol = true; // optimistic — flips to false if Supabase rejects the column
 
 async function loadForum() {
   const container = document.getElementById('forumPosts');
   if (!container) return;
   container.innerHTML = '<div class="forum-loading">Loading posts...</div>';
+
+  // Try select with category column first; if schema doesn't have it, retry without.
   try {
-    const { data: posts, error } = await sb
-      .from('forum_posts')
-      .select('*, forum_replies(*)')
-      .order('created_at', { ascending: false })
-      .limit(30);
-    if (error) throw error;
-    if (!posts || !posts.length) {
-      container.innerHTML = '<div class="forum-loading">No posts yet. Be the first.</div>';
-      return;
+    let query = sb.from('forum_posts').select('*, forum_replies(*)')
+      .order('created_at', { ascending: false }).limit(100);
+    let { data: posts, error } = await query;
+    if (error) {
+      // Fallback for older schemas where category column doesn't exist — shouldn't block UI.
+      forumHasCategoryCol = false;
+      const r2 = await sb.from('forum_posts').select('id, username, title, body, created_at, forum_replies(*)')
+        .order('created_at', { ascending: false }).limit(100);
+      if (r2.error) throw r2.error;
+      posts = r2.data;
     }
-    container.innerHTML = posts.map(post => renderForumPost(post)).join('');
+    forumCache = posts || [];
+    renderForumFiltered();
   } catch (e) {
-    container.innerHTML = `<div class="forum-loading" style="color:var(--blood);">Could not load posts. Make sure Supabase tables are set up.</div>`;
+    container.innerHTML = `<div class="forum-loading" style="color:var(--blood);">Could not load posts. Check Supabase setup.</div>`;
   }
+}
+
+function setForumCategory(cat) {
+  forumCategory = cat;
+  document.querySelectorAll('#forumPills .forum-pill').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-cat') === cat);
+  });
+  renderForumFiltered();
+}
+
+function renderForumFiltered() {
+  const container = document.getElementById('forumPosts');
+  const info = document.getElementById('forumResultsInfo');
+  if (!container) return;
+  const q = (document.getElementById('forumSearch')?.value || '').trim().toLowerCase();
+
+  let filtered = forumCache.slice();
+  if (forumCategory !== 'all') {
+    filtered = filtered.filter(p => (p.category || 'General') === forumCategory);
+  }
+  if (q) {
+    filtered = filtered.filter(p =>
+      (p.title || '').toLowerCase().includes(q) ||
+      (p.body || '').toLowerCase().includes(q) ||
+      (p.username || '').toLowerCase().includes(q)
+    );
+  }
+
+  // Update pill counts
+  const counts = { all: forumCache.length };
+  forumCache.forEach(p => {
+    const c = p.category || 'General';
+    counts[c] = (counts[c] || 0) + 1;
+  });
+  document.querySelectorAll('#forumPills .forum-pill').forEach(el => {
+    const cat = el.getAttribute('data-cat');
+    const n = counts[cat] || 0;
+    // Rebuild label cleanly: "Category (count)"
+    const base = el.textContent.replace(/\s*\(\d+\)$/, '').trim();
+    el.innerHTML = `${base}<span class="pill-count">(${n})</span>`;
+  });
+
+  if (info) {
+    if (!forumCache.length) {
+      info.textContent = '';
+    } else if (filtered.length === forumCache.length) {
+      info.textContent = `${forumCache.length} ${forumCache.length === 1 ? 'post' : 'posts'}`;
+    } else {
+      info.textContent = `${filtered.length} of ${forumCache.length} shown`;
+    }
+  }
+
+  if (!forumCache.length) {
+    container.innerHTML = '<div class="forum-loading">No posts yet. Be the first.</div>';
+    return;
+  }
+  if (!filtered.length) {
+    container.innerHTML = '<div class="forum-loading">No posts match your filter. Try a different keyword or category.</div>';
+    return;
+  }
+  container.innerHTML = filtered.map(post => renderForumPost(post)).join('');
 }
 
 function renderForumPost(post) {
   const replies = post.forum_replies || [];
   const avatar = (post.username || '?')[0].toUpperCase();
   const timeStr = new Date(post.created_at).toLocaleDateString();
+  const category = post.category || 'General';
   return `
   <div class="forum-post" id="post-${post.id}">
     <div class="forum-post-header">
@@ -3540,6 +3972,7 @@ function renderForumPost(post) {
         </div>
       </div>
     </div>
+    <div class="forum-post-category">${escHtml(category)}</div>
     <div class="forum-post-title">${escHtml(post.title || '')}</div>
     <div class="forum-post-body">${escHtml(post.body || '')}</div>
     <div class="forum-post-actions">
@@ -3569,12 +4002,22 @@ function toggleReplyBox(postId) {
 
 async function submitForumPost() {
   const username = document.getElementById('forumUsername').value.trim() || 'Anonymous';
+  const category = document.getElementById('forumCategory').value || 'General';
   const title = document.getElementById('forumTitle').value.trim();
   const body = document.getElementById('forumBody').value.trim();
   if (!title || !body) return alert('Please add a title and message.');
   try {
-    const { error } = await sb.from('forum_posts').insert([{ username, title, body }]);
-    if (error) throw error;
+    // Attempt insert with category; if Supabase rejects (column missing), retry without.
+    let payload = { username, title, body };
+    if (forumHasCategoryCol) payload.category = category;
+    let { error } = await sb.from('forum_posts').insert([payload]);
+    if (error && forumHasCategoryCol) {
+      forumHasCategoryCol = false;
+      const r = await sb.from('forum_posts').insert([{ username, title, body }]);
+      if (r.error) throw r.error;
+    } else if (error) {
+      throw error;
+    }
     document.getElementById('forumTitle').value = '';
     document.getElementById('forumBody').value = '';
     loadForum();
@@ -3602,6 +4045,98 @@ if (sb) {
     const forumSection = document.getElementById('forum');
     if (forumSection && forumSection.classList.contains('active')) loadForum();
   }).subscribe();
+}
+
+// ===== NEWS FEED =====
+// Pulls RSS feeds from major bodybuilding/fitness publications via rss2json (free, CORS-friendly).
+// Cached in memory for the session; "Refresh" button forces re-fetch.
+const NEWS_SOURCES = [
+  { name: 'Generation Iron', rss: 'https://generationiron.com/feed/' },
+  { name: 'BarBend',         rss: 'https://barbend.com/feed/' },
+  { name: 'Muscle & Fitness', rss: 'https://www.muscleandfitness.com/feed/' },
+  { name: 'Fitness Volt',    rss: 'https://fitnessvolt.com/feed/' }
+];
+let newsCache = null;
+let newsLastLoaded = 0;
+const NEWS_CACHE_MS = 10 * 60 * 1000; // 10 minutes
+
+function timeAgo(dateStr) {
+  if (!dateStr) return '';
+  const diff = Date.now() - new Date(dateStr).getTime();
+  if (isNaN(diff) || diff < 0) return '';
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  const days = Math.floor(hrs / 24);
+  if (days < 7) return days + 'd ago';
+  const weeks = Math.floor(days / 7);
+  return weeks + 'w ago';
+}
+
+async function loadNews(forceRefresh) {
+  const listEl = document.getElementById('newsList');
+  const btn = document.getElementById('newsRefreshBtn');
+  if (!listEl) return;
+
+  // Use cache if fresh and not forced
+  if (!forceRefresh && newsCache && (Date.now() - newsLastLoaded) < NEWS_CACHE_MS) {
+    renderNews(newsCache);
+    return;
+  }
+  if (btn) { btn.disabled = true; btn.textContent = 'Loading...'; }
+  listEl.innerHTML = '<div class="news-empty">Loading latest headlines...</div>';
+
+  try {
+    const results = await Promise.all(NEWS_SOURCES.map(async src => {
+      try {
+        const url = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(src.rss);
+        const r = await fetch(url);
+        if (!r.ok) return [];
+        const data = await r.json();
+        if (data.status !== 'ok' || !data.items) return [];
+        return data.items.slice(0, 5).map(item => ({
+          source: src.name,
+          title: item.title,
+          link: item.link,
+          pubDate: item.pubDate
+        }));
+      } catch (e) { return []; }
+    }));
+
+    const merged = results.flat()
+      .filter(x => x.title && x.link)
+      .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate))
+      .slice(0, 12);
+
+    if (!merged.length) throw new Error('No news items returned');
+    newsCache = merged;
+    newsLastLoaded = Date.now();
+    renderNews(merged);
+  } catch (e) {
+    listEl.innerHTML = '<div class="news-empty">News feed temporarily unavailable. Try Refresh in a moment.</div>';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Refresh'; }
+  }
+}
+
+function renderNews(items) {
+  const listEl = document.getElementById('newsList');
+  if (!listEl) return;
+  if (!items || !items.length) {
+    listEl.innerHTML = '<div class="news-empty">No headlines available right now.</div>';
+    return;
+  }
+  listEl.innerHTML = items.map(it => `
+    <a class="news-item" href="${escHtml(it.link)}" target="_blank" rel="noopener noreferrer">
+      <div class="news-item-meta">
+        <span class="news-item-source">${escHtml(it.source)}</span>
+        <span class="news-item-time">${escHtml(timeAgo(it.pubDate))}</span>
+      </div>
+      <div class="news-item-title">${escHtml(it.title)}</div>
+    </a>
+  `).join('');
 }
 
 // ===== INIT =====
