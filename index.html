@@ -2291,6 +2291,7 @@ footer {
     <a href="#" onclick="showSection('home');return false;">Home</a>
     <a href="#" onclick="showSection('legends');return false;">Legends</a>
     <a href="#" onclick="showSection('training');return false;">Training</a>
+    <a href="#" onclick="showSection('fuel');return false;">Fuel</a>
     <a href="#" onclick="showSection('supps');return false;">Supps</a>
     <a href="#" onclick="showSection('exercises');return false;">Exercises</a>
     <a href="#" onclick="showSection('tools');return false;">Tools</a>
@@ -2311,6 +2312,7 @@ footer {
   <a href="#" onclick="showSection('home');closeMobileNav();return false;">Home</a>
   <a href="#" onclick="showSection('legends');closeMobileNav();return false;">Legends</a>
   <a href="#" onclick="showSection('training');closeMobileNav();return false;">Training</a>
+  <a href="#" onclick="showSection('fuel');closeMobileNav();return false;">Fuel</a>
   <a href="#" onclick="showSection('supps');closeMobileNav();return false;">Supps</a>
   <a href="#" onclick="showSection('exercises');closeMobileNav();return false;">Exercises</a>
   <a href="#" onclick="showSection('tools');closeMobileNav();return false;">Tools</a>
@@ -2923,6 +2925,287 @@ footer {
           <p>Beginners recover fast and can train more frequently. Intermediate and advanced lifters accumulate fatigue more slowly but dig deeper holes. Match volume to your training age.</p>
         </div>
       </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== FUEL ==================== -->
+<style id="fuel-styles">
+#fuel .content { padding: 0 24px 80px; max-width: 1100px; margin: 0 auto; }
+#fuel .fuel-note {
+  background: rgba(255,59,0,0.06);
+  border: 1px solid rgba(255,59,0,0.28);
+  border-left: 3px solid var(--blood);
+  border-radius: 2px;
+  padding: 16px 20px;
+  font-size: 13px;
+  color: var(--ash);
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+#fuel .fuel-note b { color: var(--white-dim); }
+#fuel .fuel-targets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media (max-width: 760px){ #fuel .fuel-targets { grid-template-columns: 1fr; } }
+#fuel .fuel-t {
+  background: var(--carbon);
+  border: 1px solid var(--carbon3);
+  border-left: 3px solid var(--blood);
+  border-radius: 2px;
+  padding: 18px 20px;
+}
+#fuel .fuel-t .k {
+  font-family: var(--font-ui);
+  text-transform: uppercase; letter-spacing: 1.5px;
+  font-size: 11px; font-weight: 600; color: var(--ash);
+}
+#fuel .fuel-t .v {
+  font-family: var(--font-display);
+  font-size: 38px; line-height: 1; color: var(--white); margin: 6px 0 6px;
+}
+#fuel .fuel-t small { color: var(--ash); font-size: 13px; line-height: 1.55; }
+#fuel .fuel-t small b { color: var(--white-dim); }
+
+#fuel .fuel-plans {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+@media (max-width: 820px){ #fuel .fuel-plans { grid-template-columns: 1fr; } }
+#fuel .fuel-plan {
+  background: var(--carbon);
+  border: 1px solid var(--carbon3);
+  border-radius: 2px; overflow: hidden;
+}
+#fuel .fuel-plan-top {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 10px;
+  padding: 16px 18px; border-bottom: 1px solid var(--carbon3);
+}
+#fuel .fuel-goal { font-family: var(--font-display); font-size: 30px; line-height: .9; color: var(--white); }
+#fuel .fuel-goal small {
+  display: block; font-family: var(--font-ui); font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--blood); margin-bottom: 3px;
+}
+#fuel .fuel-kcal { text-align: right; font-family: var(--font-ui); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--ash); white-space: nowrap; }
+#fuel .fuel-kcal b { display: block; font-family: var(--font-display); font-size: 26px; color: var(--white); letter-spacing: .5px; }
+#fuel .fuel-meal { padding: 12px 18px; border-bottom: 1px solid var(--carbon2); }
+#fuel .fuel-meal:last-child { border-bottom: none; }
+#fuel .fuel-meal-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+#fuel .fuel-meal-h span { font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 11px; font-weight: 600; color: var(--blood); }
+#fuel .fuel-meal-h em { font-style: normal; font-family: var(--font-ui); font-size: 11px; color: var(--smoke); white-space: nowrap; }
+#fuel .fuel-meal p { font-size: 13px; color: var(--ash); margin-top: 3px; line-height: 1.5; }
+
+#fuel .fuel-callout {
+  background: var(--carbon2);
+  border: 1px solid var(--carbon3); border-left: 4px solid var(--blood);
+  border-radius: 2px; padding: 16px 20px; margin-top: 16px;
+}
+#fuel .fuel-callout .k { font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1.5px; font-size: 11px; color: var(--blood); font-weight: 600; }
+#fuel .fuel-callout p { font-size: 14px; color: var(--white-dim); margin-top: 5px; line-height: 1.6; }
+#fuel .fuel-callout p b { color: var(--white); }
+
+#fuel .fuel-shop { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14px; }
+#fuel .fuel-shop th, #fuel .fuel-shop td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--carbon3); vertical-align: top; }
+#fuel .fuel-shop th { font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 11px; color: var(--blood); font-weight: 600; }
+#fuel .fuel-shop td { color: var(--ash); }
+#fuel .fuel-shop td:first-child { color: var(--white); font-weight: 600; white-space: nowrap; }
+#fuel .fuel-shop tr:hover td { background: rgba(255,255,255,0.02); }
+
+#fuel .fuel-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 6px; }
+#fuel .fuel-chip { font-size: 12.5px; border: 1px solid var(--carbon4); border-radius: 3px; padding: 4px 9px; color: var(--white-dim); font-family: var(--font-body); }
+#fuel .fuel-buy-row { margin-bottom: 14px; }
+#fuel .fuel-buy-row .lbl { font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1.5px; font-size: 11px; color: var(--white); font-weight: 600; }
+
+#fuel .fuel-look { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+@media (max-width: 760px){ #fuel .fuel-look { grid-template-columns: 1fr; } }
+#fuel .fuel-look .l { background: var(--carbon); border: 1px solid var(--carbon3); border-radius: 2px; padding: 16px 18px; }
+#fuel .fuel-look .y { color: #00c864; font-weight: 700; font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px; }
+#fuel .fuel-look .n { color: var(--blood); font-weight: 700; font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px; }
+#fuel .fuel-look p { font-size: 13.5px; color: var(--ash); margin-top: 6px; line-height: 1.55; }
+
+#fuel .fuel-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+@media (max-width: 760px){ #fuel .fuel-vs { grid-template-columns: 1fr; } }
+#fuel .fuel-col { background: var(--carbon); border: 1px solid var(--carbon3); border-radius: 2px; padding: 18px 20px; }
+#fuel .fuel-col.good { border-top: 3px solid #00c864; }
+#fuel .fuel-col.bad { border-top: 3px solid var(--blood); }
+#fuel .fuel-col h4 { font-family: var(--font-display); font-size: 26px; letter-spacing: .5px; }
+#fuel .fuel-col.good h4 { color: #00c864; }
+#fuel .fuel-col.bad h4 { color: var(--blood); }
+#fuel .fuel-list { list-style: none; margin-top: 10px; }
+#fuel .fuel-list li { position: relative; padding-left: 16px; font-size: 13.5px; color: var(--ash); margin: 8px 0; line-height: 1.55; }
+#fuel .fuel-list li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; background: var(--blood); transform: rotate(45deg); }
+#fuel .fuel-list li b { color: var(--white-dim); }
+#fuel .fuel-link { color: var(--blood); font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px; font-weight: 600; cursor: pointer; }
+#fuel .fuel-link:hover { text-decoration: underline; }
+#fuel .fuel-block-intro { font-size: 14px; color: var(--ash); margin: -8px 0 18px; line-height: 1.6; max-width: 760px; }
+</style>
+<section id="fuel">
+  <div class="section-header">
+    <div class="section-eyebrow">Eat To Build · Education, Not A Prescription</div>
+    <div class="section-title">Fuel</div>
+    <div class="section-sub">How much to eat, what a real day on a plate looks like, where to buy it cheap, and the honest truth about energy drinks. Training builds the engine — this is the gas.</div>
+  </div>
+  <div class="content">
+
+    <div class="fuel-note">
+      <b>This is general education, not medical or nutrition advice.</b> The meal days below are <b>examples to learn from, not orders</b> — your real numbers depend on your size, goals, and activity. Talk to a doctor or registered dietitian before changing your diet, especially if you're under 18, pregnant or nursing, or have a health condition. Brands are named only as examples of products that publish independent lab testing — not endorsements, and we earn nothing from them.
+    </div>
+
+    <!-- HOW MUCH -->
+    <div class="tier-label">How Much To Eat</div>
+    <div class="fuel-block-intro">Get these three dials roughly right and the brand of chicken stops mattering. Everything else is detail.</div>
+    <div class="fuel-targets">
+      <div class="fuel-t">
+        <div class="k">Protein</div>
+        <div class="v">~1 g/lb</div>
+        <small>That's <b>grams, not pounds</b>. Weigh 180 lb? Aim for ~150–180 grams a day — about a palm of meat, fish, eggs, or dairy at each of your 3–5 meals.</small>
+      </div>
+      <div class="fuel-t">
+        <div class="k">Calories</div>
+        <div class="v">Eat to goal</div>
+        <small>Losing fat? Eat a bit <b>under</b> what you burn (~300–500 less). Building? A bit <b>over</b>. Holding? Match it. Let the scale and the mirror tell you if it's right — not a calculator.</small>
+      </div>
+      <div class="fuel-t">
+        <div class="k">The rest</div>
+        <div class="v">Fill in</div>
+        <small>Don't cut fats too low (your body needs some). Carbs take whatever calories are left — they fuel your workouts. Eat your veg and fruit, and drink plenty of water.</small>
+      </div>
+    </div>
+
+    <!-- MEAL PLANS -->
+    <div class="tier-label">A Day On A Plate</div>
+    <div class="fuel-block-intro">Three example days for a ~180&nbsp;lb lifter — one to lean out, one to hold, one to build. <b>Samples, not orders.</b> The little numbers mean <b>grams of protein · calories</b> (so "40P · 480" = 40 g protein, 480 calories). Smaller or lighter? Use smaller portions.</div>
+    <div class="fuel-plans">
+      <div class="fuel-plan">
+        <div class="fuel-plan-top">
+          <div class="fuel-goal"><small>Lean Out</small>The Cut</div>
+          <div class="fuel-kcal">~200g protein<b>~2,100</b>kcal</div>
+        </div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Breakfast</span><em>40P · 480</em></div><p>3 whole eggs + 3 whites scrambled, 1 cup oats, handful of berries.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Lunch</span><em>50P · 550</em></div><p>6 oz chicken breast, 1 cup white rice, big plate of greens, light dressing.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Snack</span><em>45P · 330</em></div><p>1 cup nonfat Greek yogurt + 1 scoop whey + a banana.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Dinner</span><em>45P · 560</em></div><p>6 oz 93% lean ground turkey, 1 large potato, broccoli.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Pre-bed</span><em>24P · 180</em></div><p>1 cup low-fat cottage cheese.</p></div>
+      </div>
+      <div class="fuel-plan">
+        <div class="fuel-plan-top">
+          <div class="fuel-goal"><small>Hold Steady</small>Maintain</div>
+          <div class="fuel-kcal">~200g protein<b>~2,700</b>kcal</div>
+        </div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Breakfast</span><em>40P · 620</em></div><p>4 whole eggs, 1 cup oats, 1 tbsp peanut butter, berries.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Lunch</span><em>55P · 700</em></div><p>7 oz chicken, 1.5 cups rice, ½ avocado, mixed veg.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Snack</span><em>35P · 400</em></div><p>Whey shake + banana + small handful of almonds.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Dinner</span><em>50P · 700</em></div><p>8 oz salmon or lean beef, potato or rice, veg, drizzle of olive oil.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Pre-bed</span><em>20P · 280</em></div><p>Greek yogurt with a little honey.</p></div>
+      </div>
+      <div class="fuel-plan">
+        <div class="fuel-plan-top">
+          <div class="fuel-goal"><small>Build Muscle</small>The Build</div>
+          <div class="fuel-kcal">~210g protein<b>~3,400</b>kcal</div>
+        </div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Breakfast</span><em>45P · 800</em></div><p>4 eggs, 1.5 cups oats, peanut butter, banana, glass of milk.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Lunch</span><em>55P · 850</em></div><p>8 oz chicken, 2 cups rice, ½ avocado, veg, olive oil.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Around training</span><em>35P · 500</em></div><p>Whey + banana + a bagel or bowl of cream of rice.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Dinner</span><em>50P · 800</em></div><p>8 oz beef or salmon, 2 cups potato/rice, veg.</p></div>
+        <div class="fuel-meal"><div class="fuel-meal-h"><span>Pre-bed</span><em>25P · 450</em></div><p>Cottage cheese + peanut butter + berries.</p></div>
+      </div>
+    </div>
+    <div class="fuel-callout">
+      <div class="k">Read this before you copy a plan</div>
+      <p>Pick the day that matches your goal, then adjust portions so the calories land on <b>your</b> number — not the 180-lb example. Lighter lifters and most women will eat noticeably less; very large or very active people, more. Eating <b>too little</b> is its own mistake — it wrecks recovery, training, and muscle. If hitting food ever starts feeling stressful or compulsive, that's a cue to talk to a professional, not to push harder.</p>
+    </div>
+
+    <!-- WHERE TO BUY -->
+    <div class="tier-label">Where To Buy It Cheap</div>
+    <div class="fuel-callout" style="margin-top:0;margin-bottom:16px;">
+      <div class="k">"Isn't all that protein expensive?"</div>
+      <p>Less than you'd think — because you need <b>grams, not pounds</b>. A 180-lb lifter needs ~150–180 g of protein a day, which is <b>under half a pound</b> of actual protein. From cheap sources like chicken thighs, eggs, milk, and whey, that runs about <b>$4–6 a day</b>. The trick is buying the right foods, not the priciest. A dollar of chicken thighs gives you far more protein than a dollar of steak or bacon.</p>
+    </div>
+    <div class="supp-grid" style="margin-bottom:18px;">
+      <div class="supp-card"><div class="supp-name">Aldi / Lidl</div><div class="supp-dose">Cheapest staples</div><div class="supp-desc">Best prices on eggs, chicken, frozen veg, oats, rice, canned tuna, milk, peanut butter. Few brands — which means fewer impulse buys.</div></div>
+      <div class="supp-card"><div class="supp-name">Walmart</div><div class="supp-dose">One-stop + variety</div><div class="supp-desc">Reliable low prices, store-brand (Great Value) protein staples, and they stock whey and creatine in-store. Good for one trip.</div></div>
+      <div class="supp-card"><div class="supp-name">Costco / Sam's</div><div class="supp-dose">Bulk = best per-unit</div><div class="supp-desc">Unbeatable on bulk chicken, ground beef/turkey, eggs, rice, oats, frozen fruit/veg, and big tubs of protein. Worth it once you eat volume.</div></div>
+    </div>
+    <table class="fuel-shop">
+      <thead><tr><th>Food</th><th>Why it earns the cart</th><th>Cheapest spot</th></tr></thead>
+      <tbody>
+        <tr><td>Eggs</td><td>~6 g protein each, complete, endlessly versatile.</td><td>Aldi · Costco</td></tr>
+        <tr><td>Chicken thighs</td><td>Cheaper than breast, more flavor, hard to overcook.</td><td>Costco · Walmart</td></tr>
+        <tr><td>Ground turkey / 93% beef</td><td>Big protein hit, freezes well, batch-cook friendly.</td><td>Costco · Aldi</td></tr>
+        <tr><td>Canned tuna / salmon</td><td>Shelf-stable protein for pennies; salmon adds omega-3s.</td><td>Aldi · Walmart</td></tr>
+        <tr><td>Greek yogurt &amp; cottage cheese</td><td>Slow protein, great for snacks and pre-bed.</td><td>Costco (tubs)</td></tr>
+        <tr><td>Milk</td><td>Cheap calories + protein for builders.</td><td>Aldi · Walmart</td></tr>
+        <tr><td>Oats &amp; rice</td><td>The cheapest clean carbs there are. Buy big bags.</td><td>Aldi · Costco</td></tr>
+        <tr><td>Potatoes</td><td>Filling, cheap, hard to overeat.</td><td>Aldi · Walmart</td></tr>
+        <tr><td>Frozen veg &amp; fruit</td><td>No spoilage, just as nutritious as fresh, always on sale.</td><td>Aldi · Costco</td></tr>
+        <tr><td>Beans &amp; lentils</td><td>Protein + fiber for almost nothing.</td><td>Aldi · Dollar stores</td></tr>
+        <tr><td>Peanut butter</td><td>Dense, cheap calories for builders; mind the spoon on a cut.</td><td>Aldi · Walmart</td></tr>
+        <tr><td>Whey protein (tub)</td><td>Cheapest protein per gram once you buy big. See buying tips below.</td><td>Costco · Walmart · online</td></tr>
+      </tbody>
+    </table>
+    <div class="fuel-callout">
+      <div class="k">Tight budget? Do this</div>
+      <p><b>Buy protein in bulk and freeze it, build meals around rice/oats/potatoes, and let frozen veg do the rest.</b> Eggs + oats + frozen veg + a bag of rice + a tub of whey will feed a lifter for a week for very little.</p>
+    </div>
+
+    <!-- SMART SUPPLEMENT SHOPPING -->
+    <div class="tier-label">Smart Supplement Shopping</div>
+    <div class="fuel-block-intro">For <b>which supplements work and how much to take</b>, hit the <span class="fuel-link" onclick="showSection('supps');return false;">Supps tab →</span> (graded A–C, evidence-based). This part is about <b>what to actually buy</b> once you know what you want — the brands and the label check.</div>
+
+    <div class="supp-card" style="margin-bottom:14px;">
+      <div class="supp-name">Reputable, independently-tested brands</div>
+      <div class="supp-desc" style="margin-bottom:10px;">Examples of brands that publish third-party lab testing. Not endorsements — and remember, testing applies to specific products, so check the logo is on the exact tub you buy.</div>
+      <div class="fuel-buy-row"><span class="lbl">Creatine (monohydrate / Creapure):</span><div class="fuel-chips"><span class="fuel-chip">Thorne</span><span class="fuel-chip">Optimum Nutrition</span><span class="fuel-chip">Sports Research</span><span class="fuel-chip">Myprotein Creapure</span></div></div>
+      <div class="fuel-buy-row"><span class="lbl">Whey (isolate = leanest):</span><div class="fuel-chips"><span class="fuel-chip">Dymatize ISO100</span><span class="fuel-chip">ON Gold Standard</span><span class="fuel-chip">Transparent Labs</span><span class="fuel-chip">NOW Sports</span><span class="fuel-chip">Klean Athlete</span></div></div>
+      <div class="fuel-buy-row"><span class="lbl">EAAs (all 9 aminos, not BCAAs):</span><div class="fuel-chips"><span class="fuel-chip">Thorne Amino Complex</span><span class="fuel-chip">NOW Sports</span><span class="fuel-chip">Kion Aminos</span></div></div>
+      <div class="fuel-buy-row" style="margin-bottom:0;"><span class="lbl">Extras (D3 / omega-3 / electrolytes):</span><div class="fuel-chips"><span class="fuel-chip">NOW Foods</span><span class="fuel-chip">Nordic Naturals</span><span class="fuel-chip">LMNT</span></div></div>
+    </div>
+
+    <div class="fuel-callout" style="margin-top:0;">
+      <div class="k">Quick note on EAAs &amp; isolate</div>
+      <p><b>Whey isolate</b> is whey filtered more, so it's almost pure protein (~90%+) with little sugar/fat — ideal on a cut or if dairy bugs you. <b>EAAs</b> (the 9 amino acids your body can't make) are mostly redundant if you already eat enough protein — your chicken and whey already contain them. They only really help training fasted, going long gaps between meals, or when you can't eat enough. And skip <b>BCAAs</b> — only 3 of the 9, can't build muscle alone.</p>
+    </div>
+
+    <div style="margin-top:18px;"></div>
+    <div class="fuel-look">
+      <div class="l"><div class="y">✓ Want to see on the label</div><p>A real test logo — <b style="color:var(--white-dim)">"NSF Certified for Sport"</b> or <b style="color:var(--white-dim)">"Informed Sport,"</b> and <b style="color:var(--white-dim)">"Creapure"</b> on creatine. A short ingredient list you can read. The brand telling you exactly how much of everything is inside.</p></div>
+      <div class="l"><div class="n">✗ Walk away from</div><p>"Third-party tested" with no logo to back it. A "proprietary blend" hiding the doses. A 20-ingredient kitchen sink with tiny useless amounts. Crazy promises like "gain 20 lbs!"</p></div>
+    </div>
+
+    <!-- ENERGY DRINKS -->
+    <div class="tier-label">Energy Drinks: The Truth</div>
+    <div class="fuel-block-intro">They're not poison and they're not magic. A can is mostly caffeine — one of the few legal boosters that actually works. The danger is in the dose, the sugar, and the timing.</div>
+    <div class="fuel-vs">
+      <div class="fuel-col good">
+        <h4>Why They Can Help</h4>
+        <ul class="fuel-list">
+          <li><b>Caffeine actually works.</b> Roughly 100–300 mg makes you more alert and focused, speeds your reactions, and makes hard sets feel easier — genuinely backed by science.</li>
+          <li><b>Consistent dose.</b> You know exactly what you're getting, unlike a random cup of coffee.</li>
+          <li><b>A decent pre-workout</b> if you grab a <b>sugar-free</b> can ~30–45 min before training.</li>
+          <li>The taurine and B-vitamins along for the ride are considered safe by regulators at the amounts in a normal can.</li>
+        </ul>
+      </div>
+      <div class="fuel-col bad">
+        <h4>Why They Can Hurt</h4>
+        <ul class="fuel-list">
+          <li><b>Easy to overdo caffeine.</b> Safe ceiling is ~400 mg/day for adults (about 2–4 cups of coffee), under ~200 mg at once. A morning coffee + pre-workout + a can adds up fast.</li>
+          <li><b>Sugar.</b> A 16 oz can can pack ~54 g sugar — more than a man's whole daily added sugar, in one drink. Grab sugar-free.</li>
+          <li><b>Sleep.</b> Caffeine sticks around 5–6 hours. A late can wrecks sleep — and sleep is when you actually recover and grow. Cruel irony.</li>
+          <li><b>Too much</b> means jitters, anxiety, a racing or pounding heart, and an upset stomach. Teens should stay much lower (~100 mg), pregnancy ~200 mg.</li>
+          <li><b>It hides tiredness — it doesn't fix it.</b> Never lean on it to push through real exhaustion behind the wheel or anywhere safety matters.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fuel-callout">
+      <div class="k">How to use them like an adult</div>
+      <p>Pick <b>sugar-free</b>, keep one can to ≤200 mg caffeine, keep your <b>whole day under ~400 mg</b>, none within ~6–8 hours of bed, and <b>don't stack a can on top of a pre-workout</b> (that's double caffeine). Hydrate alongside it. Used that way it's a useful tool — used as a daily multi-can crutch for bad sleep, it quietly costs you the recovery your training depends on.</p>
+    </div>
+
+    <div class="ped-warning">
+      <strong>⚠ EDUCATION ONLY — TALK TO A PRO</strong><br>
+      Everything on this page is general information for healthy adults, not individualized medical or nutrition advice, and these statements haven't been evaluated to diagnose, treat, or cure anything. Always check with a licensed doctor or registered dietitian before changing your diet or starting a supplement — especially if you're under 18, pregnant or nursing, take medication, or have a health condition. We do not cover steroids, SARMs, peptides, hormones, or weight-loss drugs — that's a conversation for a doctor.
     </div>
 
   </div>
